@@ -1,10 +1,11 @@
 import requests
 import pandas as pd
 from alphavantageapikey import alpha_vantagi_api_key
-
 import mysql
+import mysql.connector
 
 ticker = 'AAPL'
+
 
 # Convert Income Statement json request to pandas data frame
 isUrl = 'https://www.alphavantage.co/query?function=INCOME_STATEMENT&symbol=' + ticker + '&apikey=' + alpha_vantagi_api_key
@@ -23,9 +24,6 @@ annual_income_statement.to_csv('annual_income_statement')
 
 
 def calc_ann_is(ticker):
-    isr = requests.get(isUrl)
-    isData = isr.json()
-
     y5df = pd.DataFrame.from_dict(isData['annualReports'][0], orient='index')
     y4df = pd.DataFrame.from_dict(isData['annualReports'][1], orient='index')
     y3df = pd.DataFrame.from_dict(isData['annualReports'][2], orient='index')
@@ -35,6 +33,9 @@ def calc_ann_is(ticker):
     annual_income_statement = pd.concat([y1df, y2df, y3df, y4df, y5df], axis=1)
     print(annual_income_statement)
     annual_income_statement.to_csv('annual_income_statement')
+    isdict = annual_income_statement.to_dict(orient='index')
+
+
 
 
 print(y5df.loc['grossProfit'])

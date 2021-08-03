@@ -17,14 +17,10 @@ y1df = pd.DataFrame.from_dict(cfData['annualReports'][4], orient='index')
 
 annual_cash_flow_statement = pd.concat([y1df, y2df, y3df, y4df, y5df], axis=1)
 print(annual_cash_flow_statement)
-annual_cash_flow_statement.to_csv('annual_balance_sheet')
+annual_cash_flow_statement.to_csv('annual_cash_flow_statement')
 
 
 def calc_ann_cf(ticker):
-
-    cfr = requests.get(cfUrl)
-    cfData = cfr.json()
-
     y5df = pd.DataFrame.from_dict(cfData['annualReports'][0], orient='index')
     y4df = pd.DataFrame.from_dict(cfData['annualReports'][1], orient='index')
     y3df = pd.DataFrame.from_dict(cfData['annualReports'][2], orient='index')
@@ -34,6 +30,8 @@ def calc_ann_cf(ticker):
     annual_cash_flow_statement = pd.concat([y1df, y2df, y3df, y4df, y5df], axis=1)
     print(annual_cash_flow_statement)
     annual_cash_flow_statement.to_csv('annual_cash_flow_statement')
+    cfdict = annual_cash_flow_statement.to_dict(orient='index')
+
 
 
 operatingCashflow = y5df.loc['operatingCashflow']

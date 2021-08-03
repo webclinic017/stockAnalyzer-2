@@ -21,9 +21,6 @@ annual_balance_sheet.to_csv('annual_balance_sheet')
 
 
 def calc_ann_bs(ticker):
-    bsr = requests.get(bsUrl)
-    bsData = bsr.json()
-
     y5df = pd.DataFrame.from_dict(bsData['annualReports'][0], orient='index')
     y4df = pd.DataFrame.from_dict(bsData['annualReports'][1], orient='index')
     y3df = pd.DataFrame.from_dict(bsData['annualReports'][2], orient='index')
@@ -33,6 +30,7 @@ def calc_ann_bs(ticker):
     annual_balance_sheet = pd.concat([y1df, y2df, y3df, y4df, y5df], axis=1)
     print(annual_balance_sheet)
     annual_balance_sheet.to_csv('annual_balance_sheet')
+    bsdict = annual_balance_sheet.to_dict(orient='index')
 
 
 totalAssets = y5df.loc['totalAssets']
