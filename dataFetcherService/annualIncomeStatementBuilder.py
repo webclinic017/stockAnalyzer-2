@@ -1,8 +1,7 @@
 import requests
 import pandas as pd
 from alphavantageapikey import alpha_vantagi_api_key
-import mysql
-import mysql.connector
+
 
 ticker = 'AAPL'
 
@@ -19,8 +18,8 @@ y2df = pd.DataFrame.from_dict(isData['annualReports'][3], orient='index')
 y1df = pd.DataFrame.from_dict(isData['annualReports'][4], orient='index')
 
 annual_income_statement = pd.concat([y1df, y2df, y3df, y4df, y5df], axis=1)
-print(annual_income_statement)
 annual_income_statement.to_csv('annual_income_statement')
+
 
 
 def calc_ann_is(ticker):
@@ -31,14 +30,15 @@ def calc_ann_is(ticker):
     y1df = pd.DataFrame.from_dict(isData['annualReports'][4], orient='index')
 
     annual_income_statement = pd.concat([y1df, y2df, y3df, y4df, y5df], axis=1)
-    print(annual_income_statement)
     annual_income_statement.to_csv('annual_income_statement')
-    isdict = annual_income_statement.to_dict(orient='index')
+    print(annual_income_statement)
+    return annual_income_statement
 
 
 
 
-print(y5df.loc['grossProfit'])
+#calc_ann_is(ticker)
+
 
 gross_profit = y5df.loc['grossProfit']
 totalRevenue = y5df.loc['totalRevenue']

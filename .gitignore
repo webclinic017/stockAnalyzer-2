@@ -1,2 +1,4 @@
 alphavantageapikey.py
 quarterlybslooptest.py
+sqlsetup.py
+sqlFunctions.py

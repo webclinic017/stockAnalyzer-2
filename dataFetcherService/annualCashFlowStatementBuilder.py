@@ -2,6 +2,7 @@ import requests
 import pandas as pd
 from alphavantageapikey import alpha_vantagi_api_key
 
+
 ticker = 'AAPL'
 
 # Convert Cash Flow json request to pandas data frame
@@ -16,7 +17,6 @@ y2df = pd.DataFrame.from_dict(cfData['annualReports'][3], orient='index')
 y1df = pd.DataFrame.from_dict(cfData['annualReports'][4], orient='index')
 
 annual_cash_flow_statement = pd.concat([y1df, y2df, y3df, y4df, y5df], axis=1)
-print(annual_cash_flow_statement)
 annual_cash_flow_statement.to_csv('annual_cash_flow_statement')
 
 
@@ -28,9 +28,9 @@ def calc_ann_cf(ticker):
     y1df = pd.DataFrame.from_dict(cfData['annualReports'][4], orient='index')
 
     annual_cash_flow_statement = pd.concat([y1df, y2df, y3df, y4df, y5df], axis=1)
-    print(annual_cash_flow_statement)
     annual_cash_flow_statement.to_csv('annual_cash_flow_statement')
-    cfdict = annual_cash_flow_statement.to_dict(orient='index')
+    print(annual_cash_flow_statement)
+    return annual_cash_flow_statement
 
 
 

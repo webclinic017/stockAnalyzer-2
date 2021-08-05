@@ -2,6 +2,7 @@ import requests
 import pandas as pd
 from alphavantageapikey import alpha_vantagi_api_key
 
+
 ticker = 'AAPL'
 
 # Convert Balance Sheet json request to pandas data frame
@@ -16,7 +17,6 @@ y2df = pd.DataFrame.from_dict(bsData['annualReports'][3], orient='index')
 y1df = pd.DataFrame.from_dict(bsData['annualReports'][4], orient='index')
 
 annual_balance_sheet = pd.concat([y1df, y2df, y3df, y4df, y5df], axis=1)
-print(annual_balance_sheet)
 annual_balance_sheet.to_csv('annual_balance_sheet')
 
 
@@ -30,7 +30,7 @@ def calc_ann_bs(ticker):
     annual_balance_sheet = pd.concat([y1df, y2df, y3df, y4df, y5df], axis=1)
     print(annual_balance_sheet)
     annual_balance_sheet.to_csv('annual_balance_sheet')
-    bsdict = annual_balance_sheet.to_dict(orient='index')
+    return annual_balance_sheet
 
 
 totalAssets = y5df.loc['totalAssets']
