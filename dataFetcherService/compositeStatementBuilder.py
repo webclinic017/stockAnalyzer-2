@@ -51,7 +51,7 @@ def build_ann_statements(ticker):
     y1df = pd.DataFrame.from_dict(cfData['annualReports'][4], orient='index')
 
     annual_cash_flow_statement = pd.concat([y1df, y2df, y3df, y4df, y5df], axis=1)
-    annual_cash_flow_statement.to_csv('annual_cash_flow_statement')
+    #annual_cash_flow_statement.to_csv('annual_cash_flow_statement')
     #print(annual_cash_flow_statement)
 
     isAndBsDf = annual_income_statement.append(annual_balance_sheet)
@@ -61,6 +61,8 @@ def build_ann_statements(ticker):
     print(statementsDump)
     print(statementsDumpHtml)
     print(type(statementsDumpHtml))
+
+build_ann_statements('AAPL')
 
 
 

@@ -3,7 +3,6 @@ import pandas as pd
 from alphavantageapikey import alpha_vantagi_api_key
 
 
-ticker = 'AAPL'
 
 # Convert Balance Sheet json request to pandas data frame
 bsUrl = 'https://www.alphavantage.co/query?function=BALANCE_SHEET&symbol=' + ticker + '&apikey=' + alpha_vantagi_api_key

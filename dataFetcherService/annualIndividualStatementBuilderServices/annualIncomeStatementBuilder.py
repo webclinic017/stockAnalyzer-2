@@ -3,7 +3,6 @@ import pandas as pd
 from alphavantageapikey import alpha_vantagi_api_key
 
 
-ticker = 'AAPL'
 
 
 # Convert Income Statement json request to pandas data frame
