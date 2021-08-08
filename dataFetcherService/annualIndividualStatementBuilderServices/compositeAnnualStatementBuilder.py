@@ -32,25 +32,25 @@ def build_ann_statements(ticker):
     #print(annual_income_statement)
 
     # Creating dataframes for Balance Sheets
-    y5df = pd.DataFrame.from_dict(bsData['annualReports'][0], orient='index')
-    y4df = pd.DataFrame.from_dict(bsData['annualReports'][1], orient='index')
-    y3df = pd.DataFrame.from_dict(bsData['annualReports'][2], orient='index')
-    y2df = pd.DataFrame.from_dict(bsData['annualReports'][3], orient='index')
-    y1df = pd.DataFrame.from_dict(bsData['annualReports'][4], orient='index')
+    bsy5df = pd.DataFrame.from_dict(bsData['annualReports'][0], orient='index')
+    bsy4df = pd.DataFrame.from_dict(bsData['annualReports'][1], orient='index')
+    bsy3df = pd.DataFrame.from_dict(bsData['annualReports'][2], orient='index')
+    bsy2df = pd.DataFrame.from_dict(bsData['annualReports'][3], orient='index')
+    bsy1df = pd.DataFrame.from_dict(bsData['annualReports'][4], orient='index')
 
-    annual_balance_sheet = pd.concat([y1df, y2df, y3df, y4df, y5df], axis=1)
+    annual_balance_sheet = pd.concat([bsy1df, bsy2df, bsy3df, bsy4df, bsy5df], axis=1)
     #annual_balance_sheet.to_csv('annual_balance_sheet')
     #print(annual_balance_sheet)
 
 
     #Creating dataframes for Cash Flow Statements
-    y5df = pd.DataFrame.from_dict(cfData['annualReports'][0], orient='index')
-    y4df = pd.DataFrame.from_dict(cfData['annualReports'][1], orient='index')
-    y3df = pd.DataFrame.from_dict(cfData['annualReports'][2], orient='index')
-    y2df = pd.DataFrame.from_dict(cfData['annualReports'][3], orient='index')
-    y1df = pd.DataFrame.from_dict(cfData['annualReports'][4], orient='index')
+    cfy5df = pd.DataFrame.from_dict(cfData['annualReports'][0], orient='index')
+    cfy4df = pd.DataFrame.from_dict(cfData['annualReports'][1], orient='index')
+    cfy3df = pd.DataFrame.from_dict(cfData['annualReports'][2], orient='index')
+    cfy2df = pd.DataFrame.from_dict(cfData['annualReports'][3], orient='index')
+    cfy1df = pd.DataFrame.from_dict(cfData['annualReports'][4], orient='index')
 
-    annual_cash_flow_statement = pd.concat([y1df, y2df, y3df, y4df, y5df], axis=1)
+    annual_cash_flow_statement = pd.concat([cfy1df, cfy2df, cfy3df, cfy4df, cfy5df], axis=1)
     #annual_cash_flow_statement.to_csv('annual_cash_flow_statement')
     #print(annual_cash_flow_statement)
 
