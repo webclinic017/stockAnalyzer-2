@@ -6,3 +6,4 @@ annual_income_statement.csv
 annual_balance_sheet.csv
 annual_cash_flow_statement.csv
 finnhubAPIkey.py
+dbpass.py

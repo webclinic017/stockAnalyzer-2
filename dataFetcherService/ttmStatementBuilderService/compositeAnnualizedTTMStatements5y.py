@@ -255,5 +255,8 @@ def build_ttm_statements(ticker):
     ttm_composite = pd.concat(ttm_data_for_composite, axis=1, keys=heads)
     print(ttm_composite)
 
+    # full_20q_quarterly_statements = [ttm_m4y_statementsDump['tm19'], ttm_m4y_statementsDump['tm18'], ttm_m4y_statementsDump['tm17'], ttm_m4y_statementsDump['tm16'], ttm_m3y_statementsDump['tm15'],  ttm_m3y_statementsDump['tm14'],  ttm_m3y_statementsDump['tm13'],  ttm_m3y_statementsDump['tm12'], ttm_m2y_statementsDump['tm11'], ttm_m2y_statementsDump['tm10'], ttm_m2y_statementsDump['tm9'], ttm_m2y_statementsDump['tm8'], ttm_m1y_statementsDump['tm7'], ttm_m1y_statementsDump['tm6'], ttm_m1y_statementsDump['tm5'], ttm_m1y_statementsDump['tm4'], ttm_statementsDump['tm3'] , ttm_statementsDump['tm2'], ttm_statementsDump['tm1'], ttm_statementsDump['t'] ]
+    # full_20q_composite = pd.concat(full_20q_quarterly_statements, axis=1, keys=heads)
+    # print(full_20q_composite)
 
 build_ttm_statements('AAPL')

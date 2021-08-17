@@ -2,11 +2,12 @@ import mysql.connector
 from mysql.connector import Error
 from sqlalchemy.exc import SQLAlchemyError
 import csv
+from dbpass import db_password
 
 db = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="0595",
+    passwd=db_password,
     database="securitiesmaster"
 
 )

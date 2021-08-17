@@ -1,22 +1,33 @@
 import finnhub
 from finnhubAPIkey import FINNHUB_API_KEY
 import time
-from get_all_tickers import get_tickers as gt
+from dbpass import db_password
 import mysql
 import mysql.connector
 import pandas as pd
 import finnhub
 import datetime
+import psycopg2
 
-
+# IF USING mySQL, UN COMMENT AND ENTER CREDENTIALS TO CONNECT TO DATABASE
 # Connect to mySQL Database
-db = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    passwd="0595",
-    database="securitiesmaster"
-)
-mycursor = db.cursor()
+# db = mysql.connector.connect(
+#     host="localhost",
+#     user="root",
+#     passwd=db_password,
+#     database="securitiesmaster"
+# )
+# mycursor = db.cursor()
+
+
+db_name = 'securitiesmaster'
+db_user = 'postgres'
+db_pass = db_password
+db_host = 'localhost'
+
+
+conn = psycopg2.connect(dbname= db_name, user= db_user, paddword= db_pass, host= db_host )
+mycursor = conn.cursor()
 
 #See which ticker's data is already stored in securities master
 query = "SELECT distinct ticker FROM securitiesmaster.ohlc"
@@ -82,7 +93,7 @@ def insert_candles_to_master(ticker):
             ticker = ticker
             candle_values = (open, high, low, close, volume, timestamp, ticker)
             mycursor.execute(ohlc_db_entry, candle_values)
-            db.commit()
+            conn.commit()
         except Exception:
             print('End of selected timeseries of x stock')
             pass

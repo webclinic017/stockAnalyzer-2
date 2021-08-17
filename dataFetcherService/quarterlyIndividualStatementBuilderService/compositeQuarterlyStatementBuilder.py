@@ -105,8 +105,8 @@ def build_quarterly_statements(ticker):
     quarterly_statementsDumpHtml = quarterly_statementsDump.to_html()
     print('-------------------------------------------')
     print(quarterly_statementsDump)
-    print(quarterly_statementsDumpHtml)
-    print(type(quarterly_statementsDumpHtml))
+    # print(quarterly_statementsDumpHtml)
+    # print(type(quarterly_statementsDumpHtml))
 
 
 build_quarterly_statements('AAPL')
