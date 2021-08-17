@@ -2,6 +2,7 @@ import finnhub
 from finnhubAPIkey import FINNHUB_API_KEY
 import mysql
 import mysql.connector
+from dbpass import db_password
 
 
 
@@ -9,7 +10,7 @@ import mysql.connector
 db = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="0595",
+    passwd=db_password,
     database="securitiesmaster"
 )
 mycursor = db.cursor()
