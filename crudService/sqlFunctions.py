@@ -2,51 +2,30 @@ import mysql.connector
 from mysql.connector import Error
 from sqlalchemy.exc import SQLAlchemyError
 import csv
-from dataFetcherService.annualIncomeStatementBuilder import *
 
-connection_params_dic = {
-    "host": "localhost",
-    "user": "root",
-    "passwd": "0595",
-    "database": "stockanalyzerproject",
+db = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    passwd="0595",
+    database="securitiesmaster"
 
-}
+)
 
-
-# Defining the connect function to establish connection to the server
-def connect(connection_params_dic):
-    conn = None
-    try:
-        print('Connecting to the MySQL.......')
-        conn = mysql.connect(**connection_params_dic)
-        print("Connection Successfully........")
-    except Error as err:
-        print("Error while connecting to MySQL", err)
-        # set the connection to 'None' in case of error
-        conn = None
-    return conn
-
-# Change to alchemy method?
+mycursor = db.cursor()
 
 
-# Using CSV
-# datafrm = y5df
+mycursor.execute("SELECT distinct ticker FROM securitiesmaster.ohlc;")
+myresult = mycursor.fetchall()
+
+for x in myresult:
+  print(x)
+
+
+# mycursor.execute(
+#     "CREATE TABLE ohlc (id INT AUTO_INCREMENT PRIMARY KEY, open VARCHAR(50), high VARCHAR(50), low VARCHAR(50), close VARCHAR(50), volume bigint, timestamp TIMESTAMP(6), ticker VARCHAR(10))"
 #
-# def using_csv_reader(engine, datafrm, table_name):
-#     try:
-#         datafrm.to_csv('annualIncomeStatement.csv', index= False)
-#         cols = ','.join(list(datafrm.columns))
-#         sql = "INSERT INTO %s(%s) VALUES(%%s, %%s, %%s, %%s)" % (table_name, cols)
-#         sql = sql.format(table_name)
-#         with open('tempname.csv') as fh:
-#             #sub_sample = [next(fh) for x in range(records)]
-#             reader = csv.reader(fh)
-#             next(reader) #skips the first line (headers)
-#             data = list(reader)
-#         engine.execute(sql, data)
-#         print("Data inserted using Using_csv_reader() Sucessfully...")
-#     except Error as err:
-#         print("Error while inserting to MySQL", err)
+# )
 
+#ohlc_db_entry = "INSERT INTO ohlc (id, open, high, low, close, volume, datetime, ticker) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
 
-
+#ohlc_data = ()
