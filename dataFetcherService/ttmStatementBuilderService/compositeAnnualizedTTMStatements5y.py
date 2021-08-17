@@ -239,7 +239,21 @@ def build_ttm_statements(ticker):
     print('-------------------------------------------')
     print(ttm_m4y_statementsDump)
     print('-------------------------------------------')
-
+    # print('-------------------------------------------')
+    # print(ttm_statementsDump['sumTTM'])
+    # print('-------------------------------------------')
+    # print(ttm_m1y_statementsDump['sumTTMm1y'])
+    # print('-------------------------------------------')
+    # print(ttm_m2y_statementsDump['sumTTMm2y'])
+    # print('-------------------------------------------')
+    # print(ttm_m3y_statementsDump['sumTTMm3y'])
+    # print('-------------------------------------------')
+    # print(ttm_m4y_statementsDump['sumTTMm4y'])
+    # print('-------------------------------------------')
+    ttm_data_for_composite = [ttm_m4y_statementsDump['sumTTMm4y'], ttm_m3y_statementsDump['sumTTMm3y'], ttm_m2y_statementsDump['sumTTMm2y'], ttm_m1y_statementsDump['sumTTMm1y'], ttm_statementsDump['sumTTM'] ]
+    heads = ['sumTTMm4y', 'sumTTMm3y', 'sumTTMm2y', 'sumTTMm1y', 'sumTTM']
+    ttm_composite = pd.concat(ttm_data_for_composite, axis=1, keys=heads)
+    print(ttm_composite)
 
 
 build_ttm_statements('AAPL')
