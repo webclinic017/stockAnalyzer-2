@@ -102,9 +102,32 @@ def build_quarterly_statements(ticker):
 
     isAndBsDf = quarterly_income_statement.append(quarterly_balance_sheet)
     quarterly_statementsDump = isAndBsDf.append(quarterly_cash_flow_statement)
+    #.drop(labels='reportedCurrency', axis=0)
+    quarterly_statementsDump.columns=['tm19', 'tm18', 'tm17', 'tm16', 'tm15', 'tm14', 'tm13', 'tm12', 'tm11', 'tm10', 'tm9', 'tm8', 'tm7', 'tm6', 'tm5', 'tm4', 'tm3', 'tm2', 'tm1', 't']
     quarterly_statementsDumpHtml = quarterly_statementsDump.to_html()
     print('-------------------------------------------')
+    pd.set_option('display.max_rows', None)
+    pd.set_option('display.max_columns', None)
+    pd.set_option('display.width', None)
+
+
     print(quarterly_statementsDump)
+
+
+
+
+
+
+
+
+
+    # netIncomeAttribToCommonShares = "{:.2f}".format(float(float(netIncome) - float(0)))
+    # eps = "{:.2f}".format(float(((float(netIncome)) - 0) / float(commonStockSharesOutstanding)))
+    # epswithdollarsign = "${:.2}".format(float(((float(netIncome)) - 0) / float(commonStockSharesOutstanding)))
+
+
+
+
     # print(quarterly_statementsDumpHtml)
     # print(type(quarterly_statementsDumpHtml))
 

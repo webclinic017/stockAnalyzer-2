@@ -57,6 +57,11 @@ def calculate_roa(net_income, average_assets):
     return_on_assets = (net_income / average_assets)
     return return_on_assets
 
+#EPS Calculations
+
+def calculate_basic_eps(ttm_netIncome, ttm_preferredDivs, weighted_avg_num_comm_shrs_outstanding):
+    basic_eps = ((ttm_netIncome - ttm_preferredDivs)/weighted_avg_num_comm_shrs_outstanding)
+    return basic_eps
 
 
 

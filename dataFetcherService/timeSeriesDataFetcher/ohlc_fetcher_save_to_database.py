@@ -26,11 +26,12 @@ db_pass = db_password
 db_host = 'localhost'
 
 
-conn = psycopg2.connect(dbname= db_name, user= db_user, paddword= db_pass, host= db_host )
+conn = psycopg2.connect(dbname= db_name, user= db_user, password= db_pass, host= db_host )
+conn.set_session(autocommit=False)
 mycursor = conn.cursor()
 
 #See which ticker's data is already stored in securities master
-query = "SELECT distinct ticker FROM securitiesmaster.ohlc"
+query = "SELECT distinct ticker FROM ohlc"
 mycursor.execute(query)
 records = mycursor.fetchall()
 
@@ -70,7 +71,7 @@ def insert_candles_to_master(ticker):
     finnhub_client = finnhub.Client(api_key=FINNHUB_API_KEY)
     finhub_quote_request = finnhub_client.stock_candles(ticker, "D", 1262336461, int(time.time()))
 
-    print(finhub_quote_request)
+    #print(finhub_quote_request)
 
     opens =finhub_quote_request['o']
     highs = finhub_quote_request['h']
@@ -93,20 +94,24 @@ def insert_candles_to_master(ticker):
             ticker = ticker
             candle_values = (open, high, low, close, volume, timestamp, ticker)
             mycursor.execute(ohlc_db_entry, candle_values)
-            conn.commit()
+            if i % 1000 == 0:
+                conn.commit()
+                print(mycursor.rowcount, "1000 records inserted.")
         except Exception:
-            print('End of selected timeseries of x stock')
+            #print('End of selected timeseries of x stock')
             pass
         else:
             pass
 
-        print(mycursor.rowcount, "record inserted.")
+
+conn.commit()
 
 for symbol in ticker_list:
     try:
         insert_candles_to_master(symbol)
     except Exception:
-        print('Done - check records in database (est 50 million)')
+        #print('Done - check records in database (est 50 million)')
+        pass
 
 
 # print(opens)

@@ -18,6 +18,12 @@ mycursor = conn.cursor()
 #
 # )
 
+# Create the ohlc tables in your database
+mycursor.execute(
+    "CREATE TABLE spohlc (id serial PRIMARY KEY, open VARCHAR(50), high VARCHAR(50), low VARCHAR(50), close VARCHAR(50), volume bigint, timestamp TIMESTAMP(6), ticker VARCHAR(10))"
+
+)
+
 conn.commit()
 mycursor.close()
 conn.close()
