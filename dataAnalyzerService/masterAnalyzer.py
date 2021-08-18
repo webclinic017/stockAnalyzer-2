@@ -3,7 +3,7 @@ import pandas as pd
 from alphavantageapikey import alpha_vantagi_api_key
 import finnhub
 from finnhubAPIkey import FINNHUB_API_KEY
-from stockstatcalculations import *
+from dataAnalyzerService.stockstatcalculations import *
 import numpy as np
 
 
@@ -2021,8 +2021,8 @@ def build_master(ticker):
     placeholder4pdivs = 0
     tBasicEPS = calculate_basic_eps(tTTMnetIncome, placeholder4pdivs, tTTMweightedAvgCommShrsOutstanding)
     tPE = calculate_pe(float(quoteUnformatted), float(tBasicEPS))
-    print(tBasicEPS)
-    print(tPE)
+    print('Basic EPS =' + str(tBasicEPS))
+    print('P/E =' + str(tPE))
     print(quote)
 
 build_master('AAPL')
