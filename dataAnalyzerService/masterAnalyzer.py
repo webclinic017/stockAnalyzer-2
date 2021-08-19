@@ -16,6 +16,7 @@ def build_master(ticker):
     finhub_quote_request = finnhub_client.quote(ticker)
     quote = "${:.2f}".format(list(finhub_quote_request.values())[0])
     quoteUnformatted = "{:.2f}".format(list(finhub_quote_request.values())[0])
+    quoteUnformatted = float(quoteUnformatted)
 
     # Defining URLs for the Requests
     isUrl = 'https://www.alphavantage.co/query?function=INCOME_STATEMENT&symbol=' + ticker + '&apikey=' + alpha_vantagi_api_key
@@ -115,10 +116,38 @@ def build_master(ticker):
     # quarterly_cash_flow_statement.to_csv('quarterly_cash_flow_statements')
 
     isAndBsDf = quarterly_income_statement.append(quarterly_balance_sheet)
-    quarterly_statementsDump = isAndBsDf.append(quarterly_cash_flow_statement)
-    quarterly_statementsDump.columns = ['tm19', 'tm18', 'tm17', 'tm16', 'tm15', 'tm14', 'tm13', 'tm12', 'tm11', 'tm10', 'tm9', 'tm8', 'tm7', 'tm6', 'tm5', 'tm4', 'tm3', 'tm2', 'tm1', 't']
-    quarterly_statementsDump = quarterly_statementsDump[:-1]
-    quarterly_statementsDumpHtml = quarterly_statementsDump.to_html()
+    quarterly_statementsDump1 = isAndBsDf.append(quarterly_cash_flow_statement)
+    quarterly_statementsDump1.columns = ['tm19', 'tm18', 'tm17', 'tm16', 'tm15', 'tm14', 'tm13', 'tm12', 'tm11', 'tm10', 'tm9', 'tm8', 'tm7', 'tm6', 'tm5', 'tm4', 'tm3', 'tm2', 'tm1', 't']
+    quarterly_statementsDump = quarterly_statementsDump1[:-1]
+    #quarterly_statementsDump = quarterly_statementsDump1.replace(to_replace=['None'], value=np.nan, inplace=True)
+
+    for i in range(len(quarterly_statementsDump)):
+        try:
+            quarterly_statementsDump[i].replace('None', np.nan, inplace=True)
+        except Exception:
+            pass
+
+    # quarterly_statementsDump['t'] = pd.to_numeric(quarterly_statementsDump['t'])
+    # quarterly_statementsDump['tm1'] = pd.to_numeric(quarterly_statementsDump['tm1'])
+    # quarterly_statementsDump['tm2'] = pd.to_numeric(quarterly_statementsDump['tm2'])
+    # quarterly_statementsDump['tm3'] = pd.to_numeric(quarterly_statementsDump['tm3'])
+    # quarterly_statementsDump['tm4'] = pd.to_numeric(quarterly_statementsDump['tm4'])
+    # quarterly_statementsDump['tm5'] = pd.to_numeric(quarterly_statementsDump['tm5'])
+    # quarterly_statementsDump['tm6'] = pd.to_numeric(quarterly_statementsDump['tm6'])
+    # quarterly_statementsDump['tm7'] = pd.to_numeric(quarterly_statementsDump['tm7'])
+    # quarterly_statementsDump['tm8'] = pd.to_numeric(quarterly_statementsDump['tm8'])
+    # quarterly_statementsDump['tm9'] = pd.to_numeric(quarterly_statementsDump['tm9'])
+    # quarterly_statementsDump['tm10'] = pd.to_numeric(quarterly_statementsDump['tm10'])
+    # quarterly_statementsDump['tm11'] = pd.to_numeric(quarterly_statementsDump['tm11'])
+    # quarterly_statementsDump['tm12'] = pd.to_numeric(quarterly_statementsDump['tm12'])
+    # quarterly_statementsDump['tm13'] = pd.to_numeric(quarterly_statementsDump['tm13'])
+    # quarterly_statementsDump['tm14'] = pd.to_numeric(quarterly_statementsDump['tm14'])
+    # quarterly_statementsDump['tm15'] = pd.to_numeric(quarterly_statementsDump['tm15'])
+    # quarterly_statementsDump['tm16'] = pd.to_numeric(quarterly_statementsDump['tm16'])
+    # quarterly_statementsDump['tm17'] = pd.to_numeric(quarterly_statementsDump['tm17'])
+    # quarterly_statementsDump['tm18'] = pd.to_numeric(quarterly_statementsDump['tm18'])
+    # quarterly_statementsDump['tm19'] = pd.to_numeric(quarterly_statementsDump['tm19'])
+    quarterly_statementsDumpHtml = quarterly_statementsDump1.to_html()
     print('-------------------------------------------')
     pd.set_option('display.max_rows', None)
     pd.set_option('display.max_columns', None)
@@ -1722,6 +1751,10 @@ def build_master(ticker):
     paymentsForRepurchaseOfEquity3 = quarterly_statementsDump.loc['paymentsForRepurchaseOfEquity'][16]
     paymentsForRepurchaseOfPreferredStock3 = quarterly_statementsDump.loc['paymentsForRepurchaseOfPreferredStock'][16]
     dividendPayout3 = quarterly_statementsDump.loc['dividendPayout'][16]
+    try:
+        dividendPayout3 = int(dividendPayout3)
+    except Exception:
+        dividendPayout3 = 0
     dividendPayoutCommonStock3 = quarterly_statementsDump.loc['dividendPayoutCommonStock'][16]
     dividendPayoutPreferredStock3 = quarterly_statementsDump.loc['dividendPayoutPreferredStock'][16]
     proceedsFromIssuanceOfCommonStock3 = quarterly_statementsDump.loc['proceedsFromIssuanceOfCommonStock'][16]
@@ -1816,6 +1849,10 @@ def build_master(ticker):
     paymentsForRepurchaseOfEquity2 = quarterly_statementsDump.loc['paymentsForRepurchaseOfEquity'][17]
     paymentsForRepurchaseOfPreferredStock2 = quarterly_statementsDump.loc['paymentsForRepurchaseOfPreferredStock'][17]
     dividendPayout2 = quarterly_statementsDump.loc['dividendPayout'][17]
+    try:
+        dividendPayout2 = int(dividendPayout2)
+    except Exception:
+        dividendPayout2 = 0
     dividendPayoutCommonStock2 = quarterly_statementsDump.loc['dividendPayoutCommonStock'][17]
     dividendPayoutPreferredStock2 = quarterly_statementsDump.loc['dividendPayoutPreferredStock'][17]
     proceedsFromIssuanceOfCommonStock2 = quarterly_statementsDump.loc['proceedsFromIssuanceOfCommonStock'][17]
@@ -1910,6 +1947,10 @@ def build_master(ticker):
     paymentsForRepurchaseOfEquity1 = quarterly_statementsDump.loc['paymentsForRepurchaseOfEquity'][18]
     paymentsForRepurchaseOfPreferredStock1 = quarterly_statementsDump.loc['paymentsForRepurchaseOfPreferredStock'][18]
     dividendPayout1 = quarterly_statementsDump.loc['dividendPayout'][18]
+    try:
+        dividendPayout1 = int(dividendPayout1)
+    except Exception:
+        dividendPayout1 = 0
     dividendPayoutCommonStock1 = quarterly_statementsDump.loc['dividendPayoutCommonStock'][18]
     dividendPayoutPreferredStock1 = quarterly_statementsDump.loc['dividendPayoutPreferredStock'][18]
     proceedsFromIssuanceOfCommonStock1 = quarterly_statementsDump.loc['proceedsFromIssuanceOfCommonStock'][18]
@@ -1921,108 +1962,544 @@ def build_master(ticker):
     changeInExchangeRate1 = quarterly_statementsDump.loc['changeInExchangeRate'][18]
     netIncome1 = quarterly_statementsDump.loc['netIncome'][18]
 
-    ## TM  VARIABLES
-    # Income Statement Variables for tm
+    ## Current Time T  VARIABLES
+    # Income Statement Variables for t
     gross_profit = quarterly_statementsDump.loc['grossProfit'][19]
+    try:
+        gross_profit = int(gross_profit)
+    except Exception:
+        gross_profit = 0
     totalRevenue = quarterly_statementsDump.loc['totalRevenue'][19]
+    try:
+        totalRevenue = int(totalRevenue)
+    except Exception:
+        totalRevenue = 0
     costOfRevenue = quarterly_statementsDump.loc['costOfRevenue'][19]
+    try:
+        costOfRevenue = int(costOfRevenue)
+    except Exception:
+        costOfRevenue = 0
     costofGoodsAndServicesSold = quarterly_statementsDump.loc['costofGoodsAndServicesSold'][19]
+    try:
+        costofGoodsAndServicesSold = int(costofGoodsAndServicesSold)
+    except Exception:
+        costofGoodsAndServicesSold = 0
     operatingIncome = quarterly_statementsDump.loc['operatingIncome'][19]
+    try:
+        operatingIncome = int(operatingIncome)
+    except Exception:
+        operatingIncome = 0
     sellingGeneralAndAdministrative = quarterly_statementsDump.loc['sellingGeneralAndAdministrative'][19]
+    try:
+        sellingGeneralAndAdministrative = int(sellingGeneralAndAdministrative)
+    except Exception:
+        sellingGeneralAndAdministrative = 0
     researchAndDevelopment = quarterly_statementsDump.loc['researchAndDevelopment'][19]
+    try:
+        researchAndDevelopment = int(researchAndDevelopment)
+    except Exception:
+        researchAndDevelopment = 0
     operatingExpenses = quarterly_statementsDump.loc['operatingExpenses'][19]
+    try:
+        operatingExpenses = int(operatingExpenses)
+    except Exception:
+        operatingExpenses = 0
     investmentIncomeNet = quarterly_statementsDump.loc['investmentIncomeNet'][19]
+    try:
+        investmentIncomeNet = int(investmentIncomeNet)
+    except Exception:
+        investmentIncomeNet = 0
+
     netInterestIncome = quarterly_statementsDump.loc['netInterestIncome'][19]
+    try:
+        netInterestIncome = int(netInterestIncome)
+    except Exception:
+        netInterestIncome = 0
     interestIncome = quarterly_statementsDump.loc['interestIncome'][19]
+    try:
+        interestIncome = int(interestIncome)
+    except Exception:
+        interestIncome = 0
     interestExpense = quarterly_statementsDump.loc['interestExpense'][19]
+    try:
+        interestExpense = int(interestExpense)
+    except Exception:
+        interestExpense = 0
     nonInterestIncome = quarterly_statementsDump.loc['nonInterestIncome'][19]
+    try:
+        nonInterestIncome = int(nonInterestIncome)
+    except Exception:
+        nonInterestIncome = 0
     otherNonOperatingIncome = quarterly_statementsDump.loc['otherNonOperatingIncome'][19]
+    try:
+        otherNonOperatingIncome = int(otherNonOperatingIncome)
+    except Exception:
+        otherNonOperatingIncome = 0
     depreciation = quarterly_statementsDump.loc['depreciation'][19]
+    try:
+        depreciation = int(depreciation)
+    except Exception:
+        depreciation = 0
     depreciationAndAmortization = quarterly_statementsDump.loc['depreciationAndAmortization'][19]
+    try:
+        depreciationAndAmortization = int(depreciationAndAmortization)
+    except Exception:
+        depreciationAndAmortization = 0
+
     incomeBeforeTax = quarterly_statementsDump.loc['incomeBeforeTax'][19]
+    try:
+        incomeBeforeTax = int(incomeBeforeTax)
+    except Exception:
+        incomeBeforeTax = 0
+
     incomeTaxExpense = quarterly_statementsDump.loc['incomeTaxExpense'][19]
+    try:
+        incomeTaxExpense = int(incomeTaxExpense)
+    except Exception:
+        incomeTaxExpense = 0
     interestAndDebtExpense = quarterly_statementsDump.loc['interestAndDebtExpense'][19]
+    try:
+        interestAndDebtExpense = int(interestAndDebtExpense)
+    except Exception:
+        interestAndDebtExpense = 0
     netIncomeFromContinuingOperations = quarterly_statementsDump.loc['netIncomeFromContinuingOperations'][19]
+    try:
+        netIncomeFromContinuingOperations = int(netIncomeFromContinuingOperations)
+    except Exception:
+        netIncomeFromContinuingOperations = 0
     comprehensiveIncomeNetOfTax = quarterly_statementsDump.loc['comprehensiveIncomeNetOfTax'][19]
+    try:
+        comprehensiveIncomeNetOfTax = int(comprehensiveIncomeNetOfTax)
+    except Exception:
+        comprehensiveIncomeNetOfTax = 0
     ebit = quarterly_statementsDump.loc['ebit'][19]
+    try:
+        ebit = int(ebit)
+    except Exception:
+        ebit = 0
     ebitda = quarterly_statementsDump.loc['ebitda'][19]
+    try:
+        ebitda = int(ebitda)
+    except Exception:
+        ebitda = 0
     # netIncome  = quarterly_statementsDump.loc['netIncome'][ 19]
 
     # Balance Sheet Values for tm
-    totalAssets = quarterly_statementsDump.loc['totalAssets'][19]
-    totalCurrentAssets = quarterly_statementsDump.loc['totalCurrentAssets'][19]
-    cashAndCashEquivalentsAtCarryingValue = quarterly_statementsDump.loc['cashAndCashEquivalentsAtCarryingValue'][19]
-    cashAndShortTermInvestments = quarterly_statementsDump.loc['cashAndShortTermInvestments'][19]
-    inventory = quarterly_statementsDump.loc['inventory'][19]
-    currentNetReceivables = quarterly_statementsDump.loc['currentNetReceivables'][19]
-    totalNonCurrentAssets = quarterly_statementsDump.loc['totalNonCurrentAssets'][19]
-    propertyPlantEquipment = quarterly_statementsDump.loc['propertyPlantEquipment'][19]
-    accumulatedDepreciationAmortizationPPE = quarterly_statementsDump.loc['accumulatedDepreciationAmortizationPPE'][19]
-    intangibleAssets = quarterly_statementsDump.loc['intangibleAssets'][19]
-    intangibleAssetsExcludingGoodwill = quarterly_statementsDump.loc['intangibleAssetsExcludingGoodwill'][19]
-    goodwill = quarterly_statementsDump.loc['goodwill'][19]
-    investments = quarterly_statementsDump.loc['investments'][19]
-    longTermInvestments = quarterly_statementsDump.loc['longTermInvestments'][19]
-    shortTermInvestments = quarterly_statementsDump.loc['shortTermInvestments'][19]
-    otherCurrentAssets = quarterly_statementsDump.loc['otherCurrentAssets'][19]
-    otherNonCurrrentAssets = quarterly_statementsDump.loc['otherNonCurrrentAssets'][19]
-    totalLiabilities = quarterly_statementsDump.loc['totalLiabilities'][19]
-    totalCurrentLiabilities = quarterly_statementsDump.loc['totalCurrentLiabilities'][19]
-    currentAccountsPayable = quarterly_statementsDump.loc['currentAccountsPayable'][19]
-    deferredRevenue = quarterly_statementsDump.loc['deferredRevenue'][19]
-    currentDebt = quarterly_statementsDump.loc['currentDebt'][19]
-    shortTermDebt = quarterly_statementsDump.loc['shortTermDebt'][19]
-    totalNonCurrentLiabilities = quarterly_statementsDump.loc['totalNonCurrentLiabilities'][19]
-    capitalLeaseObligations = quarterly_statementsDump.loc['capitalLeaseObligations'][19]
-    longTermDebt = quarterly_statementsDump.loc['longTermDebt'][19]
-    currentLongTermDebt = quarterly_statementsDump.loc['currentLongTermDebt'][19]
-    longTermDebtNoncurrent = quarterly_statementsDump.loc['longTermDebtNoncurrent'][19]
-    shortLongTermDebtTotal = quarterly_statementsDump.loc['shortLongTermDebtTotal'][19]
-    otherCurrentLiabilities = quarterly_statementsDump.loc['otherCurrentLiabilities'][19]
-    otherNonCurrentLiabilities = quarterly_statementsDump.loc['otherNonCurrentLiabilities'][19]
-    totalShareholderEquity = quarterly_statementsDump.loc['totalShareholderEquity'][19]
-    treasuryStock = quarterly_statementsDump.loc['treasuryStock'][19]
-    retainedEarnings = quarterly_statementsDump.loc['retainedEarnings'][19]
-    commonStock = quarterly_statementsDump.loc['commonStock'][19]
-    commonStockSharesOutstanding = quarterly_statementsDump.loc['commonStockSharesOutstanding'][19]
 
+    totalAssets = quarterly_statementsDump.loc['totalAssets'][19]
+    try:
+        totalAssets = int(totalAssets)
+    except Exception:
+        totalAssets = 0
+    totalCurrentAssets = quarterly_statementsDump.loc['totalCurrentAssets'][19]
+    try:
+        totalCurrentAssets = int(totalCurrentAssets)
+    except Exception:
+        totalCurrentAssets = 0
+    cashAndCashEquivalentsAtCarryingValue = quarterly_statementsDump.loc['cashAndCashEquivalentsAtCarryingValue'][19]
+    try:
+        cashAndCashEquivalentsAtCarryingValue = int(cashAndCashEquivalentsAtCarryingValue)
+    except Exception:
+        cashAndCashEquivalentsAtCarryingValue = 0
+    cashAndShortTermInvestments = quarterly_statementsDump.loc['cashAndShortTermInvestments'][19]
+    try:
+        cashAndShortTermInvestments = int(cashAndShortTermInvestments)
+    except Exception:
+        cashAndShortTermInvestments = 0
+    inventory = quarterly_statementsDump.loc['inventory'][19]
+    try:
+        inventory = int(inventory)
+    except Exception:
+        inventory = 0
+    currentNetReceivables = quarterly_statementsDump.loc['currentNetReceivables'][19]
+    try:
+        currentNetReceivables = int(currentNetReceivables)
+    except Exception:
+        currentNetReceivables = 0
+    totalNonCurrentAssets = quarterly_statementsDump.loc['totalNonCurrentAssets'][19]
+    try:
+        totalNonCurrentAssets = int(totalNonCurrentAssets)
+    except Exception:
+        totalNonCurrentAssets = 0
+    propertyPlantEquipment = quarterly_statementsDump.loc['propertyPlantEquipment'][19]
+    try:
+        propertyPlantEquipment = int(propertyPlantEquipment)
+    except Exception:
+        propertyPlantEquipment = 0
+    accumulatedDepreciationAmortizationPPE = quarterly_statementsDump.loc['accumulatedDepreciationAmortizationPPE'][19]
+    try:
+        accumulatedDepreciationAmortizationPPE = int(accumulatedDepreciationAmortizationPPE)
+    except Exception:
+        accumulatedDepreciationAmortizationPPE = 0
+    intangibleAssets = quarterly_statementsDump.loc['intangibleAssets'][19]
+    try:
+        intangibleAssets = int(intangibleAssets)
+    except Exception:
+        intangibleAssets = 0
+    intangibleAssetsExcludingGoodwill = quarterly_statementsDump.loc['intangibleAssetsExcludingGoodwill'][19]
+    try:
+        intangibleAssetsExcludingGoodwill = int(intangibleAssetsExcludingGoodwill)
+    except Exception:
+        intangibleAssetsExcludingGoodwill = 0
+    goodwill = quarterly_statementsDump.loc['goodwill'][19]
+    try:
+        goodwill = int(goodwill)
+    except Exception:
+        goodwill = 0
+    investments = quarterly_statementsDump.loc['investments'][19]
+    try:
+        investments = int(investments)
+    except Exception:
+        investments = 0
+    longTermInvestments = quarterly_statementsDump.loc['longTermInvestments'][19]
+    try:
+        longTermInvestments = int(longTermInvestments)
+    except Exception:
+        longTermInvestments = 0
+    shortTermInvestments = quarterly_statementsDump.loc['shortTermInvestments'][19]
+    try:
+        shortTermInvestments = int(shortTermInvestments)
+    except Exception:
+        shortTermInvestments = 0
+    otherCurrentAssets = quarterly_statementsDump.loc['otherCurrentAssets'][19]
+    try:
+        otherCurrentAssets = int(otherCurrentAssets)
+    except Exception:
+        otherCurrentAssets = 0
+    otherNonCurrrentAssets = quarterly_statementsDump.loc['otherNonCurrrentAssets'][19]
+    try:
+        otherNonCurrrentAssets = int(otherNonCurrrentAssets)
+    except Exception:
+        otherNonCurrrentAssets = 0
+    totalLiabilities = quarterly_statementsDump.loc['totalLiabilities'][19]
+    try:
+        totalLiabilities = int(totalLiabilities)
+    except Exception:
+        totalLiabilities = 0
+    totalCurrentLiabilities = quarterly_statementsDump.loc['totalCurrentLiabilities'][19]
+    try:
+        totalCurrentLiabilities = int(totalCurrentLiabilities)
+    except Exception:
+        totalCurrentLiabilities = 0
+    currentAccountsPayable = quarterly_statementsDump.loc['currentAccountsPayable'][19]
+    try:
+        currentAccountsPayable = int(currentAccountsPayable)
+    except Exception:
+        currentAccountsPayable = 0
+    deferredRevenue = quarterly_statementsDump.loc['deferredRevenue'][19]
+    try:
+        deferredRevenue = int(deferredRevenue)
+    except Exception:
+        deferredRevenue = 0
+    currentDebt = quarterly_statementsDump.loc['currentDebt'][19]
+    try:
+        currentDebt = int(currentDebt)
+    except Exception:
+        currentDebt = 0
+    shortTermDebt = quarterly_statementsDump.loc['shortTermDebt'][19]
+    try:
+        shortTermDebt = int(shortTermDebt)
+    except Exception:
+        shortTermDebt = 0
+    totalNonCurrentLiabilities = quarterly_statementsDump.loc['totalNonCurrentLiabilities'][19]
+    try:
+        totalNonCurrentLiabilities = int(totalNonCurrentLiabilities)
+    except Exception:
+        totalNonCurrentLiabilities = 0
+    capitalLeaseObligations = quarterly_statementsDump.loc['capitalLeaseObligations'][19]
+    try:
+        capitalLeaseObligations = int(capitalLeaseObligations)
+    except Exception:
+        capitalLeaseObligations = 0
+
+    longTermDebt = quarterly_statementsDump.loc['longTermDebt'][19]
+    try:
+        longTermDebt = int(longTermDebt)
+    except Exception:
+        longTermDebt = 0
+    currentLongTermDebt = quarterly_statementsDump.loc['currentLongTermDebt'][19]
+    try:
+        currentLongTermDebt = int(currentLongTermDebt)
+    except Exception:
+        currentLongTermDebt = 0
+    longTermDebtNoncurrent = quarterly_statementsDump.loc['longTermDebtNoncurrent'][19]
+    try:
+        longTermDebtNoncurrent = int(longTermDebtNoncurrent)
+    except Exception:
+        longTermDebtNoncurrent = 0
+    shortLongTermDebtTotal = quarterly_statementsDump.loc['shortLongTermDebtTotal'][19]
+    try:
+        shortLongTermDebtTotal = int(shortLongTermDebtTotal)
+    except Exception:
+        shortLongTermDebtTotal = 0
+    otherCurrentLiabilities = quarterly_statementsDump.loc['otherCurrentLiabilities'][19]
+    try:
+        otherCurrentLiabilities = int(otherCurrentLiabilities)
+    except Exception:
+        otherCurrentLiabilities = 0
+    otherNonCurrentLiabilities = quarterly_statementsDump.loc['otherNonCurrentLiabilities'][19]
+    try:
+        otherNonCurrentLiabilities = int(otherNonCurrentLiabilities)
+    except Exception:
+        otherNonCurrentLiabilities = 0
+    totalShareholderEquity = quarterly_statementsDump.loc['totalShareholderEquity'][19]
+    try:
+        totalShareholderEquity = int(totalShareholderEquity)
+    except Exception:
+        totalShareholderEquity = 0
+    treasuryStock = quarterly_statementsDump.loc['treasuryStock'][19]
+    try:
+        treasuryStock = int(treasuryStock)
+    except Exception:
+        treasuryStock = 0
+    retainedEarnings = quarterly_statementsDump.loc['retainedEarnings'][19]
+    try:
+        retainedEarnings = int(retainedEarnings)
+    except Exception:
+        retainedEarnings = 0
+    commonStock = quarterly_statementsDump.loc['commonStock'][19]
+    try:
+        commonStock = int(commonStock)
+    except Exception:
+        commonStock = 0
+    commonStockSharesOutstanding = quarterly_statementsDump.loc['commonStockSharesOutstanding'][19]
+    try:
+        commonStockSharesOutstanding = int(commonStockSharesOutstanding)
+    except Exception:
+        commonStockSharesOutstanding = 0
     # Cash-Flow Statement values for tm
     operatingCashflow = quarterly_statementsDump.loc['operatingCashflow'][19]
+    try:
+        operatingCashflow = int(operatingCashflow)
+    except Exception:
+        operatingCashflow = 0
     paymentsForOperatingActivities = quarterly_statementsDump.loc['paymentsForOperatingActivities'][19]
+    try:
+        paymentsForOperatingActivities = int(paymentsForOperatingActivities)
+    except Exception:
+        paymentsForOperatingActivities = 0
     proceedsFromOperatingActivities = quarterly_statementsDump.loc['proceedsFromOperatingActivities'][19]
+    try:
+        proceedsFromOperatingActivities = int(proceedsFromOperatingActivities)
+    except Exception:
+        proceedsFromOperatingActivities = 0
     changeInOperatingLiabilities = quarterly_statementsDump.loc['changeInOperatingLiabilities'][19]
+    try:
+        changeInOperatingLiabilities = int(changeInOperatingLiabilities)
+    except Exception:
+        changeInOperatingLiabilities = 0
     changeInOperatingAssets = quarterly_statementsDump.loc['changeInOperatingAssets'][19]
+    try:
+        changeInOperatingAssets = int(changeInOperatingAssets)
+    except Exception:
+        changeInOperatingAssets = 0
     depreciationDepletionAndAmortization = quarterly_statementsDump.loc['depreciationDepletionAndAmortization'][19]
+    try:
+        depreciationDepletionAndAmortization = int(depreciationDepletionAndAmortization)
+    except Exception:
+        depreciationDepletionAndAmortization = 0
     capitalExpenditures = quarterly_statementsDump.loc['capitalExpenditures'][19]
+    try:
+        capitalExpenditures = int(capitalExpenditures)
+    except Exception:
+        capitalExpenditures = 0
     changeInReceivables = quarterly_statementsDump.loc['changeInReceivables'][19]
+    try:
+        changeInReceivables = int(changeInReceivables)
+    except Exception:
+        changeInReceivables = 0
     changeInInventory = quarterly_statementsDump.loc['changeInInventory'][19]
+    try:
+        changeInInventory = int(changeInInventory)
+    except Exception:
+        changeInInventory = 0
     profitLoss = quarterly_statementsDump.loc['profitLoss'][19]
+    try:
+        profitLoss = int(profitLoss)
+    except Exception:
+        profitLoss = 0
     cashflowFromInvestment = quarterly_statementsDump.loc['cashflowFromInvestment'][19]
+    try:
+        cashflowFromInvestment = int(cashflowFromInvestment)
+    except Exception:
+        cashflowFromInvestment = 0
     cashflowFromFinancing = quarterly_statementsDump.loc['cashflowFromFinancing'][19]
+    try:
+        cashflowFromFinancing = int(cashflowFromFinancing)
+    except Exception:
+        cashflowFromFinancing = 0
     proceedsFromRepaymentsOfShortTermDebt = quarterly_statementsDump.loc['proceedsFromRepaymentsOfShortTermDebt'][19]
+    try:
+        proceedsFromRepaymentsOfShortTermDebt = int(proceedsFromRepaymentsOfShortTermDebt)
+    except Exception:
+        proceedsFromRepaymentsOfShortTermDebt = 0
     paymentsForRepurchaseOfCommonStock = quarterly_statementsDump.loc['paymentsForRepurchaseOfCommonStock'][19]
+    try:
+        paymentsForRepurchaseOfCommonStock = int(paymentsForRepurchaseOfCommonStock)
+    except Exception:
+        paymentsForRepurchaseOfCommonStock = 0
     paymentsForRepurchaseOfEquity = quarterly_statementsDump.loc['paymentsForRepurchaseOfEquity'][19]
+    try:
+        paymentsForRepurchaseOfEquity = int(paymentsForRepurchaseOfEquity)
+    except Exception:
+        paymentsForRepurchaseOfEquity = 0
     paymentsForRepurchaseOfPreferredStock = quarterly_statementsDump.loc['paymentsForRepurchaseOfPreferredStock'][19]
+    try:
+        paymentsForRepurchaseOfPreferredStock = int(paymentsForRepurchaseOfPreferredStock)
+    except Exception:
+        paymentsForRepurchaseOfPreferredStock = 0
     dividendPayout = quarterly_statementsDump.loc['dividendPayout'][19]
+    try:
+        dividendPayout = int(dividendPayout)
+    except Exception:
+        dividendPayout = 0
     dividendPayoutCommonStock = quarterly_statementsDump.loc['dividendPayoutCommonStock'][19]
+    try:
+        dividendPayoutCommonStock = int(dividendPayoutCommonStock)
+    except Exception:
+        dividendPayoutCommonStock = 0
     dividendPayoutPreferredStock = quarterly_statementsDump.loc['dividendPayoutPreferredStock'][19]
+    try:
+        dividendPayoutPreferredStock = int(dividendPayoutPreferredStock)
+    except Exception:
+        dividendPayoutPreferredStock = 0
     proceedsFromIssuanceOfCommonStock = quarterly_statementsDump.loc['proceedsFromIssuanceOfCommonStock'][19]
+    try:
+        proceedsFromIssuanceOfCommonStock = int(proceedsFromIssuanceOfCommonStock)
+    except Exception:
+        proceedsFromIssuanceOfCommonStock = 0
     proceedsFromIssuanceOfLongTermDebtAndCapitalSecuritiesNet = quarterly_statementsDump.loc['proceedsFromIssuanceOfLongTermDebtAndCapitalSecuritiesNet'][19]
+    try:
+        proceedsFromIssuanceOfLongTermDebtAndCapitalSecuritiesNet = int(proceedsFromIssuanceOfLongTermDebtAndCapitalSecuritiesNet)
+    except Exception:
+        proceedsFromIssuanceOfLongTermDebtAndCapitalSecuritiesNet = 0
     proceedsFromIssuanceOfPreferredStock = quarterly_statementsDump.loc['proceedsFromIssuanceOfPreferredStock'][19]
+    try:
+        proceedsFromIssuanceOfPreferredStock = int(proceedsFromIssuanceOfPreferredStock)
+    except Exception:
+        proceedsFromIssuanceOfPreferredStock = 0
     proceedsFromRepurchaseOfEquity = quarterly_statementsDump.loc['proceedsFromRepurchaseOfEquity'][19]
+    try:
+        proceedsFromRepurchaseOfEquity = int(proceedsFromRepurchaseOfEquity)
+    except Exception:
+        proceedsFromRepurchaseOfEquity = 0
     proceedsFromSaleOfTreasuryStock = quarterly_statementsDump.loc['proceedsFromSaleOfTreasuryStock'][19]
+    try:
+        proceedsFromSaleOfTreasuryStock = int(proceedsFromSaleOfTreasuryStock)
+    except Exception:
+        proceedsFromSaleOfTreasuryStock = 0
     changeInCashAndCashEquivalents = quarterly_statementsDump.loc['changeInCashAndCashEquivalents'][19]
+    try:
+        changeInCashAndCashEquivalents = int(changeInCashAndCashEquivalents)
+    except Exception:
+        changeInCashAndCashEquivalents = 0
     changeInExchangeRate = quarterly_statementsDump.loc['changeInExchangeRate'][19]
+    try:
+        changeInExchangeRate = int(changeInExchangeRate)
+    except Exception:
+        changeInExchangeRate = 0
     netIncome = quarterly_statementsDump.loc['netIncome'][19]
+    try:
+        netIncome = int(netIncome)
+    except Exception:
+        netIncome = 0
+    tTMnetIncome = (float(netIncome) + float(netIncome1) + float(netIncome2) + float(netIncome3))
+    try:
+        tTMpreferredDivs = (int(dividendPayoutPreferredStock) + int(dividendPayoutPreferredStock1) + int(dividendPayoutPreferredStock2) + int(dividendPayoutPreferredStock3))
+    except Exception:
+        tTMpreferredDivs = 0
+    weightedAvgCommShrsOutstanding = ((float(commonStockSharesOutstanding) + float(commonStockSharesOutstanding1) + float(commonStockSharesOutstanding2) + float(commonStockSharesOutstanding3))/4)
+    marketCap = calculateMarketCap(quoteUnformatted, commonStockSharesOutstanding)
+    basicEPS = calculateBasicEPS(tTMnetIncome, tTMpreferredDivs, weightedAvgCommShrsOutstanding)
+    pE = calculatePE(quoteUnformatted, basicEPS)
+    pCF = calculatePriceToCashFlow(quoteUnformatted, calculateOperatingCashFlowPerShare(operatingCashflow, weightedAvgCommShrsOutstanding))
+    pS = calculatePS(quoteUnformatted, calculateSalesPerShare(totalRevenue, weightedAvgCommShrsOutstanding))
+    pB = calculatePB(quoteUnformatted, calculateMarketToBookValue(marketCap, totalAssets, shortLongTermDebtTotal, preferredStock=0))
+    sustainableGrowthRate = calculateSustainableGrowthRate(calculateRetentionRate(calculateDividendPayoutRatio(dividendPayout, netIncome)), calculateROE(netIncome, totalShareholderEquity))
+    pEGRatio = calculatePEGRatio(pE, (sustainableGrowthRate*100))
+    earningsYield = calculateEarningsYield(basicEPS, quoteUnformatted)
+    cashFlowPerShare = calculateOperatingCashFlowPerShare(operatingCashflow, weightedAvgCommShrsOutstanding)
+    ebitdaPerShare = calculateEBITDAperShare(ebitda, weightedAvgCommShrsOutstanding)
+    tTMDividendPayout = ((float(dividendPayout) + float(dividendPayout1) + float(dividendPayout2) + float(dividendPayout3)))
+    dividendsPerShare = calculateDividendsPerShare(tTMDividendPayout, weightedAvgCommShrsOutstanding)
+    currentQuarterGrossProfitMargin = calculateGrossProfitMargin(totalRevenue, costofGoodsAndServicesSold)
+    tTmTotalRevenue = ((float(totalRevenue) + float(totalRevenue1) + float(totalRevenue2) + float(totalRevenue3)))
+    tTmCOGS = ((float(costofGoodsAndServicesSold) + float(costofGoodsAndServicesSold1) + float(costofGoodsAndServicesSold2) + float(costofGoodsAndServicesSold3)))
+    tTMGrossProfitMargin = calculateGrossProfitMargin(tTmTotalRevenue, tTmCOGS)
+    currentQuarterOperatingMargin = calculateOperatingMargin(operatingIncome, totalRevenue)
+    tTMOperatingIncome = ((float(operatingIncome) + float(operatingIncome1) + float(operatingIncome2) + float(operatingIncome3)))
+    tTMOperatingMargin = calculateOperatingMargin(tTMOperatingIncome, tTmTotalRevenue)
+    currentQuarterPreTaxMargin = calculatePreTaxMargin(calculateEBT(ebit, interestExpense), totalRevenue)
+    tTMebit = ((float(ebit) + float(ebit1) + float(ebit2) + float(ebit3)))
+    tTMInterestExpense = ((float(interestExpense) + float(interestExpense1) + float(interestExpense2) + float(interestExpense3)))
+    tTMPreTaxMargin = calculatePreTaxMargin(calculateEBT(tTMebit, tTMInterestExpense), tTmTotalRevenue)
+    currentQuarterNetProfitMargin = calculateNetProfitMargin(netIncome, totalRevenue)
+    tTMNetProfitMargin = calculateNetProfitMargin(tTMnetIncome, tTmTotalRevenue)
+    currentQuarterAvgTotalAssets = ((float(totalAssets) + float(totalAssets1))/2)
+    currentQuarterOperatingROA = (calculateOperatingROA(operatingIncome, currentQuarterAvgTotalAssets)) *4
+    tTMAvgTotalAssets = ((float(totalAssets) + float(totalAssets1) + float(totalAssets2) + float(totalAssets3))/4)
+    tTMOperatingROA = calculateOperatingROA(tTMOperatingIncome, tTMAvgTotalAssets)
+    currentQuarterROA = (calculateROA(netIncome, currentQuarterAvgTotalAssets))*4
+    tTMROA = calculateROA(tTMnetIncome, tTMAvgTotalAssets)
+    currentQuarterReturnOnTotalCapital = (calculateReturnOnTotalCapital(ebit, shortLongTermDebtTotal, totalShareholderEquity))*4
+    tTMReturnOnTotalCapital = calculateReturnOnTotalCapital(tTMebit, shortLongTermDebtTotal, totalShareholderEquity)
+    currentQuarterROE = (calculateROE(netIncome, totalShareholderEquity)) * 4
+    tTMROE = calculateROE(tTMnetIncome, totalShareholderEquity)
+    currentQuarterAvgCommonEquity = ((float(totalShareholderEquity) + float(totalShareholderEquity1))/2)
+    currentQuarterReturnOnCommonEquity = (calculateReturnOnCommonEquity(netIncome, dividendPayoutPreferredStock, currentQuarterAvgCommonEquity))*4
+    tTMAvgCommonEquity = ((float(totalShareholderEquity) + float(totalShareholderEquity1) + float(totalShareholderEquity2) + float(totalShareholderEquity3))/4)
+    tTMReturnOnCommonEquity = calculateReturnOnCommonEquity(tTMnetIncome, tTMpreferredDivs, tTMAvgCommonEquity)
+    debtRatio = calculateDebtRatio(totalLiabilities, totalAssets)
+    debtToEquityRatio = calculateDebtToEquity(shortLongTermDebtTotal, totalShareholderEquity)
+    debtToAssetRatio = calculateDebtToAssetRatio(shortLongTermDebtTotal, totalAssets)
+    debtToCapitalRatio = calculateDebtToCapitalRatio(shortLongTermDebtTotal, totalShareholderEquity)
 
-    tTTMnetIncome = (float(netIncome) + float(netIncome1) + float(netIncome2) + float(netIncome3))
-    #tTTMpreferredDivs = (float(dividendPayoutPreferredStock) + float(dividendPayoutPreferredStock1) + float(dividendPayoutPreferredStock2) + float(dividendPayoutPreferredStock3))
-    tTTMweightedAvgCommShrsOutstanding = ((float(commonStockSharesOutstanding) + float(commonStockSharesOutstanding1) + float(commonStockSharesOutstanding2) + float(commonStockSharesOutstanding3))/4)
-    placeholder4pdivs = 0
-    tBasicEPS = calculate_basic_eps(tTTMnetIncome, placeholder4pdivs, tTTMweightedAvgCommShrsOutstanding)
-    tPE = calculate_pe(float(quoteUnformatted), float(tBasicEPS))
-    print('Basic EPS =' + str(tBasicEPS))
-    print('P/E =' + str(tPE))
+    financialLeverage = calculateFinancialLeverageRatio(currentQuarterAvgTotalAssets, currentQuarterAvgCommonEquity)
+    interestCoverage = calculateInterestCoverageRatio(operatingCashflow, interestExpense, incomeTaxExpense)
+    fixedChargeCoverageRatio = calculateFixedChargeCoverage(ebit, capitalLeaseObligations, interestExpense)
+
+
+
+
+
+
+    print('-----------------------------------')
+    print('P/E =' + str(pE))
+    print('P/CF =' + str(pCF))
+    print('P/S =' + str(pS))
+    print('P/B =' + str(pB))
+    print('PEG Ratio =' + str(pEGRatio))
+    print('growthrate =' + str(sustainableGrowthRate))
+    print('Earnings Yield =' + str(earningsYield))
+    print('Basic EPS =' + str(basicEPS))
+    print('cashFlowPerShare =' + str(cashFlowPerShare))
+    print('ebitdaPerShare =' + str(ebitdaPerShare))
+    print('dividendsPerShare =' + str(dividendsPerShare))
+    print('Current Quarter Gross Profit Margin =' + str(currentQuarterGrossProfitMargin))
+    print('TTM Gross Profit Margin =' + str(tTMGrossProfitMargin))
+    print('Current Quarter Operating Margin =' + str(currentQuarterOperatingMargin))
+    print('TTM Operating Margin  =' + str(tTMOperatingMargin))
+    print('Current Quarter Pre-Tax Margin =' + str(currentQuarterPreTaxMargin))
+    print('TTM Pre-Tax Margin =' + str(tTMPreTaxMargin))
+    print('Current Quarter Net Profit Margin =' + str(currentQuarterNetProfitMargin))
+    print('TTM Net Profit Margin  =' + str(tTMNetProfitMargin))
+    print('Current Quarter Operating ROA =' + str(currentQuarterOperatingROA))
+    print('TTM Operating ROA  =' + str(tTMOperatingROA))
+    print('Current Quarter  ROA =' + str(currentQuarterROA))
+    print('TTM  ROA  =' + str(tTMROA))
+    print('Current Quarter Return On Total Capital  =' + str(currentQuarterReturnOnTotalCapital))
+    print('TTM Return On Total Capital  =' + str(tTMReturnOnTotalCapital))
+    print('Current Quarter  ROE =' + str(currentQuarterROE))
+    print('TTM  ROE  =' + str(tTMROE))
+    print('Current Quarter Return on Common Equity =' + str(currentQuarterReturnOnCommonEquity))
+    print('TTM  Return on Common Equity  =' + str(tTMReturnOnCommonEquity))
+    print('Debt Ratio  =' + str(debtRatio))
+    print('Debt to Equity Ratio  =' + str(debtToEquityRatio))
+    print('Debt to Asset Ratio  =' + str(debtToAssetRatio))
+    print('Debt to Capital Ratio  =' + str(debtToCapitalRatio))
+    print('Financial Legerage Ratio  =' + str(financialLeverage))
+    print('Fixed-Charge Coverage Ratio  =' + str(fixedChargeCoverageRatio))
+
     print(quote)
 
-build_master('AAPL')
+build_master('SQ')

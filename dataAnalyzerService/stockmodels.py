@@ -1,6 +1,8 @@
-from dataFetcherService.annualFullStatementVariables import *
-
+from dataAnalyzerService.stockstatcalculations import *
+from masterAnalyzer import *
 ticker = 'test'
+
+
 
 current_eps = 2.04
 current_dividend = 1.90
@@ -14,7 +16,7 @@ free_cash_flow = operatingCashflow - capitalExpenditures
 #Constant Growth DDM Model -> vs0 =
 def cg_ddm_model(ticker):
     d0 = current_dividend
-    g = growth_rate
+    g = calculateSustainableGrowthRate(calculateRetentionRate(calculateDividendPayoutRatio(dividendPayout, netIncome)), calculate_roe(netIncome, totalEquity))
     ke = req_ror
     cg_ddm_vs0 = ((d0 * (1 + g))/(ke - g))
     print(cg_ddm_vs0)

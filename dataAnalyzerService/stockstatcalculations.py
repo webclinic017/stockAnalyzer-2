@@ -2,55 +2,92 @@ import pandas as pd
 
 
 # Valuation metrics
-def calculate_pe(current_price, earnings):
-    pe_ratio = (current_price / earnings)
-    return pe_ratio
+def calculatePE(quoteUnformatted, basicEPS):
+    peRatio = (quoteUnformatted / basicEPS)
+    return peRatio
+
+def calculateEarningsYield(basicEPS, quoteUnformatted):
+    earningsYield = (basicEPS / quoteUnformatted)
+    return earningsYield
+
+def calculateMarketCap(quoteUnformatted, sharesOutstanding):
+    marketCap = (float(quoteUnformatted) * float(sharesOutstanding))
+    return marketCap
+
+def calculateMarketToBookValue(marketCap, totalAssets, totalDebt, preferredStock):
+    bookValue = (float(marketCap) / (float(totalAssets)-float(totalDebt)-float(preferredStock)))
+    return bookValue
+
+def calculatePB(quoteUnformatted, bookValue):
+    pbRatio = (float(quoteUnformatted) / float(bookValue))
+    return pbRatio
+
+def calculateSalesPerShare(totalRevenue, weightedAverageSharesOutstanding):
+    salesPerShare = (float(totalRevenue) / weightedAverageSharesOutstanding)
+    return salesPerShare
 
 
-def calculate_pb(current_price, book_value):
-    pb_ratio = (current_price / book_value)
-    return pb_ratio
+def calculatePS(quoteUnformatted, salesPerShare):
+    psRatio = (float(quoteUnformatted) / float(salesPerShare))
+    return psRatio
 
+def calculateOperatingCashFlowPerShare(operatingCashflow, weightedAverageSharesOutstanding):
+    operatingCashFlowPerShare = (float(operatingCashflow) / weightedAverageSharesOutstanding)
+    return operatingCashFlowPerShare
 
-def calculate_ps(current_price, total_sales):
-    ps_ratio = (current_price / total_sales)
-    return ps_ratio
-
+def calculatePriceToCashFlow(quoteUnformatted, operatingCashFlowPerShare):
+    priceToCashFlow = (float(quoteUnformatted) / operatingCashFlowPerShare)
+    return priceToCashFlow
 
 # Liquidity Ratios
-def calculate_current_ratio(current_assets, current_liabilities):
-    current_ratio = (current_assets / current_liabilities)
-    return current_ratio
+def calculateCurrentRatio(totalCurrentAssets, totalCurrentLiabilities):
+    currentRatio = (float(totalCurrentAssets) / float(totalCurrentLiabilities))
+    return currentRatio
 
 
-def calculate_quick_ratio(current_assets, current_liabilities, inventory):
-    quick_ratio = ((current_assets - inventory) / current_liabilities)
-    return quick_ratio
+def calculateQuickRatio(totalCurrentAssets, totalCurrentLiabilities, inventory):
+    quickRatio = ((float(totalCurrentAssets) - float(inventory)) / float(totalCurrentLiabilities))
+    return quickRatio
 
 
 def calculate_cfa_quick_ratio(cash, marketable_securities, recievables, current_liabilities):
-    cfa_quick_ratio = ((cash + marketable_securities + recievables) / current_liabilities)
+    cfa_quick_ratio = ((float(cash) + float(marketable_securities) + float(recievables)) / float(current_liabilities))
     return cfa_quick_ratio
 
 
 # Leverage Ratios
-def calculate_debt_ratio(total_liabilities, total_assets):
-    debt_ratio = (total_liabilities / total_assets)
-    return debt_ratio
+def calculateDebtRatio(totalLiabilities, totalAssets):
+    debtRatio = (float(totalLiabilities) / float(totalAssets))
+    return debtRatio
 
 
-def calculate_debt_to_equity(total_debt, total_equity):
-    debt_to_equity = (total_debt / total_equity)
-    return debt_to_equity
+def calculateDebtToEquity(totalDebt, totalShareholderEquity):
+    debtToEquity = (float(totalDebt) / float(totalShareholderEquity))
+    return debtToEquity
 
-def calculate_cash_ratio(cash, marketable_securities, current_liabilities):
-    cash_ratio = ((cash + marketable_securities) / current_liabilities)
-    return cash_ratio
+def calculateCashRatio(cash, cashAndCashEquivalentsAtCarryingValue, currentLiabilities):
+    cashRatio = ((float(cash) + float(cashAndCashEquivalentsAtCarryingValue)) / float(currentLiabilities))
+    return cashRatio
 
+def calculateDebtToAssetRatio(shortLongTermDebtTotal, totalAssets):
+    debtToAssetRatio = (float(shortLongTermDebtTotal) / float(totalAssets))
+    return debtToAssetRatio
 
-def calculate_interest_coverage_ratio(ebit, interest_expense):
-    interest_coverage_ratio = (ebit / interest_expense)
-    return interest_coverage_ratio
+def calculateDebtToCapitalRatio(shortLongTermDebtTotal, totalShareholderEquity):
+    debtToCapitalRatio = ((float(shortLongTermDebtTotal))/ (float(totalShareholderEquity)+float(shortLongTermDebtTotal)))
+    return debtToCapitalRatio
+
+def calculateInterestCoverageRatio(ebit, interestExpense):
+    interestCoverageRatio = (float(ebit) / float(interestExpense))
+    return interestCoverageRatio
+
+def calculateFixedChargeCoverage(ebit, leasePayments, interestExpense):
+    fixedChargeCoverageRatio = ((float(ebit) + float(leasePayments))/(float(interestExpense) + float(leasePayments)))
+    return fixedChargeCoverageRatio
+
+def calculateFinancialLeverageRatio(avgTotalAssets, avgTotalEquity):
+    financialLeverage = (float(avgTotalAssets) / float(avgTotalEquity))
+    return financialLeverage
 
 
 # def calculate_fixed_charge_coverage_ratio =
@@ -58,61 +95,143 @@ def calculate_interest_coverage_ratio(ebit, interest_expense):
 
 # Profitability ratios
 
-def calculate_roe(net_income, total_equity):
-    return_on_equity = (net_income / total_equity)
-    return return_on_equity
+def calculateROE(netIncome, totalShareholderEquity):
+    returnOnEquity = (float(netIncome) / float(totalShareholderEquity))
+    return returnOnEquity
 
 
-def calculate_roa(net_income, average_assets):
-    return_on_assets = (net_income / average_assets)
-    return return_on_assets
+def calculateROA(netIncome, averageAssets):
+    returnOnAssets = (float(netIncome) / float(averageAssets))
+    return returnOnAssets
+
+def calculateOperatingROA(operatingIncome, averageTotalAssets):
+    operatingROA = (float(operatingIncome) / float(averageTotalAssets))
+    return operatingROA
+
+def calculateReturnOnTotalCapital(ebit, shortLongTermDebtTotal, totalShareholderEquity):
+    returnOnTotalCapital = ((float(ebit))/(float(shortLongTermDebtTotal) + float(totalShareholderEquity)))
+    return returnOnTotalCapital
+
+def calculateReturnOnCommonEquity(netIncome, dividendPayoutPreferredStock, averageCommonEquity):
+    returnOnCommonEquity = ((float(netIncome) - float(dividendPayoutPreferredStock))/ float(averageCommonEquity))
+    return returnOnCommonEquity
+
 
 
 # EPS Calculations
 
-def calculate_basic_eps(ttm_netIncome, ttm_preferredDivs, weighted_avg_num_comm_shrs_outstanding):
-    basic_eps = ((ttm_netIncome - ttm_preferredDivs) / weighted_avg_num_comm_shrs_outstanding)
-    return basic_eps
+def calculateBasicEPS(ttm_netIncome, ttm_preferredDivs, weightedAverageSharesOutstanding):
+    basicEPS = ((float(ttm_netIncome) - float(ttm_preferredDivs)) / weightedAverageSharesOutstanding)
+    return basicEPS
 
 
 def calculate_cfa_diluted_eps(net_income, preferred_divs, convertible_pref_dividends, convertible_debt_interest,
                               corporate_tax_rate, weighted_avg_shares, shares_from_convers_of_conv_pref_shares,
                               shares_from_conversion_of_debt, shares_issuable_from_stock_options):
-    cfa_diluted_eps = (((net_income - preferred_divs) + convertible_pref_dividends + (
-                convertible_debt_interest * (1 - corporate_tax_rate))) / (
-                                   weighted_avg_shares + shares_from_convers_of_conv_pref_shares + shares_from_conversion_of_debt + shares_issuable_from_stock_options))
+    cfa_diluted_eps = (((net_income - preferred_divs) + convertible_pref_dividends + (convertible_debt_interest * (1 - corporate_tax_rate))) / (weighted_avg_shares + shares_from_convers_of_conv_pref_shares + shares_from_conversion_of_debt + shares_issuable_from_stock_options))
     return cfa_diluted_eps
 
-
+def calculatePEGRatio(pERatio, sustainableGrowthRate):
+    pEG = (float(pERatio) / float(sustainableGrowthRate))
+    return pEG
 
 # Activity Ratios
-def calculate_inventory_turnover(cogs, average_inventory):
-    inventory_turnover = (cogs/average_inventory)
-    return inventory_turnover
+def calculateInventoryTurnover(cogs, averageInventory):
+    inventoryTurnover = (float(cogs)/float(averageInventory))
+    return inventoryTurnover
 
 
-def calculate_days_of_inv_on_hand(average_inventory, cogs):
-    days_of_inv_on_hand = ((average_inventory / cogs)*365)
-    return days_of_inv_on_hand
+def calculateDaysOfInventoryOnHand(averageInventory, cogs):
+    daysOfInventoryOnHand = ((float(averageInventory) / float(cogs))*365)
+    return daysOfInventoryOnHand
 
 
-def calculate_recievables_turnover(revenue, average_recievables):
-    recievables_turnover = (revenue / average_recievables)
-    return recievables_turnover
+def calculateRecievablesTurnover(totalRevenue, averageRecievables):
+    recievablesTurnover = (float(totalRevenue) / float(averageRecievables))
+    return recievablesTurnover
+
+def calculatePayablesTurnover(cogs, averageAccountsPayable):
+    payablesTurnoverRatio = (float(cogs) / float(averageAccountsPayable))
+    return averageAccountsPayable
+
+def calculateNumberOfDaysOfPayables(payablesTurnoverRatio):
+    numberOfDaysOfPayables = (365 / float(payablesTurnoverRatio))
+    return numberOfDaysOfPayables
+
+def calculateDaysOfSalesOutstanding(avgRecievables, totalRevenue):
+    daysOfSalesOutstanding = ((float(avgRecievables) / float(totalRevenue)) *365)
+    return daysOfSalesOutstanding
 
 
-def calculate_days_of_sales_outstanding(avg_recievables, revenue):
-    days_of_sales_outstanding = ((avg_recievables / revenue) *365)
-    return days_of_sales_outstanding
+def calculateWorkingCapitalTurnover(totalRevenue, averageWorkingCapital):
+    workingCapitalTurnover = (float(totalRevenue) / float(averageWorkingCapital))
+    return workingCapitalTurnover
 
+def calculateFixedAssetTurnoverRatio(totalRevenue, averageNetFixedAssets):
+    fixedAssetTurnoverRatio = (float(totalRevenue) / float(averageNetFixedAssets))
+    return fixedAssetTurnoverRatio
+
+def calculateTotalAssetTurnover(totalRevenue, averageTotalAssets):
+    totalAssetTurnover = (float(totalRevenue) / float(averageTotalAssets))
+    return totalAssetTurnover
 
 #Coverage Ratios
 
-def calculate_debt_coverage_ratio(operating_cash_flow, total_debt ):
-    debt_coverage_ratio = (operating_cash_flow / total_debt)
-    return debt_coverage_ratio
+def calculateDebtCoverageRatio(operatingCashFlow, shortLongTermDebtTotal ):
+    debtCoverageRatio = (float(operatingCashFlow) / float(shortLongTermDebtTotal))
+    return debtCoverageRatio
 
 
-def calculate_interest_coverage_ratio(operating_cash_flow, interest_paid, taxes_paid):
-    interest_coverage_ratio = ((operating_cash_flow + interest_paid + taxes_paid) / interest_paid)
-    return interest_coverage_ratio
+def calculateInterestCoverageRatio(operatingCashFlow, interestExpense, incomeTaxExpense):
+    interestCoverageRatio = ((float(operatingCashFlow) + float(interestExpense) + float(incomeTaxExpense)) / float(interestExpense))
+    return interestCoverageRatio
+
+#Dividend-Related
+
+def calculateDividendsPerShare(dividendPayout, weightedAverageSharesOutstanding ):
+    dividendsPerShare = (float(dividendPayout) / weightedAverageSharesOutstanding)
+    return dividendsPerShare
+
+def calculateDividendPayoutRatio(dividendPayout, netIncome):
+    payoutRatio = (float(dividendPayout) / float(netIncome))
+    return payoutRatio
+
+def calculateRetentionRate(payoutRatio):
+    retentionRateB = (1-payoutRatio)
+    return retentionRateB
+
+def calculateSustainableGrowthRate(retentionRateB, roe):
+    SustainableGrowthRate = retentionRateB * roe
+    return SustainableGrowthRate
+
+# Asset-based Valuation
+
+def calculateGrossProfitMargin(totalRevenue, cogs):
+    grossProfitMargin = ((float(totalRevenue) - float(cogs))/ float(totalRevenue))
+    return grossProfitMargin
+
+def calculateOperatingMargin(operatingIncome, totalRevenue):
+    operatingMargin = (float(operatingIncome) / float(totalRevenue))
+    return operatingMargin
+
+def calculatePreTaxMargin(ebt, totalRevenue):
+    preTaxMargin = (float(ebt) / float(totalRevenue))
+    return preTaxMargin
+
+def calculateNetProfitMargin(netIncome, totalRevenue):
+    netProfitMargin = (float(netIncome) / float(totalRevenue))
+    return netProfitMargin
+
+def calculateEBITDAperShare(ebitda, weightedAverageSharesOutstanding):
+    ebitdaPerShare = (float(ebitda) / weightedAverageSharesOutstanding)
+    return ebitdaPerShare
+
+def calculateEBIT(grossProfit, operatingExpenses):
+    ebit = (float(grossProfit) - float(operatingExpenses))
+    return ebit
+
+def calculateEBT(ebit, interestExpense):
+    ebt = (float(ebit) - float(interestExpense))
+    return ebt
+
+
