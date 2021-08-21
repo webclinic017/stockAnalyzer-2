@@ -1,5 +1,5 @@
 import pandas as pd
-
+import numpy as np
 
 # Valuation metrics
 def calculatePE(quoteUnformatted, basicEPS):
@@ -65,8 +65,8 @@ def calculateDebtToEquity(totalDebt, totalShareholderEquity):
     debtToEquity = (float(totalDebt) / float(totalShareholderEquity))
     return debtToEquity
 
-def calculateCashRatio(cash, cashAndCashEquivalentsAtCarryingValue, currentLiabilities):
-    cashRatio = ((float(cash) + float(cashAndCashEquivalentsAtCarryingValue)) / float(currentLiabilities))
+def calculateCashRatio( cashAndCashEquivalentsAtCarryingValue, currentLiabilities):
+    cashRatio = ( float(cashAndCashEquivalentsAtCarryingValue) / float(currentLiabilities))
     return cashRatio
 
 def calculateDebtToAssetRatio(shortLongTermDebtTotal, totalAssets):
@@ -147,15 +147,24 @@ def calculateDaysOfInventoryOnHand(averageInventory, cogs):
 
 
 def calculateRecievablesTurnover(totalRevenue, averageRecievables):
-    recievablesTurnover = (float(totalRevenue) / float(averageRecievables))
+    try:
+        recievablesTurnover = (float(totalRevenue) / float(averageRecievables))
+    except Exception:
+        recievablesTurnover = np.nan
     return recievablesTurnover
 
 def calculatePayablesTurnover(cogs, averageAccountsPayable):
-    payablesTurnoverRatio = (float(cogs) / float(averageAccountsPayable))
+    try:
+        payablesTurnoverRatio = (float(cogs) / float(averageAccountsPayable))
+    except Exception:
+        payablesTurnoverRatio = np.nan
     return averageAccountsPayable
 
 def calculateNumberOfDaysOfPayables(payablesTurnoverRatio):
-    numberOfDaysOfPayables = (365 / float(payablesTurnoverRatio))
+    try:
+        numberOfDaysOfPayables = (365 / float(payablesTurnoverRatio))
+    except Exception:
+        numberOfDaysOfPayables = np.nan
     return numberOfDaysOfPayables
 
 def calculateDaysOfSalesOutstanding(avgRecievables, totalRevenue):
@@ -164,7 +173,10 @@ def calculateDaysOfSalesOutstanding(avgRecievables, totalRevenue):
 
 
 def calculateWorkingCapitalTurnover(totalRevenue, averageWorkingCapital):
-    workingCapitalTurnover = (float(totalRevenue) / float(averageWorkingCapital))
+    try:
+        workingCapitalTurnover = (float(totalRevenue) / float(averageWorkingCapital))
+    except Exception:
+        workingCapitalTurnover = np.nan
     return workingCapitalTurnover
 
 def calculateFixedAssetTurnoverRatio(totalRevenue, averageNetFixedAssets):
@@ -183,7 +195,10 @@ def calculateDebtCoverageRatio(operatingCashFlow, shortLongTermDebtTotal ):
 
 
 def calculateInterestCoverageRatio(operatingCashFlow, interestExpense, incomeTaxExpense):
-    interestCoverageRatio = ((float(operatingCashFlow) + float(interestExpense) + float(incomeTaxExpense)) / float(interestExpense))
+    try:
+        interestCoverageRatio = ((float(operatingCashFlow) + float(interestExpense) + float(incomeTaxExpense)) / float(interestExpense))
+    except Exception:
+        interestCoverageRatio = np.nan
     return interestCoverageRatio
 
 #Dividend-Related
@@ -234,4 +249,10 @@ def calculateEBT(ebit, interestExpense):
     ebt = (float(ebit) - float(interestExpense))
     return ebt
 
+def calculateWorkingCapital(totalCurrentAssets, totalCurrentLiabilities):
+    workingCapital = ((float(totalCurrentAssets) - float(totalCurrentLiabilities)))
+    return workingCapital
 
+def calculateNetFixedAssets(totalFixedAssets, accumulatedDepreciation):
+    netFixedAssets = (float(totalFixedAssets) - float(accumulatedDepreciation))
+    return netFixedAssets

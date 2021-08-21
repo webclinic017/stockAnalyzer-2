@@ -673,10 +673,35 @@ def build_master(ticker):
     debtToAssetRatio19 = calculateDebtToAssetRatio(shortLongTermDebtTotal19, totalAssets19)
     debtToCapitalRatio19 = calculateDebtToCapitalRatio(shortLongTermDebtTotal19, totalShareholderEquity19)
 
+    workingCapital19 = (float(totalCurrentAssets19) - float(totalCurrentLiabilities19))
+    averageWorkingCapital19 = (((float(totalCurrentAssets19) - float(totalCurrentLiabilities19)) + (
+            float(totalCurrentAssets19) - float(totalCurrentLiabilities19))) / 2)
+    averageInventory19 = ((float(inventory19) + float(inventory19)) / 2)
+    averageNetFixedAssets19 = ((calculateNetFixedAssets(propertyPlantEquipment19,
+                                                        accumulatedDepreciationAmortizationPPE19) + calculateNetFixedAssets(
+        propertyPlantEquipment19, accumulatedDepreciationAmortizationPPE19)) / 2)
+    averageRecievables19 = ((float(currentNetReceivables19) + float(currentNetReceivables19)) / 2)
+    averageAccountsPayable19 = ((float(currentAccountsPayable19) + float(currentAccountsPayable19)) / 2)
     financialLeverage19 = calculateFinancialLeverageRatio(currentQuarterAvgTotalAssets19,
                                                           currentQuarterAvgCommonEquity19)
     interestCoverage19 = calculateInterestCoverageRatio(operatingCashflow19, interestExpense19, incomeTaxExpense19)
     fixedChargeCoverageRatio19 = calculateFixedChargeCoverage(ebit19, capitalLeaseObligations19, interestExpense19)
+    quickRatio19 = calculateQuickRatio(totalCurrentAssets19, totalCurrentLiabilities19, inventory19)
+    currentRatio19 = calculateCurrentRatio(totalCurrentAssets19, totalCurrentLiabilities19)
+    cashRatio19 = calculateCashRatio(cashAndCashEquivalentsAtCarryingValue19, totalCurrentLiabilities19)
+    payoutRatio19 = calculateDividendPayoutRatio(dividendPayout19, netIncome19)
+    retentionRateB19 = calculateRetentionRate(calculateDividendPayoutRatio(dividendPayout19, netIncome19))
+
+    inventoryTurnoverRatio19 = calculateInventoryTurnover(costofGoodsAndServicesSold19, averageInventory19)
+    daysOfInventoryOnHand19 = calculateDaysOfInventoryOnHand(averageInventory19, costofGoodsAndServicesSold19)
+    recievablesTurnover19 = calculateRecievablesTurnover(totalRevenue19, currentNetReceivables19)
+    daysOfSalesOutstanding19 = calculateDaysOfSalesOutstanding(averageRecievables19, totalRevenue19)
+    payablesTurnover19 = calculatePayablesTurnover(costofGoodsAndServicesSold19, averageAccountsPayable19)
+    numberOfDaysOfPayables19 = calculateNumberOfDaysOfPayables(
+        calculatePayablesTurnover(costofGoodsAndServicesSold19, averageAccountsPayable19))
+    workingCapitalTurnover19 = calculateWorkingCapitalTurnover(totalRevenue19, averageWorkingCapital19)
+    fixedAssetTurnover19 = calculateFixedAssetTurnoverRatio(totalRevenue19, averageNetFixedAssets19)
+    totalAssetTurnover19 = calculateTotalAssetTurnover(totalRevenue19, currentQuarterAvgTotalAssets19)
 
     ## tm18  VARIABLES
     # Income Statement Variables for tm18
@@ -1194,10 +1219,35 @@ def build_master(ticker):
     debtToAssetRatio18 = calculateDebtToAssetRatio(shortLongTermDebtTotal18, totalAssets18)
     debtToCapitalRatio18 = calculateDebtToCapitalRatio(shortLongTermDebtTotal18, totalShareholderEquity18)
 
+    workingCapital18 = (float(totalCurrentAssets18) - float(totalCurrentLiabilities18))
+    averageWorkingCapital18 = (((float(totalCurrentAssets18) - float(totalCurrentLiabilities18)) + (
+            float(totalCurrentAssets19) - float(totalCurrentLiabilities19))) / 2)
+    averageInventory18 = ((float(inventory18) + float(inventory19)) / 2)
+    averageNetFixedAssets18 = ((calculateNetFixedAssets(propertyPlantEquipment18,
+                                                        accumulatedDepreciationAmortizationPPE18) + calculateNetFixedAssets(
+        propertyPlantEquipment19, accumulatedDepreciationAmortizationPPE19)) / 2)
+    averageRecievables18 = ((float(currentNetReceivables18) + float(currentNetReceivables19)) / 2)
+    averageAccountsPayable18 = ((float(currentAccountsPayable18) + float(currentAccountsPayable19)) / 2)
     financialLeverage18 = calculateFinancialLeverageRatio(currentQuarterAvgTotalAssets18,
                                                           currentQuarterAvgCommonEquity18)
     interestCoverage18 = calculateInterestCoverageRatio(operatingCashflow18, interestExpense18, incomeTaxExpense18)
     fixedChargeCoverageRatio18 = calculateFixedChargeCoverage(ebit18, capitalLeaseObligations18, interestExpense18)
+    quickRatio18 = calculateQuickRatio(totalCurrentAssets18, totalCurrentLiabilities18, inventory18)
+    currentRatio18 = calculateCurrentRatio(totalCurrentAssets18, totalCurrentLiabilities18)
+    cashRatio18 = calculateCashRatio(cashAndCashEquivalentsAtCarryingValue18, totalCurrentLiabilities18)
+    payoutRatio18 = calculateDividendPayoutRatio(dividendPayout18, netIncome18)
+    retentionRateB18 = calculateRetentionRate(calculateDividendPayoutRatio(dividendPayout18, netIncome18))
+
+    inventoryTurnoverRatio18 = calculateInventoryTurnover(costofGoodsAndServicesSold18, averageInventory18)
+    daysOfInventoryOnHand18 = calculateDaysOfInventoryOnHand(averageInventory18, costofGoodsAndServicesSold18)
+    recievablesTurnover18 = calculateRecievablesTurnover(totalRevenue18, currentNetReceivables18)
+    daysOfSalesOutstanding18 = calculateDaysOfSalesOutstanding(averageRecievables18, totalRevenue18)
+    payablesTurnover18 = calculatePayablesTurnover(costofGoodsAndServicesSold18, averageAccountsPayable18)
+    numberOfDaysOfPayables18 = calculateNumberOfDaysOfPayables(
+        calculatePayablesTurnover(costofGoodsAndServicesSold18, averageAccountsPayable18))
+    workingCapitalTurnover18 = calculateWorkingCapitalTurnover(totalRevenue18, averageWorkingCapital18)
+    fixedAssetTurnover18 = calculateFixedAssetTurnoverRatio(totalRevenue18, averageNetFixedAssets18)
+    totalAssetTurnover18 = calculateTotalAssetTurnover(totalRevenue18, currentQuarterAvgTotalAssets18)
 
     ## tm17  VARIABLES
     # Income Statement Variables for tm17
@@ -1715,10 +1765,35 @@ def build_master(ticker):
     debtToAssetRatio17 = calculateDebtToAssetRatio(shortLongTermDebtTotal17, totalAssets17)
     debtToCapitalRatio17 = calculateDebtToCapitalRatio(shortLongTermDebtTotal17, totalShareholderEquity17)
 
+    workingCapital17 = (float(totalCurrentAssets17) - float(totalCurrentLiabilities17))
+    averageWorkingCapital17 = (((float(totalCurrentAssets17) - float(totalCurrentLiabilities17)) + (
+            float(totalCurrentAssets18) - float(totalCurrentLiabilities18))) / 2)
+    averageInventory17 = ((float(inventory17) + float(inventory18)) / 2)
+    averageNetFixedAssets17 = ((calculateNetFixedAssets(propertyPlantEquipment17,
+                                                        accumulatedDepreciationAmortizationPPE17) + calculateNetFixedAssets(
+        propertyPlantEquipment18, accumulatedDepreciationAmortizationPPE18)) / 2)
+    averageRecievables17 = ((float(currentNetReceivables17) + float(currentNetReceivables18)) / 2)
+    averageAccountsPayable17 = ((float(currentAccountsPayable17) + float(currentAccountsPayable18)) / 2)
     financialLeverage17 = calculateFinancialLeverageRatio(currentQuarterAvgTotalAssets17,
                                                           currentQuarterAvgCommonEquity17)
     interestCoverage17 = calculateInterestCoverageRatio(operatingCashflow17, interestExpense17, incomeTaxExpense17)
     fixedChargeCoverageRatio17 = calculateFixedChargeCoverage(ebit17, capitalLeaseObligations17, interestExpense17)
+    quickRatio17 = calculateQuickRatio(totalCurrentAssets17, totalCurrentLiabilities17, inventory17)
+    currentRatio17 = calculateCurrentRatio(totalCurrentAssets17, totalCurrentLiabilities17)
+    cashRatio17 = calculateCashRatio(cashAndCashEquivalentsAtCarryingValue17, totalCurrentLiabilities17)
+    payoutRatio17 = calculateDividendPayoutRatio(dividendPayout17, netIncome17)
+    retentionRateB17 = calculateRetentionRate(calculateDividendPayoutRatio(dividendPayout17, netIncome17))
+
+    inventoryTurnoverRatio17 = calculateInventoryTurnover(costofGoodsAndServicesSold17, averageInventory17)
+    daysOfInventoryOnHand17 = calculateDaysOfInventoryOnHand(averageInventory17, costofGoodsAndServicesSold17)
+    recievablesTurnover17 = calculateRecievablesTurnover(totalRevenue17, currentNetReceivables17)
+    daysOfSalesOutstanding17 = calculateDaysOfSalesOutstanding(averageRecievables17, totalRevenue17)
+    payablesTurnover17 = calculatePayablesTurnover(costofGoodsAndServicesSold17, averageAccountsPayable17)
+    numberOfDaysOfPayables17 = calculateNumberOfDaysOfPayables(
+        calculatePayablesTurnover(costofGoodsAndServicesSold17, averageAccountsPayable17))
+    workingCapitalTurnover17 = calculateWorkingCapitalTurnover(totalRevenue17, averageWorkingCapital17)
+    fixedAssetTurnover17 = calculateFixedAssetTurnoverRatio(totalRevenue17, averageNetFixedAssets17)
+    totalAssetTurnover17 = calculateTotalAssetTurnover(totalRevenue17, currentQuarterAvgTotalAssets17)
 
     ## tm16  VARIABLES
     # Income Statement Variables for tm16
@@ -2236,10 +2311,35 @@ def build_master(ticker):
     debtToAssetRatio16 = calculateDebtToAssetRatio(shortLongTermDebtTotal16, totalAssets16)
     debtToCapitalRatio16 = calculateDebtToCapitalRatio(shortLongTermDebtTotal16, totalShareholderEquity16)
 
+    workingCapital16 = (float(totalCurrentAssets16) - float(totalCurrentLiabilities16))
+    averageWorkingCapital16 = (((float(totalCurrentAssets16) - float(totalCurrentLiabilities16)) + (
+            float(totalCurrentAssets17) - float(totalCurrentLiabilities17))) / 2)
+    averageInventory16 = ((float(inventory16) + float(inventory17)) / 2)
+    averageNetFixedAssets16 = ((calculateNetFixedAssets(propertyPlantEquipment16,
+                                                        accumulatedDepreciationAmortizationPPE16) + calculateNetFixedAssets(
+        propertyPlantEquipment17, accumulatedDepreciationAmortizationPPE17)) / 2)
+    averageRecievables16 = ((float(currentNetReceivables16) + float(currentNetReceivables17)) / 2)
+    averageAccountsPayable16 = ((float(currentAccountsPayable16) + float(currentAccountsPayable17)) / 2)
     financialLeverage16 = calculateFinancialLeverageRatio(currentQuarterAvgTotalAssets16,
                                                           currentQuarterAvgCommonEquity16)
     interestCoverage16 = calculateInterestCoverageRatio(operatingCashflow16, interestExpense16, incomeTaxExpense16)
     fixedChargeCoverageRatio16 = calculateFixedChargeCoverage(ebit16, capitalLeaseObligations16, interestExpense16)
+    quickRatio16 = calculateQuickRatio(totalCurrentAssets16, totalCurrentLiabilities16, inventory16)
+    currentRatio16 = calculateCurrentRatio(totalCurrentAssets16, totalCurrentLiabilities16)
+    cashRatio16 = calculateCashRatio(cashAndCashEquivalentsAtCarryingValue16, totalCurrentLiabilities16)
+    payoutRatio16 = calculateDividendPayoutRatio(dividendPayout16, netIncome16)
+    retentionRateB16 = calculateRetentionRate(calculateDividendPayoutRatio(dividendPayout16, netIncome16))
+
+    inventoryTurnoverRatio16 = calculateInventoryTurnover(costofGoodsAndServicesSold16, averageInventory16)
+    daysOfInventoryOnHand16 = calculateDaysOfInventoryOnHand(averageInventory16, costofGoodsAndServicesSold16)
+    recievablesTurnover16 = calculateRecievablesTurnover(totalRevenue16, currentNetReceivables16)
+    daysOfSalesOutstanding16 = calculateDaysOfSalesOutstanding(averageRecievables16, totalRevenue16)
+    payablesTurnover16 = calculatePayablesTurnover(costofGoodsAndServicesSold16, averageAccountsPayable16)
+    numberOfDaysOfPayables16 = calculateNumberOfDaysOfPayables(
+        calculatePayablesTurnover(costofGoodsAndServicesSold16, averageAccountsPayable16))
+    workingCapitalTurnover16 = calculateWorkingCapitalTurnover(totalRevenue16, averageWorkingCapital16)
+    fixedAssetTurnover16 = calculateFixedAssetTurnoverRatio(totalRevenue16, averageNetFixedAssets16)
+    totalAssetTurnover16 = calculateTotalAssetTurnover(totalRevenue16, currentQuarterAvgTotalAssets16)
 
     ## tm15  VARIABLES
     # Income Statement Variables for tm15
@@ -2757,10 +2857,35 @@ def build_master(ticker):
     debtToAssetRatio15 = calculateDebtToAssetRatio(shortLongTermDebtTotal15, totalAssets15)
     debtToCapitalRatio15 = calculateDebtToCapitalRatio(shortLongTermDebtTotal15, totalShareholderEquity15)
 
+    workingCapital15 = (float(totalCurrentAssets15) - float(totalCurrentLiabilities15))
+    averageWorkingCapital15 = (((float(totalCurrentAssets15) - float(totalCurrentLiabilities15)) + (
+            float(totalCurrentAssets16) - float(totalCurrentLiabilities16))) / 2)
+    averageInventory15 = ((float(inventory15) + float(inventory16)) / 2)
+    averageNetFixedAssets15 = ((calculateNetFixedAssets(propertyPlantEquipment15,
+                                                        accumulatedDepreciationAmortizationPPE15) + calculateNetFixedAssets(
+        propertyPlantEquipment16, accumulatedDepreciationAmortizationPPE16)) / 2)
+    averageRecievables15 = ((float(currentNetReceivables15) + float(currentNetReceivables16)) / 2)
+    averageAccountsPayable15 = ((float(currentAccountsPayable15) + float(currentAccountsPayable16)) / 2)
     financialLeverage15 = calculateFinancialLeverageRatio(currentQuarterAvgTotalAssets15,
                                                           currentQuarterAvgCommonEquity15)
     interestCoverage15 = calculateInterestCoverageRatio(operatingCashflow15, interestExpense15, incomeTaxExpense15)
     fixedChargeCoverageRatio15 = calculateFixedChargeCoverage(ebit15, capitalLeaseObligations15, interestExpense15)
+    quickRatio15 = calculateQuickRatio(totalCurrentAssets15, totalCurrentLiabilities15, inventory15)
+    currentRatio15 = calculateCurrentRatio(totalCurrentAssets15, totalCurrentLiabilities15)
+    cashRatio15 = calculateCashRatio(cashAndCashEquivalentsAtCarryingValue15, totalCurrentLiabilities15)
+    payoutRatio15 = calculateDividendPayoutRatio(dividendPayout15, netIncome15)
+    retentionRateB15 = calculateRetentionRate(calculateDividendPayoutRatio(dividendPayout15, netIncome15))
+
+    inventoryTurnoverRatio15 = calculateInventoryTurnover(costofGoodsAndServicesSold15, averageInventory15)
+    daysOfInventoryOnHand15 = calculateDaysOfInventoryOnHand(averageInventory15, costofGoodsAndServicesSold15)
+    recievablesTurnover15 = calculateRecievablesTurnover(totalRevenue15, currentNetReceivables15)
+    daysOfSalesOutstanding15 = calculateDaysOfSalesOutstanding(averageRecievables15, totalRevenue15)
+    payablesTurnover15 = calculatePayablesTurnover(costofGoodsAndServicesSold15, averageAccountsPayable15)
+    numberOfDaysOfPayables15 = calculateNumberOfDaysOfPayables(
+        calculatePayablesTurnover(costofGoodsAndServicesSold15, averageAccountsPayable15))
+    workingCapitalTurnover15 = calculateWorkingCapitalTurnover(totalRevenue15, averageWorkingCapital15)
+    fixedAssetTurnover15 = calculateFixedAssetTurnoverRatio(totalRevenue15, averageNetFixedAssets15)
+    totalAssetTurnover15 = calculateTotalAssetTurnover(totalRevenue15, currentQuarterAvgTotalAssets15)
 
     ## tm14  VARIABLES
     # Income Statement Variables for tm14
@@ -3278,10 +3403,35 @@ def build_master(ticker):
     debtToAssetRatio14 = calculateDebtToAssetRatio(shortLongTermDebtTotal14, totalAssets14)
     debtToCapitalRatio14 = calculateDebtToCapitalRatio(shortLongTermDebtTotal14, totalShareholderEquity14)
 
+    workingCapital14 = (float(totalCurrentAssets14) - float(totalCurrentLiabilities14))
+    averageWorkingCapital14 = (((float(totalCurrentAssets14) - float(totalCurrentLiabilities14)) + (
+            float(totalCurrentAssets15) - float(totalCurrentLiabilities15))) / 2)
+    averageInventory14 = ((float(inventory14) + float(inventory15)) / 2)
+    averageNetFixedAssets14 = ((calculateNetFixedAssets(propertyPlantEquipment14,
+                                                        accumulatedDepreciationAmortizationPPE14) + calculateNetFixedAssets(
+        propertyPlantEquipment15, accumulatedDepreciationAmortizationPPE15)) / 2)
+    averageRecievables14 = ((float(currentNetReceivables14) + float(currentNetReceivables15)) / 2)
+    averageAccountsPayable14 = ((float(currentAccountsPayable14) + float(currentAccountsPayable15)) / 2)
     financialLeverage14 = calculateFinancialLeverageRatio(currentQuarterAvgTotalAssets14,
                                                           currentQuarterAvgCommonEquity14)
     interestCoverage14 = calculateInterestCoverageRatio(operatingCashflow14, interestExpense14, incomeTaxExpense14)
     fixedChargeCoverageRatio14 = calculateFixedChargeCoverage(ebit14, capitalLeaseObligations14, interestExpense14)
+    quickRatio14 = calculateQuickRatio(totalCurrentAssets14, totalCurrentLiabilities14, inventory14)
+    currentRatio14 = calculateCurrentRatio(totalCurrentAssets14, totalCurrentLiabilities14)
+    cashRatio14 = calculateCashRatio(cashAndCashEquivalentsAtCarryingValue14, totalCurrentLiabilities14)
+    payoutRatio14 = calculateDividendPayoutRatio(dividendPayout14, netIncome14)
+    retentionRateB14 = calculateRetentionRate(calculateDividendPayoutRatio(dividendPayout14, netIncome14))
+
+    inventoryTurnoverRatio14 = calculateInventoryTurnover(costofGoodsAndServicesSold14, averageInventory14)
+    daysOfInventoryOnHand14 = calculateDaysOfInventoryOnHand(averageInventory14, costofGoodsAndServicesSold14)
+    recievablesTurnover14 = calculateRecievablesTurnover(totalRevenue14, currentNetReceivables14)
+    daysOfSalesOutstanding14 = calculateDaysOfSalesOutstanding(averageRecievables14, totalRevenue14)
+    payablesTurnover14 = calculatePayablesTurnover(costofGoodsAndServicesSold14, averageAccountsPayable14)
+    numberOfDaysOfPayables14 = calculateNumberOfDaysOfPayables(
+        calculatePayablesTurnover(costofGoodsAndServicesSold14, averageAccountsPayable14))
+    workingCapitalTurnover14 = calculateWorkingCapitalTurnover(totalRevenue14, averageWorkingCapital14)
+    fixedAssetTurnover14 = calculateFixedAssetTurnoverRatio(totalRevenue14, averageNetFixedAssets14)
+    totalAssetTurnover14 = calculateTotalAssetTurnover(totalRevenue14, currentQuarterAvgTotalAssets14)
 
     ## tm13  VARIABLES
     # Income Statement Variables for tm13
@@ -3799,10 +3949,35 @@ def build_master(ticker):
     debtToAssetRatio13 = calculateDebtToAssetRatio(shortLongTermDebtTotal13, totalAssets13)
     debtToCapitalRatio13 = calculateDebtToCapitalRatio(shortLongTermDebtTotal13, totalShareholderEquity13)
 
+    workingCapital13 = (float(totalCurrentAssets13) - float(totalCurrentLiabilities13))
+    averageWorkingCapital13 = (((float(totalCurrentAssets13) - float(totalCurrentLiabilities13)) + (
+            float(totalCurrentAssets14) - float(totalCurrentLiabilities14))) / 2)
+    averageInventory13 = ((float(inventory13) + float(inventory14)) / 2)
+    averageNetFixedAssets13 = ((calculateNetFixedAssets(propertyPlantEquipment13,
+                                                        accumulatedDepreciationAmortizationPPE13) + calculateNetFixedAssets(
+        propertyPlantEquipment14, accumulatedDepreciationAmortizationPPE14)) / 2)
+    averageRecievables13 = ((float(currentNetReceivables13) + float(currentNetReceivables14)) / 2)
+    averageAccountsPayable13 = ((float(currentAccountsPayable13) + float(currentAccountsPayable14)) / 2)
     financialLeverage13 = calculateFinancialLeverageRatio(currentQuarterAvgTotalAssets13,
                                                           currentQuarterAvgCommonEquity13)
     interestCoverage13 = calculateInterestCoverageRatio(operatingCashflow13, interestExpense13, incomeTaxExpense13)
     fixedChargeCoverageRatio13 = calculateFixedChargeCoverage(ebit13, capitalLeaseObligations13, interestExpense13)
+    quickRatio13 = calculateQuickRatio(totalCurrentAssets13, totalCurrentLiabilities13, inventory13)
+    currentRatio13 = calculateCurrentRatio(totalCurrentAssets13, totalCurrentLiabilities13)
+    cashRatio13 = calculateCashRatio(cashAndCashEquivalentsAtCarryingValue13, totalCurrentLiabilities13)
+    payoutRatio13 = calculateDividendPayoutRatio(dividendPayout13, netIncome13)
+    retentionRateB13 = calculateRetentionRate(calculateDividendPayoutRatio(dividendPayout13, netIncome13))
+
+    inventoryTurnoverRatio13 = calculateInventoryTurnover(costofGoodsAndServicesSold13, averageInventory13)
+    daysOfInventoryOnHand13 = calculateDaysOfInventoryOnHand(averageInventory13, costofGoodsAndServicesSold13)
+    recievablesTurnover13 = calculateRecievablesTurnover(totalRevenue13, currentNetReceivables13)
+    daysOfSalesOutstanding13 = calculateDaysOfSalesOutstanding(averageRecievables13, totalRevenue13)
+    payablesTurnover13 = calculatePayablesTurnover(costofGoodsAndServicesSold13, averageAccountsPayable13)
+    numberOfDaysOfPayables13 = calculateNumberOfDaysOfPayables(
+        calculatePayablesTurnover(costofGoodsAndServicesSold13, averageAccountsPayable13))
+    workingCapitalTurnover13 = calculateWorkingCapitalTurnover(totalRevenue13, averageWorkingCapital13)
+    fixedAssetTurnover13 = calculateFixedAssetTurnoverRatio(totalRevenue13, averageNetFixedAssets13)
+    totalAssetTurnover13 = calculateTotalAssetTurnover(totalRevenue13, currentQuarterAvgTotalAssets13)
 
     ## tm12  VARIABLES
     # Income Statement Variables for tm12
@@ -4320,10 +4495,35 @@ def build_master(ticker):
     debtToAssetRatio12 = calculateDebtToAssetRatio(shortLongTermDebtTotal12, totalAssets12)
     debtToCapitalRatio12 = calculateDebtToCapitalRatio(shortLongTermDebtTotal12, totalShareholderEquity12)
 
+    workingCapital12 = (float(totalCurrentAssets12) - float(totalCurrentLiabilities12))
+    averageWorkingCapital12 = (((float(totalCurrentAssets12) - float(totalCurrentLiabilities12)) + (
+            float(totalCurrentAssets13) - float(totalCurrentLiabilities13))) / 2)
+    averageInventory12 = ((float(inventory12) + float(inventory13)) / 2)
+    averageNetFixedAssets12 = ((calculateNetFixedAssets(propertyPlantEquipment12,
+                                                        accumulatedDepreciationAmortizationPPE12) + calculateNetFixedAssets(
+        propertyPlantEquipment13, accumulatedDepreciationAmortizationPPE13)) / 2)
+    averageRecievables12 = ((float(currentNetReceivables12) + float(currentNetReceivables13)) / 2)
+    averageAccountsPayable12 = ((float(currentAccountsPayable12) + float(currentAccountsPayable13)) / 2)
     financialLeverage12 = calculateFinancialLeverageRatio(currentQuarterAvgTotalAssets12,
                                                           currentQuarterAvgCommonEquity12)
     interestCoverage12 = calculateInterestCoverageRatio(operatingCashflow12, interestExpense12, incomeTaxExpense12)
     fixedChargeCoverageRatio12 = calculateFixedChargeCoverage(ebit12, capitalLeaseObligations12, interestExpense12)
+    quickRatio12 = calculateQuickRatio(totalCurrentAssets12, totalCurrentLiabilities12, inventory12)
+    currentRatio12 = calculateCurrentRatio(totalCurrentAssets12, totalCurrentLiabilities12)
+    cashRatio12 = calculateCashRatio(cashAndCashEquivalentsAtCarryingValue12, totalCurrentLiabilities12)
+    payoutRatio12 = calculateDividendPayoutRatio(dividendPayout12, netIncome12)
+    retentionRateB12 = calculateRetentionRate(calculateDividendPayoutRatio(dividendPayout12, netIncome12))
+
+    inventoryTurnoverRatio12 = calculateInventoryTurnover(costofGoodsAndServicesSold12, averageInventory12)
+    daysOfInventoryOnHand12 = calculateDaysOfInventoryOnHand(averageInventory12, costofGoodsAndServicesSold12)
+    recievablesTurnover12 = calculateRecievablesTurnover(totalRevenue12, currentNetReceivables12)
+    daysOfSalesOutstanding12 = calculateDaysOfSalesOutstanding(averageRecievables12, totalRevenue12)
+    payablesTurnover12 = calculatePayablesTurnover(costofGoodsAndServicesSold12, averageAccountsPayable12)
+    numberOfDaysOfPayables12 = calculateNumberOfDaysOfPayables(
+        calculatePayablesTurnover(costofGoodsAndServicesSold12, averageAccountsPayable12))
+    workingCapitalTurnover12 = calculateWorkingCapitalTurnover(totalRevenue12, averageWorkingCapital12)
+    fixedAssetTurnover12 = calculateFixedAssetTurnoverRatio(totalRevenue12, averageNetFixedAssets12)
+    totalAssetTurnover12 = calculateTotalAssetTurnover(totalRevenue12, currentQuarterAvgTotalAssets12)
 
     ## tm11  VARIABLES
     # Income Statement Variables for tm11
@@ -4841,10 +5041,35 @@ def build_master(ticker):
     debtToAssetRatio11 = calculateDebtToAssetRatio(shortLongTermDebtTotal11, totalAssets11)
     debtToCapitalRatio11 = calculateDebtToCapitalRatio(shortLongTermDebtTotal11, totalShareholderEquity11)
 
+    workingCapital11 = (float(totalCurrentAssets11) - float(totalCurrentLiabilities11))
+    averageWorkingCapital11 = (((float(totalCurrentAssets11) - float(totalCurrentLiabilities11)) + (
+            float(totalCurrentAssets12) - float(totalCurrentLiabilities12))) / 2)
+    averageInventory11 = ((float(inventory11) + float(inventory12)) / 2)
+    averageNetFixedAssets11 = ((calculateNetFixedAssets(propertyPlantEquipment11,
+                                                        accumulatedDepreciationAmortizationPPE11) + calculateNetFixedAssets(
+        propertyPlantEquipment12, accumulatedDepreciationAmortizationPPE12)) / 2)
+    averageRecievables11 = ((float(currentNetReceivables11) + float(currentNetReceivables12)) / 2)
+    averageAccountsPayable11 = ((float(currentAccountsPayable11) + float(currentAccountsPayable12)) / 2)
     financialLeverage11 = calculateFinancialLeverageRatio(currentQuarterAvgTotalAssets11,
                                                           currentQuarterAvgCommonEquity11)
     interestCoverage11 = calculateInterestCoverageRatio(operatingCashflow11, interestExpense11, incomeTaxExpense11)
     fixedChargeCoverageRatio11 = calculateFixedChargeCoverage(ebit11, capitalLeaseObligations11, interestExpense11)
+    quickRatio11 = calculateQuickRatio(totalCurrentAssets11, totalCurrentLiabilities11, inventory11)
+    currentRatio11 = calculateCurrentRatio(totalCurrentAssets11, totalCurrentLiabilities11)
+    cashRatio11 = calculateCashRatio(cashAndCashEquivalentsAtCarryingValue11, totalCurrentLiabilities11)
+    payoutRatio11 = calculateDividendPayoutRatio(dividendPayout11, netIncome11)
+    retentionRateB11 = calculateRetentionRate(calculateDividendPayoutRatio(dividendPayout11, netIncome11))
+
+    inventoryTurnoverRatio11 = calculateInventoryTurnover(costofGoodsAndServicesSold11, averageInventory11)
+    daysOfInventoryOnHand11 = calculateDaysOfInventoryOnHand(averageInventory11, costofGoodsAndServicesSold11)
+    recievablesTurnover11 = calculateRecievablesTurnover(totalRevenue11, currentNetReceivables11)
+    daysOfSalesOutstanding11 = calculateDaysOfSalesOutstanding(averageRecievables11, totalRevenue11)
+    payablesTurnover11 = calculatePayablesTurnover(costofGoodsAndServicesSold11, averageAccountsPayable11)
+    numberOfDaysOfPayables11 = calculateNumberOfDaysOfPayables(
+        calculatePayablesTurnover(costofGoodsAndServicesSold11, averageAccountsPayable11))
+    workingCapitalTurnover11 = calculateWorkingCapitalTurnover(totalRevenue11, averageWorkingCapital11)
+    fixedAssetTurnover11 = calculateFixedAssetTurnoverRatio(totalRevenue11, averageNetFixedAssets11)
+    totalAssetTurnover11 = calculateTotalAssetTurnover(totalRevenue11, currentQuarterAvgTotalAssets11)
 
     ## tm10  VARIABLES
     # Income Statement Variables for tm10
@@ -5362,10 +5587,35 @@ def build_master(ticker):
     debtToAssetRatio10 = calculateDebtToAssetRatio(shortLongTermDebtTotal10, totalAssets10)
     debtToCapitalRatio10 = calculateDebtToCapitalRatio(shortLongTermDebtTotal10, totalShareholderEquity10)
 
+    workingCapital10 = (float(totalCurrentAssets10) - float(totalCurrentLiabilities10))
+    averageWorkingCapital10 = (((float(totalCurrentAssets10) - float(totalCurrentLiabilities10)) + (
+            float(totalCurrentAssets11) - float(totalCurrentLiabilities11))) / 2)
+    averageInventory10 = ((float(inventory10) + float(inventory11)) / 2)
+    averageNetFixedAssets10 = ((calculateNetFixedAssets(propertyPlantEquipment10,
+                                                        accumulatedDepreciationAmortizationPPE10) + calculateNetFixedAssets(
+        propertyPlantEquipment11, accumulatedDepreciationAmortizationPPE11)) / 2)
+    averageRecievables10 = ((float(currentNetReceivables10) + float(currentNetReceivables11)) / 2)
+    averageAccountsPayable10 = ((float(currentAccountsPayable10) + float(currentAccountsPayable11)) / 2)
     financialLeverage10 = calculateFinancialLeverageRatio(currentQuarterAvgTotalAssets10,
                                                           currentQuarterAvgCommonEquity10)
     interestCoverage10 = calculateInterestCoverageRatio(operatingCashflow10, interestExpense10, incomeTaxExpense10)
     fixedChargeCoverageRatio10 = calculateFixedChargeCoverage(ebit10, capitalLeaseObligations10, interestExpense10)
+    quickRatio10 = calculateQuickRatio(totalCurrentAssets10, totalCurrentLiabilities10, inventory10)
+    currentRatio10 = calculateCurrentRatio(totalCurrentAssets10, totalCurrentLiabilities10)
+    cashRatio10 = calculateCashRatio(cashAndCashEquivalentsAtCarryingValue10, totalCurrentLiabilities10)
+    payoutRatio10 = calculateDividendPayoutRatio(dividendPayout10, netIncome10)
+    retentionRateB10 = calculateRetentionRate(calculateDividendPayoutRatio(dividendPayout10, netIncome10))
+
+    inventoryTurnoverRatio10 = calculateInventoryTurnover(costofGoodsAndServicesSold10, averageInventory10)
+    daysOfInventoryOnHand10 = calculateDaysOfInventoryOnHand(averageInventory10, costofGoodsAndServicesSold10)
+    recievablesTurnover10 = calculateRecievablesTurnover(totalRevenue10, currentNetReceivables10)
+    daysOfSalesOutstanding10 = calculateDaysOfSalesOutstanding(averageRecievables10, totalRevenue10)
+    payablesTurnover10 = calculatePayablesTurnover(costofGoodsAndServicesSold10, averageAccountsPayable10)
+    numberOfDaysOfPayables10 = calculateNumberOfDaysOfPayables(
+        calculatePayablesTurnover(costofGoodsAndServicesSold10, averageAccountsPayable10))
+    workingCapitalTurnover10 = calculateWorkingCapitalTurnover(totalRevenue10, averageWorkingCapital10)
+    fixedAssetTurnover10 = calculateFixedAssetTurnoverRatio(totalRevenue10, averageNetFixedAssets10)
+    totalAssetTurnover10 = calculateTotalAssetTurnover(totalRevenue10, currentQuarterAvgTotalAssets10)
 
     ## tm9  VARIABLES
     # Income Statement Variables for tm9
@@ -5880,9 +6130,34 @@ def build_master(ticker):
     debtToAssetRatio9 = calculateDebtToAssetRatio(shortLongTermDebtTotal9, totalAssets9)
     debtToCapitalRatio9 = calculateDebtToCapitalRatio(shortLongTermDebtTotal9, totalShareholderEquity9)
 
+    workingCapital9 = (float(totalCurrentAssets9) - float(totalCurrentLiabilities9))
+    averageWorkingCapital9 = (((float(totalCurrentAssets9) - float(totalCurrentLiabilities9)) + (
+            float(totalCurrentAssets10) - float(totalCurrentLiabilities10))) / 2)
+    averageInventory9 = ((float(inventory9) + float(inventory10)) / 2)
+    averageNetFixedAssets9 = ((calculateNetFixedAssets(propertyPlantEquipment9,
+                                                       accumulatedDepreciationAmortizationPPE9) + calculateNetFixedAssets(
+        propertyPlantEquipment10, accumulatedDepreciationAmortizationPPE10)) / 2)
+    averageRecievables9 = ((float(currentNetReceivables9) + float(currentNetReceivables10)) / 2)
+    averageAccountsPayable9 = ((float(currentAccountsPayable9) + float(currentAccountsPayable10)) / 2)
     financialLeverage9 = calculateFinancialLeverageRatio(currentQuarterAvgTotalAssets9, currentQuarterAvgCommonEquity9)
     interestCoverage9 = calculateInterestCoverageRatio(operatingCashflow9, interestExpense9, incomeTaxExpense9)
     fixedChargeCoverageRatio9 = calculateFixedChargeCoverage(ebit9, capitalLeaseObligations9, interestExpense9)
+    quickRatio9 = calculateQuickRatio(totalCurrentAssets9, totalCurrentLiabilities9, inventory9)
+    currentRatio9 = calculateCurrentRatio(totalCurrentAssets9, totalCurrentLiabilities9)
+    cashRatio9 = calculateCashRatio(cashAndCashEquivalentsAtCarryingValue9, totalCurrentLiabilities9)
+    payoutRatio9 = calculateDividendPayoutRatio(dividendPayout9, netIncome9)
+    retentionRateB9 = calculateRetentionRate(calculateDividendPayoutRatio(dividendPayout9, netIncome9))
+
+    inventoryTurnoverRatio9 = calculateInventoryTurnover(costofGoodsAndServicesSold9, averageInventory9)
+    daysOfInventoryOnHand9 = calculateDaysOfInventoryOnHand(averageInventory9, costofGoodsAndServicesSold9)
+    recievablesTurnover9 = calculateRecievablesTurnover(totalRevenue9, currentNetReceivables9)
+    daysOfSalesOutstanding9 = calculateDaysOfSalesOutstanding(averageRecievables9, totalRevenue9)
+    payablesTurnover9 = calculatePayablesTurnover(costofGoodsAndServicesSold9, averageAccountsPayable9)
+    numberOfDaysOfPayables9 = calculateNumberOfDaysOfPayables(
+        calculatePayablesTurnover(costofGoodsAndServicesSold9, averageAccountsPayable9))
+    workingCapitalTurnover9 = calculateWorkingCapitalTurnover(totalRevenue9, averageWorkingCapital9)
+    fixedAssetTurnover9 = calculateFixedAssetTurnoverRatio(totalRevenue9, averageNetFixedAssets9)
+    totalAssetTurnover9 = calculateTotalAssetTurnover(totalRevenue9, currentQuarterAvgTotalAssets9)
 
     ## tm8  VARIABLES
     # Income Statement Variables for tm8
@@ -6396,9 +6671,34 @@ def build_master(ticker):
     debtToAssetRatio8 = calculateDebtToAssetRatio(shortLongTermDebtTotal8, totalAssets8)
     debtToCapitalRatio8 = calculateDebtToCapitalRatio(shortLongTermDebtTotal8, totalShareholderEquity8)
 
+    workingCapital8 = (float(totalCurrentAssets8) - float(totalCurrentLiabilities8))
+    averageWorkingCapital8 = (((float(totalCurrentAssets8) - float(totalCurrentLiabilities8)) + (
+            float(totalCurrentAssets9) - float(totalCurrentLiabilities9))) / 2)
+    averageInventory8 = ((float(inventory8) + float(inventory9)) / 2)
+    averageNetFixedAssets8 = ((calculateNetFixedAssets(propertyPlantEquipment8,
+                                                       accumulatedDepreciationAmortizationPPE8) + calculateNetFixedAssets(
+        propertyPlantEquipment9, accumulatedDepreciationAmortizationPPE9)) / 2)
+    averageRecievables8 = ((float(currentNetReceivables8) + float(currentNetReceivables9)) / 2)
+    averageAccountsPayable8 = ((float(currentAccountsPayable8) + float(currentAccountsPayable9)) / 2)
     financialLeverage8 = calculateFinancialLeverageRatio(currentQuarterAvgTotalAssets8, currentQuarterAvgCommonEquity8)
     interestCoverage8 = calculateInterestCoverageRatio(operatingCashflow8, interestExpense8, incomeTaxExpense8)
     fixedChargeCoverageRatio8 = calculateFixedChargeCoverage(ebit8, capitalLeaseObligations8, interestExpense8)
+    quickRatio8 = calculateQuickRatio(totalCurrentAssets8, totalCurrentLiabilities8, inventory8)
+    currentRatio8 = calculateCurrentRatio(totalCurrentAssets8, totalCurrentLiabilities8)
+    cashRatio8 = calculateCashRatio(cashAndCashEquivalentsAtCarryingValue8, totalCurrentLiabilities8)
+    payoutRatio8 = calculateDividendPayoutRatio(dividendPayout8, netIncome8)
+    retentionRateB8 = calculateRetentionRate(calculateDividendPayoutRatio(dividendPayout8, netIncome8))
+
+    inventoryTurnoverRatio8 = calculateInventoryTurnover(costofGoodsAndServicesSold8, averageInventory8)
+    daysOfInventoryOnHand8 = calculateDaysOfInventoryOnHand(averageInventory8, costofGoodsAndServicesSold8)
+    recievablesTurnover8 = calculateRecievablesTurnover(totalRevenue8, currentNetReceivables8)
+    daysOfSalesOutstanding8 = calculateDaysOfSalesOutstanding(averageRecievables8, totalRevenue8)
+    payablesTurnover8 = calculatePayablesTurnover(costofGoodsAndServicesSold8, averageAccountsPayable8)
+    numberOfDaysOfPayables8 = calculateNumberOfDaysOfPayables(
+        calculatePayablesTurnover(costofGoodsAndServicesSold8, averageAccountsPayable8))
+    workingCapitalTurnover8 = calculateWorkingCapitalTurnover(totalRevenue8, averageWorkingCapital8)
+    fixedAssetTurnover8 = calculateFixedAssetTurnoverRatio(totalRevenue8, averageNetFixedAssets8)
+    totalAssetTurnover8 = calculateTotalAssetTurnover(totalRevenue8, currentQuarterAvgTotalAssets8)
 
     ## tm7  VARIABLES
     # Income Statement Variables for tm7
@@ -6912,9 +7212,34 @@ def build_master(ticker):
     debtToAssetRatio7 = calculateDebtToAssetRatio(shortLongTermDebtTotal7, totalAssets7)
     debtToCapitalRatio7 = calculateDebtToCapitalRatio(shortLongTermDebtTotal7, totalShareholderEquity7)
 
+    workingCapital7 = (float(totalCurrentAssets7) - float(totalCurrentLiabilities7))
+    averageWorkingCapital7 = (((float(totalCurrentAssets7) - float(totalCurrentLiabilities7)) + (
+            float(totalCurrentAssets8) - float(totalCurrentLiabilities8))) / 2)
+    averageInventory7 = ((float(inventory7) + float(inventory8)) / 2)
+    averageNetFixedAssets7 = ((calculateNetFixedAssets(propertyPlantEquipment7,
+                                                       accumulatedDepreciationAmortizationPPE7) + calculateNetFixedAssets(
+        propertyPlantEquipment8, accumulatedDepreciationAmortizationPPE8)) / 2)
+    averageRecievables7 = ((float(currentNetReceivables7) + float(currentNetReceivables8)) / 2)
+    averageAccountsPayable7 = ((float(currentAccountsPayable7) + float(currentAccountsPayable8)) / 2)
     financialLeverage7 = calculateFinancialLeverageRatio(currentQuarterAvgTotalAssets7, currentQuarterAvgCommonEquity7)
     interestCoverage7 = calculateInterestCoverageRatio(operatingCashflow7, interestExpense7, incomeTaxExpense7)
     fixedChargeCoverageRatio7 = calculateFixedChargeCoverage(ebit7, capitalLeaseObligations7, interestExpense7)
+    quickRatio7 = calculateQuickRatio(totalCurrentAssets7, totalCurrentLiabilities7, inventory7)
+    currentRatio7 = calculateCurrentRatio(totalCurrentAssets7, totalCurrentLiabilities7)
+    cashRatio7 = calculateCashRatio(cashAndCashEquivalentsAtCarryingValue7, totalCurrentLiabilities7)
+    payoutRatio7 = calculateDividendPayoutRatio(dividendPayout7, netIncome7)
+    retentionRateB7 = calculateRetentionRate(calculateDividendPayoutRatio(dividendPayout7, netIncome7))
+
+    inventoryTurnoverRatio7 = calculateInventoryTurnover(costofGoodsAndServicesSold7, averageInventory7)
+    daysOfInventoryOnHand7 = calculateDaysOfInventoryOnHand(averageInventory7, costofGoodsAndServicesSold7)
+    recievablesTurnover7 = calculateRecievablesTurnover(totalRevenue7, currentNetReceivables7)
+    daysOfSalesOutstanding7 = calculateDaysOfSalesOutstanding(averageRecievables7, totalRevenue7)
+    payablesTurnover7 = calculatePayablesTurnover(costofGoodsAndServicesSold7, averageAccountsPayable7)
+    numberOfDaysOfPayables7 = calculateNumberOfDaysOfPayables(
+        calculatePayablesTurnover(costofGoodsAndServicesSold7, averageAccountsPayable7))
+    workingCapitalTurnover7 = calculateWorkingCapitalTurnover(totalRevenue7, averageWorkingCapital7)
+    fixedAssetTurnover7 = calculateFixedAssetTurnoverRatio(totalRevenue7, averageNetFixedAssets7)
+    totalAssetTurnover7 = calculateTotalAssetTurnover(totalRevenue7, currentQuarterAvgTotalAssets7)
 
     ## tm6  VARIABLES
     # Income Statement Variables for tm6
@@ -7428,9 +7753,34 @@ def build_master(ticker):
     debtToAssetRatio6 = calculateDebtToAssetRatio(shortLongTermDebtTotal6, totalAssets6)
     debtToCapitalRatio6 = calculateDebtToCapitalRatio(shortLongTermDebtTotal6, totalShareholderEquity6)
 
+    workingCapital6 = (float(totalCurrentAssets6) - float(totalCurrentLiabilities6))
+    averageWorkingCapital6 = (((float(totalCurrentAssets6) - float(totalCurrentLiabilities6)) + (
+            float(totalCurrentAssets7) - float(totalCurrentLiabilities7))) / 2)
+    averageInventory6 = ((float(inventory6) + float(inventory7)) / 2)
+    averageNetFixedAssets6 = ((calculateNetFixedAssets(propertyPlantEquipment6,
+                                                       accumulatedDepreciationAmortizationPPE6) + calculateNetFixedAssets(
+        propertyPlantEquipment7, accumulatedDepreciationAmortizationPPE7)) / 2)
+    averageRecievables6 = ((float(currentNetReceivables6) + float(currentNetReceivables7)) / 2)
+    averageAccountsPayable6 = ((float(currentAccountsPayable6) + float(currentAccountsPayable7)) / 2)
     financialLeverage6 = calculateFinancialLeverageRatio(currentQuarterAvgTotalAssets6, currentQuarterAvgCommonEquity6)
     interestCoverage6 = calculateInterestCoverageRatio(operatingCashflow6, interestExpense6, incomeTaxExpense6)
     fixedChargeCoverageRatio6 = calculateFixedChargeCoverage(ebit6, capitalLeaseObligations6, interestExpense6)
+    quickRatio6 = calculateQuickRatio(totalCurrentAssets6, totalCurrentLiabilities6, inventory6)
+    currentRatio6 = calculateCurrentRatio(totalCurrentAssets6, totalCurrentLiabilities6)
+    cashRatio6 = calculateCashRatio(cashAndCashEquivalentsAtCarryingValue6, totalCurrentLiabilities6)
+    payoutRatio6 = calculateDividendPayoutRatio(dividendPayout6, netIncome6)
+    retentionRateB6 = calculateRetentionRate(calculateDividendPayoutRatio(dividendPayout6, netIncome6))
+
+    inventoryTurnoverRatio6 = calculateInventoryTurnover(costofGoodsAndServicesSold6, averageInventory6)
+    daysOfInventoryOnHand6 = calculateDaysOfInventoryOnHand(averageInventory6, costofGoodsAndServicesSold6)
+    recievablesTurnover6 = calculateRecievablesTurnover(totalRevenue6, currentNetReceivables6)
+    daysOfSalesOutstanding6 = calculateDaysOfSalesOutstanding(averageRecievables6, totalRevenue6)
+    payablesTurnover6 = calculatePayablesTurnover(costofGoodsAndServicesSold6, averageAccountsPayable6)
+    numberOfDaysOfPayables6 = calculateNumberOfDaysOfPayables(
+        calculatePayablesTurnover(costofGoodsAndServicesSold6, averageAccountsPayable6))
+    workingCapitalTurnover6 = calculateWorkingCapitalTurnover(totalRevenue6, averageWorkingCapital6)
+    fixedAssetTurnover6 = calculateFixedAssetTurnoverRatio(totalRevenue6, averageNetFixedAssets6)
+    totalAssetTurnover6 = calculateTotalAssetTurnover(totalRevenue6, currentQuarterAvgTotalAssets6)
 
     ## tm5  VARIABLES
     # Income Statement Variables for tm5
@@ -7944,9 +8294,30 @@ def build_master(ticker):
     debtToAssetRatio5 = calculateDebtToAssetRatio(shortLongTermDebtTotal5, totalAssets5)
     debtToCapitalRatio5 = calculateDebtToCapitalRatio(shortLongTermDebtTotal5, totalShareholderEquity5)
 
+    workingCapital5 = (float(totalCurrentAssets5) - float(totalCurrentLiabilities5))
+    averageWorkingCapital5 = (((float(totalCurrentAssets5) - float(totalCurrentLiabilities5)) + (float(totalCurrentAssets6) - float(totalCurrentLiabilities6))) / 2)
+    averageInventory5 = ((float(inventory5) + float(inventory6)) / 2)
+    averageNetFixedAssets5 = ((calculateNetFixedAssets(propertyPlantEquipment5,accumulatedDepreciationAmortizationPPE5) + calculateNetFixedAssets(propertyPlantEquipment6, accumulatedDepreciationAmortizationPPE6)) / 2)
+    averageRecievables5 = ((float(currentNetReceivables5) + float(currentNetReceivables6)) / 2)
+    averageAccountsPayable5 = ((float(currentAccountsPayable5) + float(currentAccountsPayable6)) / 2)
     financialLeverage5 = calculateFinancialLeverageRatio(currentQuarterAvgTotalAssets5, currentQuarterAvgCommonEquity5)
     interestCoverage5 = calculateInterestCoverageRatio(operatingCashflow5, interestExpense5, incomeTaxExpense5)
     fixedChargeCoverageRatio5 = calculateFixedChargeCoverage(ebit5, capitalLeaseObligations5, interestExpense5)
+    quickRatio5 = calculateQuickRatio(totalCurrentAssets5, totalCurrentLiabilities5, inventory5)
+    currentRatio5 = calculateCurrentRatio(totalCurrentAssets5, totalCurrentLiabilities5)
+    cashRatio5 = calculateCashRatio(cashAndCashEquivalentsAtCarryingValue5, totalCurrentLiabilities5)
+    payoutRatio5 = calculateDividendPayoutRatio(dividendPayout5, netIncome5)
+    retentionRateB5 = calculateRetentionRate(calculateDividendPayoutRatio(dividendPayout5, netIncome5))
+
+    inventoryTurnoverRatio5 = calculateInventoryTurnover(costofGoodsAndServicesSold5, averageInventory5)
+    daysOfInventoryOnHand5 = calculateDaysOfInventoryOnHand(averageInventory5, costofGoodsAndServicesSold5)
+    recievablesTurnover5 = calculateRecievablesTurnover(totalRevenue5, currentNetReceivables5)
+    daysOfSalesOutstanding5 = calculateDaysOfSalesOutstanding(averageRecievables5, totalRevenue5)
+    payablesTurnover5 = calculatePayablesTurnover(costofGoodsAndServicesSold5, averageAccountsPayable5)
+    numberOfDaysOfPayables5 = calculateNumberOfDaysOfPayables(calculatePayablesTurnover(costofGoodsAndServicesSold5, averageAccountsPayable5))
+    workingCapitalTurnover5 = calculateWorkingCapitalTurnover(totalRevenue5, averageWorkingCapital5)
+    fixedAssetTurnover5 = calculateFixedAssetTurnoverRatio(totalRevenue5, averageNetFixedAssets5)
+    totalAssetTurnover5 = calculateTotalAssetTurnover(totalRevenue5, currentQuarterAvgTotalAssets5)
 
     ## tm4  VARIABLES
     # Income Statement Variables for tm4
@@ -8461,9 +8832,30 @@ def build_master(ticker):
     debtToAssetRatio4 = calculateDebtToAssetRatio(shortLongTermDebtTotal4, totalAssets4)
     debtToCapitalRatio4 = calculateDebtToCapitalRatio(shortLongTermDebtTotal4, totalShareholderEquity4)
 
+    workingCapital4 = (float(totalCurrentAssets4) - float(totalCurrentLiabilities4))
+    averageWorkingCapital4 = (((float(totalCurrentAssets4) - float(totalCurrentLiabilities4)) + (float(totalCurrentAssets5) - float(totalCurrentLiabilities5))) / 2)
+    averageInventory4 = ((float(inventory4) + float(inventory5)) / 2)
+    averageNetFixedAssets4 = ((calculateNetFixedAssets(propertyPlantEquipment4,accumulatedDepreciationAmortizationPPE4) + calculateNetFixedAssets(propertyPlantEquipment5, accumulatedDepreciationAmortizationPPE5)) / 2)
+    averageRecievables4 = ((float(currentNetReceivables4) + float(currentNetReceivables5)) / 2)
+    averageAccountsPayable4 = ((float(currentAccountsPayable4) + float(currentAccountsPayable5)) / 2)
     financialLeverage4 = calculateFinancialLeverageRatio(currentQuarterAvgTotalAssets4, currentQuarterAvgCommonEquity4)
     interestCoverage4 = calculateInterestCoverageRatio(operatingCashflow4, interestExpense4, incomeTaxExpense4)
     fixedChargeCoverageRatio4 = calculateFixedChargeCoverage(ebit4, capitalLeaseObligations4, interestExpense4)
+    quickRatio4 = calculateQuickRatio(totalCurrentAssets4, totalCurrentLiabilities4, inventory4)
+    currentRatio4 = calculateCurrentRatio(totalCurrentAssets4, totalCurrentLiabilities4)
+    cashRatio4 = calculateCashRatio(cashAndCashEquivalentsAtCarryingValue4, totalCurrentLiabilities4)
+    payoutRatio4 = calculateDividendPayoutRatio(dividendPayout4, netIncome4)
+    retentionRateB4 = calculateRetentionRate(calculateDividendPayoutRatio(dividendPayout4, netIncome4))
+
+    inventoryTurnoverRatio4 = calculateInventoryTurnover(costofGoodsAndServicesSold4, averageInventory4)
+    daysOfInventoryOnHand4 = calculateDaysOfInventoryOnHand(averageInventory4, costofGoodsAndServicesSold4)
+    recievablesTurnover4 = calculateRecievablesTurnover(totalRevenue4, currentNetReceivables4)
+    daysOfSalesOutstanding4 = calculateDaysOfSalesOutstanding(averageRecievables4, totalRevenue4)
+    payablesTurnover4 = calculatePayablesTurnover(costofGoodsAndServicesSold4, averageAccountsPayable4)
+    numberOfDaysOfPayables4 = calculateNumberOfDaysOfPayables(calculatePayablesTurnover(costofGoodsAndServicesSold4, averageAccountsPayable4))
+    workingCapitalTurnover4 = calculateWorkingCapitalTurnover(totalRevenue4, averageWorkingCapital4)
+    fixedAssetTurnover4 = calculateFixedAssetTurnoverRatio(totalRevenue4, averageNetFixedAssets4)
+    totalAssetTurnover4 = calculateTotalAssetTurnover(totalRevenue4, currentQuarterAvgTotalAssets4)
 
     ## tm3  VARIABLES
     # Income Statement Variables for tm3
@@ -8976,9 +9368,30 @@ def build_master(ticker):
     debtToAssetRatio3 = calculateDebtToAssetRatio(shortLongTermDebtTotal3, totalAssets3)
     debtToCapitalRatio3 = calculateDebtToCapitalRatio(shortLongTermDebtTotal3, totalShareholderEquity3)
 
+    workingCapital3 = (float(totalCurrentAssets3) - float(totalCurrentLiabilities3))
+    averageWorkingCapital3 = (((float(totalCurrentAssets3) - float(totalCurrentLiabilities3)) + (float(totalCurrentAssets4) - float(totalCurrentLiabilities4))) / 2)
+    averageInventory3 = ((float(inventory3) + float(inventory4)) / 2)
+    averageNetFixedAssets3 = ((calculateNetFixedAssets(propertyPlantEquipment3,accumulatedDepreciationAmortizationPPE3) + calculateNetFixedAssets(propertyPlantEquipment4, accumulatedDepreciationAmortizationPPE4)) / 2)
+    averageRecievables3 = ((float(currentNetReceivables3) + float(currentNetReceivables4)) / 2)
+    averageAccountsPayable3 = ((float(currentAccountsPayable3) + float(currentAccountsPayable4)) / 2)
     financialLeverage3 = calculateFinancialLeverageRatio(currentQuarterAvgTotalAssets3, currentQuarterAvgCommonEquity3)
     interestCoverage3 = calculateInterestCoverageRatio(operatingCashflow3, interestExpense3, incomeTaxExpense3)
     fixedChargeCoverageRatio3 = calculateFixedChargeCoverage(ebit3, capitalLeaseObligations3, interestExpense3)
+    quickRatio3 = calculateQuickRatio(totalCurrentAssets3, totalCurrentLiabilities3, inventory3)
+    currentRatio3 = calculateCurrentRatio(totalCurrentAssets3, totalCurrentLiabilities3)
+    cashRatio3 = calculateCashRatio(cashAndCashEquivalentsAtCarryingValue3, totalCurrentLiabilities3)
+    payoutRatio3 = calculateDividendPayoutRatio(dividendPayout3, netIncome3)
+    retentionRateB3 = calculateRetentionRate(calculateDividendPayoutRatio(dividendPayout3, netIncome3))
+
+    inventoryTurnoverRatio3 = calculateInventoryTurnover(costofGoodsAndServicesSold3, averageInventory3)
+    daysOfInventoryOnHand3 = calculateDaysOfInventoryOnHand(averageInventory3, costofGoodsAndServicesSold3)
+    recievablesTurnover3 = calculateRecievablesTurnover(totalRevenue3, currentNetReceivables3)
+    daysOfSalesOutstanding3 = calculateDaysOfSalesOutstanding(averageRecievables3, totalRevenue3)
+    payablesTurnover3 = calculatePayablesTurnover(costofGoodsAndServicesSold3, averageAccountsPayable3)
+    numberOfDaysOfPayables3 = calculateNumberOfDaysOfPayables(calculatePayablesTurnover(costofGoodsAndServicesSold3, averageAccountsPayable3))
+    workingCapitalTurnover3 = calculateWorkingCapitalTurnover(totalRevenue3, averageWorkingCapital3)
+    fixedAssetTurnover3 = calculateFixedAssetTurnoverRatio(totalRevenue3, averageNetFixedAssets3)
+    totalAssetTurnover3 = calculateTotalAssetTurnover(totalRevenue3, currentQuarterAvgTotalAssets3)
 
     ## tm2  VARIABLES
     # Income Statement Variables for tm2
@@ -9493,9 +9906,30 @@ def build_master(ticker):
     debtToAssetRatio2 = calculateDebtToAssetRatio(shortLongTermDebtTotal2, totalAssets2)
     debtToCapitalRatio2 = calculateDebtToCapitalRatio(shortLongTermDebtTotal2, totalShareholderEquity2)
 
+    workingCapital2 = (float(totalCurrentAssets2) - float(totalCurrentLiabilities2))
+    averageWorkingCapital2 = (((float(totalCurrentAssets2) - float(totalCurrentLiabilities2)) + (float(totalCurrentAssets3) - float(totalCurrentLiabilities3))) / 2)
+    averageInventory2 = ((float(inventory2) + float(inventory3)) / 2)
+    averageNetFixedAssets2 = ((calculateNetFixedAssets(propertyPlantEquipment2,accumulatedDepreciationAmortizationPPE2) + calculateNetFixedAssets(propertyPlantEquipment3, accumulatedDepreciationAmortizationPPE3)) / 2)
+    averageRecievables2 = ((float(currentNetReceivables2) + float(currentNetReceivables3)) / 2)
+    averageAccountsPayable2 = ((float(currentAccountsPayable2) + float(currentAccountsPayable3)) / 2)
     financialLeverage2 = calculateFinancialLeverageRatio(currentQuarterAvgTotalAssets2, currentQuarterAvgCommonEquity2)
     interestCoverage2 = calculateInterestCoverageRatio(operatingCashflow2, interestExpense2, incomeTaxExpense2)
     fixedChargeCoverageRatio2 = calculateFixedChargeCoverage(ebit2, capitalLeaseObligations2, interestExpense2)
+    quickRatio2 = calculateQuickRatio(totalCurrentAssets2, totalCurrentLiabilities2, inventory2)
+    currentRatio2 = calculateCurrentRatio(totalCurrentAssets2, totalCurrentLiabilities2)
+    cashRatio2 = calculateCashRatio(cashAndCashEquivalentsAtCarryingValue2, totalCurrentLiabilities2)
+    payoutRatio2 = calculateDividendPayoutRatio(dividendPayout2, netIncome2)
+    retentionRateB2 = calculateRetentionRate(calculateDividendPayoutRatio(dividendPayout2, netIncome2))
+
+    inventoryTurnoverRatio2 = calculateInventoryTurnover(costofGoodsAndServicesSold2, averageInventory2)
+    daysOfInventoryOnHand2 = calculateDaysOfInventoryOnHand(averageInventory2, costofGoodsAndServicesSold2)
+    recievablesTurnover2 = calculateRecievablesTurnover(totalRevenue2, currentNetReceivables2)
+    daysOfSalesOutstanding2 = calculateDaysOfSalesOutstanding(averageRecievables2, totalRevenue2)
+    payablesTurnover2 = calculatePayablesTurnover(costofGoodsAndServicesSold2, averageAccountsPayable2)
+    numberOfDaysOfPayables2 = calculateNumberOfDaysOfPayables(calculatePayablesTurnover(costofGoodsAndServicesSold2, averageAccountsPayable2))
+    workingCapitalTurnover2 = calculateWorkingCapitalTurnover(totalRevenue2, averageWorkingCapital2)
+    fixedAssetTurnover2 = calculateFixedAssetTurnoverRatio(totalRevenue2, averageNetFixedAssets2)
+    totalAssetTurnover2 = calculateTotalAssetTurnover(totalRevenue2, currentQuarterAvgTotalAssets2)
 
     ## tm1  VARIABLES
     # Income Statement Variables for tm1
@@ -10007,9 +10441,30 @@ def build_master(ticker):
     debtToAssetRatio1 = calculateDebtToAssetRatio(shortLongTermDebtTotal1, totalAssets1)
     debtToCapitalRatio1 = calculateDebtToCapitalRatio(shortLongTermDebtTotal1, totalShareholderEquity1)
 
+    workingCapital1 = (float(totalCurrentAssets1) - float(totalCurrentLiabilities1))
+    averageWorkingCapital1 = (((float(totalCurrentAssets1) - float(totalCurrentLiabilities1)) + (float(totalCurrentAssets2) - float(totalCurrentLiabilities2))) / 2)
+    averageInventory1 = ((float(inventory1) + float(inventory2)) / 2)
+    averageNetFixedAssets1 = ((calculateNetFixedAssets(propertyPlantEquipment1,accumulatedDepreciationAmortizationPPE1) + calculateNetFixedAssets(propertyPlantEquipment2, accumulatedDepreciationAmortizationPPE2)) / 2)
+    averageRecievables1 = ((float(currentNetReceivables1) + float(currentNetReceivables2)) / 2)
+    averageAccountsPayable1 = ((float(currentAccountsPayable1) + float(currentAccountsPayable2)) / 2)
     financialLeverage1 = calculateFinancialLeverageRatio(currentQuarterAvgTotalAssets1, currentQuarterAvgCommonEquity1)
     interestCoverage1 = calculateInterestCoverageRatio(operatingCashflow1, interestExpense1, incomeTaxExpense1)
     fixedChargeCoverageRatio1 = calculateFixedChargeCoverage(ebit1, capitalLeaseObligations1, interestExpense1)
+    quickRatio1 = calculateQuickRatio(totalCurrentAssets1, totalCurrentLiabilities1, inventory1)
+    currentRatio1 = calculateCurrentRatio(totalCurrentAssets1, totalCurrentLiabilities1)
+    cashRatio1 = calculateCashRatio(cashAndCashEquivalentsAtCarryingValue1, totalCurrentLiabilities1)
+    payoutRatio1 = calculateDividendPayoutRatio(dividendPayout1, netIncome1)
+    retentionRateB1 = calculateRetentionRate(calculateDividendPayoutRatio(dividendPayout1, netIncome1))
+
+    inventoryTurnoverRatio1 = calculateInventoryTurnover(costofGoodsAndServicesSold1, averageInventory1)
+    daysOfInventoryOnHand1 = calculateDaysOfInventoryOnHand(averageInventory1, costofGoodsAndServicesSold1)
+    recievablesTurnover1 = calculateRecievablesTurnover(totalRevenue1, currentNetReceivables1)
+    daysOfSalesOutstanding1 = calculateDaysOfSalesOutstanding(averageRecievables1, totalRevenue1)
+    payablesTurnover1 = calculatePayablesTurnover(costofGoodsAndServicesSold1, averageAccountsPayable1)
+    numberOfDaysOfPayables1 = calculateNumberOfDaysOfPayables(calculatePayablesTurnover(costofGoodsAndServicesSold1, averageAccountsPayable1))
+    workingCapitalTurnover1 = calculateWorkingCapitalTurnover(totalRevenue1, averageWorkingCapital1)
+    fixedAssetTurnover1 = calculateFixedAssetTurnoverRatio(totalRevenue1, averageNetFixedAssets1)
+    totalAssetTurnover1 = calculateTotalAssetTurnover(totalRevenue1, currentQuarterAvgTotalAssets1)
 
 
     print('------------------------------------------------------------------------------------------------')
@@ -10461,6 +10916,7 @@ def build_master(ticker):
         tTMpreferredDivs = 0
     weightedAvgCommShrsOutstanding = ((float(commonStockSharesOutstanding) + float(commonStockSharesOutstanding1) + float(commonStockSharesOutstanding2) + float(commonStockSharesOutstanding3))/4)
     marketCap = calculateMarketCap(quoteUnformatted, commonStockSharesOutstanding)
+
     basicEPS = calculateBasicEPS(tTMnetIncome, tTMpreferredDivs, weightedAvgCommShrsOutstanding)
     pE = calculatePE(quoteUnformatted, basicEPS)
     pCF = calculatePriceToCashFlow(quoteUnformatted, calculateOperatingCashFlowPerShare(operatingCashflow, weightedAvgCommShrsOutstanding))
@@ -10505,52 +10961,1766 @@ def build_master(ticker):
     debtToAssetRatio = calculateDebtToAssetRatio(shortLongTermDebtTotal, totalAssets)
     debtToCapitalRatio = calculateDebtToCapitalRatio(shortLongTermDebtTotal, totalShareholderEquity)
 
+    workingCapital = (float(totalCurrentAssets) - float(totalCurrentLiabilities))
+    averageWorkingCapital = (((float(totalCurrentAssets) - float(totalCurrentLiabilities)) + (float(totalCurrentAssets1) - float(totalCurrentLiabilities2)))/2)
+    averageInventory = ((float(inventory) + float(inventory1))/2)
+    averageNetFixedAssets = ((calculateNetFixedAssets(propertyPlantEquipment, accumulatedDepreciationAmortizationPPE) + calculateNetFixedAssets(propertyPlantEquipment1, accumulatedDepreciationAmortizationPPE1))/2)
+    averageRecievables = ((float(currentNetReceivables) + float(currentNetReceivables1))/2)
+    averageAccountsPayable = ((float(currentAccountsPayable) + float(currentAccountsPayable1))/2)
     financialLeverage = calculateFinancialLeverageRatio(currentQuarterAvgTotalAssets, currentQuarterAvgCommonEquity)
     interestCoverage = calculateInterestCoverageRatio(operatingCashflow, interestExpense, incomeTaxExpense)
     fixedChargeCoverageRatio = calculateFixedChargeCoverage(ebit, capitalLeaseObligations, interestExpense)
+    quickRatio = calculateQuickRatio(totalCurrentAssets, totalCurrentLiabilities, inventory)
+    currentRatio = calculateCurrentRatio(totalCurrentAssets, totalCurrentLiabilities)
+    cashRatio = calculateCashRatio(cashAndCashEquivalentsAtCarryingValue, totalCurrentLiabilities)
+    payoutRatio = calculateDividendPayoutRatio(dividendPayout, netIncome)
+    retentionRateB = calculateRetentionRate(calculateDividendPayoutRatio(dividendPayout, netIncome))
+
+    inventoryTurnoverRatio = calculateInventoryTurnover(costofGoodsAndServicesSold, averageInventory)
+    daysOfInventoryOnHand = calculateDaysOfInventoryOnHand(averageInventory, costofGoodsAndServicesSold)
+    recievablesTurnover = calculateRecievablesTurnover(totalRevenue, currentNetReceivables)
+    daysOfSalesOutstanding = calculateDaysOfSalesOutstanding(averageRecievables, totalRevenue)
+    payablesTurnover = calculatePayablesTurnover(costofGoodsAndServicesSold, averageAccountsPayable)
+    numberOfDaysOfPayables = calculateNumberOfDaysOfPayables(calculatePayablesTurnover(costofGoodsAndServicesSold, averageAccountsPayable ))
+    workingCapitalTurnover = calculateWorkingCapitalTurnover(totalRevenue, averageWorkingCapital)
+    fixedAssetTurnover = calculateFixedAssetTurnoverRatio(totalRevenue, averageNetFixedAssets)
+    totalAssetTurnover = calculateTotalAssetTurnover(totalRevenue, currentQuarterAvgTotalAssets)
+
+
+    statsDfIndexNames = ['pE', 'pCF', 'pS', 'pB', 'pEGRatio', 'sustainableGrowthRate', 'earningsYield', 'basicEPS',
+                         'cashFlowPerShare', 'ebitdaPerShare', 'dividendsPerShare',
+                         'currentQuarterGrossProfitMargin', 'tTMGrossProfitMargin',
+                         'currentQuarterOperatingMargin', 'tTMOperatingMargin',
+                         'currentQuarterPreTaxMargin', 'tTMPreTaxMargin', 'currentQuarterNetProfitMargin',
+                         'tTMNetProfitMargin',
+                         'currentQuarterOperatingROA', 'tTMOperatingROA', 'currentQuarterROA', 'tTMROA',
+                         'currentQuarterReturnOnTotalCapital',
+                         'tTMReturnOnTotalCapital', 'currentQuarterROE', 'tTMROE',
+                         'currentQuarterReturnOnCommonEquity', 'tTMReturnOnCommonEquity',
+                         'debtRatio', 'debtToEquityRatio', 'debtToAssetRatio', 'debtToCapitalRatio',
+                         'financialLeverage', 'interestCoverage', 'fixedChargeCoverageRatio', 'currentRatio', 'quickRatio', 'cashRatio',
+                         'payoutRatio', 'retentionRateB', 'sustainableGrowthRate', 'inventoryTurnoverRatio', 'daysOfInventoryOnHand',
+                         'recievablesTurnover', 'daysOfSalesOutstanding', 'payablesTurnover', 'numberOfDaysOfPayables', 'workingCapitalTurnover',
+                         'fixedAssetTurnover', 'totalAssetTurnover']
+
+    tStatsDf = [pE, pCF, pS, pB, pEGRatio, '{:.2%}'.format(sustainableGrowthRate), '{:.2%}'.format(earningsYield), "${:,.2f}".format(basicEPS), "${:,.2f}".format(cashFlowPerShare),
+                "${:,.2f}".format(ebitdaPerShare), "${:,.2f}".format(dividendsPerShare),
+                '{:.2%}'.format(currentQuarterGrossProfitMargin), '{:.2%}'.format(tTMGrossProfitMargin), '{:.2%}'.format(currentQuarterOperatingMargin),
+                '{:.2%}'.format(tTMOperatingMargin), '{:.2%}'.format(currentQuarterPreTaxMargin),
+                '{:.2%}'.format(tTMPreTaxMargin), '{:.2%}'.format(currentQuarterNetProfitMargin), '{:.2%}'.format(tTMNetProfitMargin), '{:.2%}'.format(currentQuarterOperatingROA),
+                '{:.2%}'.format(tTMOperatingROA),
+                '{:.2%}'.format(currentQuarterROA), '{:.2%}'.format(tTMROA), '{:.2%}'.format(currentQuarterReturnOnTotalCapital), '{:.2%}'.format(tTMReturnOnTotalCapital),
+                '{:.2%}'.format(currentQuarterROE), '{:.2%}'.format(tTMROE),
+                '{:.2%}'.format(currentQuarterReturnOnCommonEquity), '{:.2%}'.format(tTMReturnOnCommonEquity), debtRatio, debtToEquityRatio,
+                debtToAssetRatio, debtToCapitalRatio,
+                financialLeverage, interestCoverage, fixedChargeCoverageRatio, currentRatio, quickRatio, cashRatio,
+                payoutRatio, retentionRateB, sustainableGrowthRate, inventoryTurnoverRatio, daysOfInventoryOnHand, recievablesTurnover,
+                daysOfSalesOutstanding, payablesTurnover, numberOfDaysOfPayables, workingCapitalTurnover, fixedAssetTurnover, totalAssetTurnover]
+
+    tStatsDf1 = [pE1, pCF1, pS1, pB1, pEGRatio1, '{:.2%}'.format(sustainableGrowthRate1),
+                 '{:.2%}'.format(earningsYield1),
+                 "${:,.2f}".format(basicEPS1), "${:,.2f}".format(cashFlowPerShare1),
+                 "${:,.2f}".format(ebitdaPerShare1), "${:,.2f}".format(dividendsPerShare),
+                 '{:.2%}'.format(currentQuarterGrossProfitMargin1), '{:.2%}'.format(tTMGrossProfitMargin1),
+                 '{:.2%}'.format(currentQuarterOperatingMargin1),
+                 '{:.2%}'.format(tTMOperatingMargin1), '{:.2%}'.format(currentQuarterPreTaxMargin1),
+                 '{:.2%}'.format(tTMPreTaxMargin1), '{:.2%}'.format(currentQuarterNetProfitMargin1),
+                 '{:.2%}'.format(tTMNetProfitMargin1), '{:.2%}'.format(currentQuarterOperatingROA1),
+                 '{:.2%}'.format(tTMOperatingROA1),
+                 '{:.2%}'.format(currentQuarterROA1), '{:.2%}'.format(tTMROA1),
+                 '{:.2%}'.format(currentQuarterReturnOnTotalCapital1), '{:.2%}'.format(tTMReturnOnTotalCapital1),
+                 '{:.2%}'.format(currentQuarterROE1), '{:.2%}'.format(tTMROE1),
+                 '{:.2%}'.format(currentQuarterReturnOnCommonEquity1), '{:.2%}'.format(tTMReturnOnCommonEquity1),
+                 debtRatio1,
+                 debtToEquityRatio1,
+                 debtToAssetRatio1, debtToCapitalRatio1,
+                 financialLeverage1, interestCoverage1, fixedChargeCoverageRatio1, currentRatio1, quickRatio1,
+                 cashRatio1,
+                 payoutRatio1, retentionRateB1, sustainableGrowthRate1, inventoryTurnoverRatio1, daysOfInventoryOnHand1,
+                 recievablesTurnover1,
+                 daysOfSalesOutstanding1, payablesTurnover1, numberOfDaysOfPayables1, workingCapitalTurnover1,
+                 fixedAssetTurnover1, totalAssetTurnover1]
+
+    tStatsDf2 = [pE2, pCF2, pS2, pB2, pEGRatio2, '{:.2%}'.format(sustainableGrowthRate2),
+                 '{:.2%}'.format(earningsYield2),
+                 "${:,.2f}".format(basicEPS2), "${:,.2f}".format(cashFlowPerShare2),
+                 "${:,.2f}".format(ebitdaPerShare2), "${:,.2f}".format(dividendsPerShare),
+                 '{:.2%}'.format(currentQuarterGrossProfitMargin2), '{:.2%}'.format(tTMGrossProfitMargin2),
+                 '{:.2%}'.format(currentQuarterOperatingMargin2),
+                 '{:.2%}'.format(tTMOperatingMargin2), '{:.2%}'.format(currentQuarterPreTaxMargin2),
+                 '{:.2%}'.format(tTMPreTaxMargin2), '{:.2%}'.format(currentQuarterNetProfitMargin2),
+                 '{:.2%}'.format(tTMNetProfitMargin2), '{:.2%}'.format(currentQuarterOperatingROA2),
+                 '{:.2%}'.format(tTMOperatingROA2),
+                 '{:.2%}'.format(currentQuarterROA2), '{:.2%}'.format(tTMROA2),
+                 '{:.2%}'.format(currentQuarterReturnOnTotalCapital2), '{:.2%}'.format(tTMReturnOnTotalCapital2),
+                 '{:.2%}'.format(currentQuarterROE2), '{:.2%}'.format(tTMROE2),
+                 '{:.2%}'.format(currentQuarterReturnOnCommonEquity2), '{:.2%}'.format(tTMReturnOnCommonEquity2),
+                 debtRatio2,
+                 debtToEquityRatio2,
+                 debtToAssetRatio2, debtToCapitalRatio2,
+                 financialLeverage2, interestCoverage2, fixedChargeCoverageRatio2, currentRatio2, quickRatio2,
+                 cashRatio2,
+                 payoutRatio2, retentionRateB2, sustainableGrowthRate2, inventoryTurnoverRatio2, daysOfInventoryOnHand2,
+                 recievablesTurnover2,
+                 daysOfSalesOutstanding2, payablesTurnover2, numberOfDaysOfPayables2, workingCapitalTurnover2,
+                 fixedAssetTurnover2, totalAssetTurnover2]
+
+    tStatsDf3 = [pE3, pCF3, pS3, pB3, pEGRatio3, '{:.2%}'.format(sustainableGrowthRate3),
+                 '{:.2%}'.format(earningsYield3),
+                 "${:,.2f}".format(basicEPS3), "${:,.2f}".format(cashFlowPerShare3),
+                 "${:,.2f}".format(ebitdaPerShare3), "${:,.2f}".format(dividendsPerShare),
+                 '{:.2%}'.format(currentQuarterGrossProfitMargin3), '{:.2%}'.format(tTMGrossProfitMargin3),
+                 '{:.2%}'.format(currentQuarterOperatingMargin3),
+                 '{:.2%}'.format(tTMOperatingMargin3), '{:.2%}'.format(currentQuarterPreTaxMargin3),
+                 '{:.2%}'.format(tTMPreTaxMargin3), '{:.2%}'.format(currentQuarterNetProfitMargin3),
+                 '{:.2%}'.format(tTMNetProfitMargin3), '{:.2%}'.format(currentQuarterOperatingROA3),
+                 '{:.2%}'.format(tTMOperatingROA3),
+                 '{:.2%}'.format(currentQuarterROA3), '{:.2%}'.format(tTMROA3),
+                 '{:.2%}'.format(currentQuarterReturnOnTotalCapital3), '{:.2%}'.format(tTMReturnOnTotalCapital3),
+                 '{:.2%}'.format(currentQuarterROE3), '{:.2%}'.format(tTMROE3),
+                 '{:.2%}'.format(currentQuarterReturnOnCommonEquity3), '{:.2%}'.format(tTMReturnOnCommonEquity3),
+                 debtRatio3,
+                 debtToEquityRatio3,
+                 debtToAssetRatio3, debtToCapitalRatio3,
+                 financialLeverage3, interestCoverage3, fixedChargeCoverageRatio3, currentRatio3, quickRatio3,
+                 cashRatio3,
+                 payoutRatio3, retentionRateB3, sustainableGrowthRate3, inventoryTurnoverRatio3, daysOfInventoryOnHand3,
+                 recievablesTurnover3,
+                 daysOfSalesOutstanding3, payablesTurnover3, numberOfDaysOfPayables3, workingCapitalTurnover3,
+                 fixedAssetTurnover3, totalAssetTurnover3]
+
+    tStatsDf4 = [pE4, pCF4, pS4, pB4, pEGRatio4, '{:.2%}'.format(sustainableGrowthRate4),
+                 '{:.2%}'.format(earningsYield4),
+                 "${:,.2f}".format(basicEPS4), "${:,.2f}".format(cashFlowPerShare4),
+                 "${:,.2f}".format(ebitdaPerShare4), "${:,.2f}".format(dividendsPerShare),
+                 '{:.2%}'.format(currentQuarterGrossProfitMargin4), '{:.2%}'.format(tTMGrossProfitMargin4),
+                 '{:.2%}'.format(currentQuarterOperatingMargin4),
+                 '{:.2%}'.format(tTMOperatingMargin4), '{:.2%}'.format(currentQuarterPreTaxMargin4),
+                 '{:.2%}'.format(tTMPreTaxMargin4), '{:.2%}'.format(currentQuarterNetProfitMargin4),
+                 '{:.2%}'.format(tTMNetProfitMargin4), '{:.2%}'.format(currentQuarterOperatingROA4),
+                 '{:.2%}'.format(tTMOperatingROA4),
+                 '{:.2%}'.format(currentQuarterROA4), '{:.2%}'.format(tTMROA4),
+                 '{:.2%}'.format(currentQuarterReturnOnTotalCapital4), '{:.2%}'.format(tTMReturnOnTotalCapital4),
+                 '{:.2%}'.format(currentQuarterROE4), '{:.2%}'.format(tTMROE4),
+                 '{:.2%}'.format(currentQuarterReturnOnCommonEquity4), '{:.2%}'.format(tTMReturnOnCommonEquity4),
+                 debtRatio4,
+                 debtToEquityRatio4,
+                 debtToAssetRatio4, debtToCapitalRatio4,
+                 financialLeverage4, interestCoverage4, fixedChargeCoverageRatio4, currentRatio4, quickRatio4,
+                 cashRatio4,
+                 payoutRatio4, retentionRateB4, sustainableGrowthRate4, inventoryTurnoverRatio4, daysOfInventoryOnHand4,
+                 recievablesTurnover4,
+                 daysOfSalesOutstanding4, payablesTurnover4, numberOfDaysOfPayables4, workingCapitalTurnover4,
+                 fixedAssetTurnover4, totalAssetTurnover4]
+
+    tStatsDf5 = [pE5, pCF5, pS5, pB5, pEGRatio5, '{:.2%}'.format(sustainableGrowthRate5),
+                 '{:.2%}'.format(earningsYield5),
+                 "${:,.2f}".format(basicEPS5), "${:,.2f}".format(cashFlowPerShare5),
+                 "${:,.2f}".format(ebitdaPerShare5), "${:,.2f}".format(dividendsPerShare),
+                 '{:.2%}'.format(currentQuarterGrossProfitMargin5), '{:.2%}'.format(tTMGrossProfitMargin5),
+                 '{:.2%}'.format(currentQuarterOperatingMargin5),
+                 '{:.2%}'.format(tTMOperatingMargin5), '{:.2%}'.format(currentQuarterPreTaxMargin5),
+                 '{:.2%}'.format(tTMPreTaxMargin5), '{:.2%}'.format(currentQuarterNetProfitMargin5),
+                 '{:.2%}'.format(tTMNetProfitMargin5), '{:.2%}'.format(currentQuarterOperatingROA5),
+                 '{:.2%}'.format(tTMOperatingROA5),
+                 '{:.2%}'.format(currentQuarterROA5), '{:.2%}'.format(tTMROA5),
+                 '{:.2%}'.format(currentQuarterReturnOnTotalCapital5), '{:.2%}'.format(tTMReturnOnTotalCapital5),
+                 '{:.2%}'.format(currentQuarterROE5), '{:.2%}'.format(tTMROE5),
+                 '{:.2%}'.format(currentQuarterReturnOnCommonEquity5), '{:.2%}'.format(tTMReturnOnCommonEquity5),
+                 debtRatio5,
+                 debtToEquityRatio5,
+                 debtToAssetRatio5, debtToCapitalRatio5,
+                 financialLeverage5, interestCoverage5, fixedChargeCoverageRatio5, currentRatio5, quickRatio5,
+                 cashRatio5,
+                 payoutRatio5, retentionRateB5, sustainableGrowthRate5, inventoryTurnoverRatio5, daysOfInventoryOnHand5,
+                 recievablesTurnover5,
+                 daysOfSalesOutstanding5, payablesTurnover5, numberOfDaysOfPayables5, workingCapitalTurnover5,
+                 fixedAssetTurnover5, totalAssetTurnover5]
+
+    tStatsDf6 = [pE6, pCF6, pS6, pB6, pEGRatio6, '{:.2%}'.format(sustainableGrowthRate6),
+                 '{:.2%}'.format(earningsYield6),
+                 "${:,.2f}".format(basicEPS6), "${:,.2f}".format(cashFlowPerShare6),
+                 "${:,.2f}".format(ebitdaPerShare6), "${:,.2f}".format(dividendsPerShare),
+                 '{:.2%}'.format(currentQuarterGrossProfitMargin6), '{:.2%}'.format(tTMGrossProfitMargin6),
+                 '{:.2%}'.format(currentQuarterOperatingMargin6),
+                 '{:.2%}'.format(tTMOperatingMargin6), '{:.2%}'.format(currentQuarterPreTaxMargin6),
+                 '{:.2%}'.format(tTMPreTaxMargin6), '{:.2%}'.format(currentQuarterNetProfitMargin6),
+                 '{:.2%}'.format(tTMNetProfitMargin6), '{:.2%}'.format(currentQuarterOperatingROA6),
+                 '{:.2%}'.format(tTMOperatingROA6),
+                 '{:.2%}'.format(currentQuarterROA6), '{:.2%}'.format(tTMROA6),
+                 '{:.2%}'.format(currentQuarterReturnOnTotalCapital6), '{:.2%}'.format(tTMReturnOnTotalCapital6),
+                 '{:.2%}'.format(currentQuarterROE6), '{:.2%}'.format(tTMROE6),
+                 '{:.2%}'.format(currentQuarterReturnOnCommonEquity6), '{:.2%}'.format(tTMReturnOnCommonEquity6),
+                 debtRatio6,
+                 debtToEquityRatio6,
+                 debtToAssetRatio6, debtToCapitalRatio6,
+                 financialLeverage6, interestCoverage6, fixedChargeCoverageRatio6, currentRatio6, quickRatio6,
+                 cashRatio6,
+                 payoutRatio6, retentionRateB6, sustainableGrowthRate6, inventoryTurnoverRatio6, daysOfInventoryOnHand6,
+                 recievablesTurnover6,
+                 daysOfSalesOutstanding6, payablesTurnover6, numberOfDaysOfPayables6, workingCapitalTurnover6,
+                 fixedAssetTurnover6, totalAssetTurnover6]
+
+    tStatsDf7 = [pE7, pCF7, pS7, pB7, pEGRatio7, '{:.2%}'.format(sustainableGrowthRate7),
+                 '{:.2%}'.format(earningsYield7),
+                 "${:,.2f}".format(basicEPS7), "${:,.2f}".format(cashFlowPerShare7),
+                 "${:,.2f}".format(ebitdaPerShare7), "${:,.2f}".format(dividendsPerShare),
+                 '{:.2%}'.format(currentQuarterGrossProfitMargin7), '{:.2%}'.format(tTMGrossProfitMargin7),
+                 '{:.2%}'.format(currentQuarterOperatingMargin7),
+                 '{:.2%}'.format(tTMOperatingMargin7), '{:.2%}'.format(currentQuarterPreTaxMargin7),
+                 '{:.2%}'.format(tTMPreTaxMargin7), '{:.2%}'.format(currentQuarterNetProfitMargin7),
+                 '{:.2%}'.format(tTMNetProfitMargin7), '{:.2%}'.format(currentQuarterOperatingROA7),
+                 '{:.2%}'.format(tTMOperatingROA7),
+                 '{:.2%}'.format(currentQuarterROA7), '{:.2%}'.format(tTMROA7),
+                 '{:.2%}'.format(currentQuarterReturnOnTotalCapital7), '{:.2%}'.format(tTMReturnOnTotalCapital7),
+                 '{:.2%}'.format(currentQuarterROE7), '{:.2%}'.format(tTMROE7),
+                 '{:.2%}'.format(currentQuarterReturnOnCommonEquity7), '{:.2%}'.format(tTMReturnOnCommonEquity7),
+                 debtRatio7,
+                 debtToEquityRatio7,
+                 debtToAssetRatio7, debtToCapitalRatio7,
+                 financialLeverage7, interestCoverage7, fixedChargeCoverageRatio7, currentRatio7, quickRatio7,
+                 cashRatio7,
+                 payoutRatio7, retentionRateB7, sustainableGrowthRate7, inventoryTurnoverRatio7, daysOfInventoryOnHand7,
+                 recievablesTurnover7,
+                 daysOfSalesOutstanding7, payablesTurnover7, numberOfDaysOfPayables7, workingCapitalTurnover7,
+                 fixedAssetTurnover7, totalAssetTurnover7]
+
+    tStatsDf8 = [pE8, pCF8, pS8, pB8, pEGRatio8, '{:.2%}'.format(sustainableGrowthRate8),
+                 '{:.2%}'.format(earningsYield8),
+                 "${:,.2f}".format(basicEPS8), "${:,.2f}".format(cashFlowPerShare8),
+                 "${:,.2f}".format(ebitdaPerShare8), "${:,.2f}".format(dividendsPerShare),
+                 '{:.2%}'.format(currentQuarterGrossProfitMargin8), '{:.2%}'.format(tTMGrossProfitMargin8),
+                 '{:.2%}'.format(currentQuarterOperatingMargin8),
+                 '{:.2%}'.format(tTMOperatingMargin8), '{:.2%}'.format(currentQuarterPreTaxMargin8),
+                 '{:.2%}'.format(tTMPreTaxMargin8), '{:.2%}'.format(currentQuarterNetProfitMargin8),
+                 '{:.2%}'.format(tTMNetProfitMargin8), '{:.2%}'.format(currentQuarterOperatingROA8),
+                 '{:.2%}'.format(tTMOperatingROA8),
+                 '{:.2%}'.format(currentQuarterROA8), '{:.2%}'.format(tTMROA8),
+                 '{:.2%}'.format(currentQuarterReturnOnTotalCapital8), '{:.2%}'.format(tTMReturnOnTotalCapital8),
+                 '{:.2%}'.format(currentQuarterROE8), '{:.2%}'.format(tTMROE8),
+                 '{:.2%}'.format(currentQuarterReturnOnCommonEquity8), '{:.2%}'.format(tTMReturnOnCommonEquity8),
+                 debtRatio8,
+                 debtToEquityRatio8,
+                 debtToAssetRatio8, debtToCapitalRatio8,
+                 financialLeverage8, interestCoverage8, fixedChargeCoverageRatio8, currentRatio8, quickRatio8,
+                 cashRatio8,
+                 payoutRatio8, retentionRateB8, sustainableGrowthRate8, inventoryTurnoverRatio8, daysOfInventoryOnHand8,
+                 recievablesTurnover8,
+                 daysOfSalesOutstanding8, payablesTurnover8, numberOfDaysOfPayables8, workingCapitalTurnover8,
+                 fixedAssetTurnover8, totalAssetTurnover8]
+
+    tStatsDf9 = [pE9, pCF9, pS9, pB9, pEGRatio9, '{:.2%}'.format(sustainableGrowthRate9),
+                 '{:.2%}'.format(earningsYield9),
+                 "${:,.2f}".format(basicEPS9), "${:,.2f}".format(cashFlowPerShare9),
+                 "${:,.2f}".format(ebitdaPerShare9), "${:,.2f}".format(dividendsPerShare),
+                 '{:.2%}'.format(currentQuarterGrossProfitMargin9), '{:.2%}'.format(tTMGrossProfitMargin9),
+                 '{:.2%}'.format(currentQuarterOperatingMargin9),
+                 '{:.2%}'.format(tTMOperatingMargin9), '{:.2%}'.format(currentQuarterPreTaxMargin9),
+                 '{:.2%}'.format(tTMPreTaxMargin9), '{:.2%}'.format(currentQuarterNetProfitMargin9),
+                 '{:.2%}'.format(tTMNetProfitMargin9), '{:.2%}'.format(currentQuarterOperatingROA9),
+                 '{:.2%}'.format(tTMOperatingROA9),
+                 '{:.2%}'.format(currentQuarterROA9), '{:.2%}'.format(tTMROA9),
+                 '{:.2%}'.format(currentQuarterReturnOnTotalCapital9), '{:.2%}'.format(tTMReturnOnTotalCapital9),
+                 '{:.2%}'.format(currentQuarterROE9), '{:.2%}'.format(tTMROE9),
+                 '{:.2%}'.format(currentQuarterReturnOnCommonEquity9), '{:.2%}'.format(tTMReturnOnCommonEquity9),
+                 debtRatio9,
+                 debtToEquityRatio9,
+                 debtToAssetRatio9, debtToCapitalRatio9,
+                 financialLeverage9, interestCoverage9, fixedChargeCoverageRatio9, currentRatio9, quickRatio9,
+                 cashRatio9,
+                 payoutRatio9, retentionRateB9, sustainableGrowthRate9, inventoryTurnoverRatio9, daysOfInventoryOnHand9,
+                 recievablesTurnover9,
+                 daysOfSalesOutstanding9, payablesTurnover9, numberOfDaysOfPayables9, workingCapitalTurnover9,
+                 fixedAssetTurnover9, totalAssetTurnover9]
+
+    tStatsDf10 = [pE10, pCF10, pS10, pB10, pEGRatio10, '{:.2%}'.format(sustainableGrowthRate10),
+                  '{:.2%}'.format(earningsYield10),
+                  "${:,.2f}".format(basicEPS10), "${:,.2f}".format(cashFlowPerShare10),
+                  "${:,.2f}".format(ebitdaPerShare10), "${:,.2f}".format(dividendsPerShare),
+                  '{:.2%}'.format(currentQuarterGrossProfitMargin10), '{:.2%}'.format(tTMGrossProfitMargin10),
+                  '{:.2%}'.format(currentQuarterOperatingMargin10),
+                  '{:.2%}'.format(tTMOperatingMargin10), '{:.2%}'.format(currentQuarterPreTaxMargin10),
+                  '{:.2%}'.format(tTMPreTaxMargin10), '{:.2%}'.format(currentQuarterNetProfitMargin10),
+                  '{:.2%}'.format(tTMNetProfitMargin10), '{:.2%}'.format(currentQuarterOperatingROA10),
+                  '{:.2%}'.format(tTMOperatingROA10),
+                  '{:.2%}'.format(currentQuarterROA10), '{:.2%}'.format(tTMROA10),
+                  '{:.2%}'.format(currentQuarterReturnOnTotalCapital10), '{:.2%}'.format(tTMReturnOnTotalCapital10),
+                  '{:.2%}'.format(currentQuarterROE10), '{:.2%}'.format(tTMROE10),
+                  '{:.2%}'.format(currentQuarterReturnOnCommonEquity10), '{:.2%}'.format(tTMReturnOnCommonEquity10),
+                  debtRatio10,
+                  debtToEquityRatio10,
+                  debtToAssetRatio10, debtToCapitalRatio10,
+                  financialLeverage10, interestCoverage10, fixedChargeCoverageRatio10, currentRatio10, quickRatio10,
+                  cashRatio10,
+                  payoutRatio10, retentionRateB10, sustainableGrowthRate10, inventoryTurnoverRatio10,
+                  daysOfInventoryOnHand10,
+                  recievablesTurnover10,
+                  daysOfSalesOutstanding10, payablesTurnover10, numberOfDaysOfPayables10, workingCapitalTurnover10,
+                  fixedAssetTurnover10, totalAssetTurnover10]
+
+    tStatsDf11 = [pE11, pCF11, pS11, pB11, pEGRatio11, '{:.2%}'.format(sustainableGrowthRate11),
+                  '{:.2%}'.format(earningsYield11),
+                  "${:,.2f}".format(basicEPS11), "${:,.2f}".format(cashFlowPerShare11),
+                  "${:,.2f}".format(ebitdaPerShare11), "${:,.2f}".format(dividendsPerShare),
+                  '{:.2%}'.format(currentQuarterGrossProfitMargin11), '{:.2%}'.format(tTMGrossProfitMargin11),
+                  '{:.2%}'.format(currentQuarterOperatingMargin11),
+                  '{:.2%}'.format(tTMOperatingMargin11), '{:.2%}'.format(currentQuarterPreTaxMargin11),
+                  '{:.2%}'.format(tTMPreTaxMargin11), '{:.2%}'.format(currentQuarterNetProfitMargin11),
+                  '{:.2%}'.format(tTMNetProfitMargin11), '{:.2%}'.format(currentQuarterOperatingROA11),
+                  '{:.2%}'.format(tTMOperatingROA11),
+                  '{:.2%}'.format(currentQuarterROA11), '{:.2%}'.format(tTMROA11),
+                  '{:.2%}'.format(currentQuarterReturnOnTotalCapital11), '{:.2%}'.format(tTMReturnOnTotalCapital11),
+                  '{:.2%}'.format(currentQuarterROE11), '{:.2%}'.format(tTMROE11),
+                  '{:.2%}'.format(currentQuarterReturnOnCommonEquity11), '{:.2%}'.format(tTMReturnOnCommonEquity11),
+                  debtRatio11,
+                  debtToEquityRatio11,
+                  debtToAssetRatio11, debtToCapitalRatio11,
+                  financialLeverage11, interestCoverage11, fixedChargeCoverageRatio11, currentRatio11, quickRatio11,
+                  cashRatio11,
+                  payoutRatio11, retentionRateB11, sustainableGrowthRate11, inventoryTurnoverRatio11,
+                  daysOfInventoryOnHand11,
+                  recievablesTurnover11,
+                  daysOfSalesOutstanding11, payablesTurnover11, numberOfDaysOfPayables11, workingCapitalTurnover11,
+                  fixedAssetTurnover11, totalAssetTurnover11]
+
+    tStatsDf12 = [pE12, pCF12, pS12, pB12, pEGRatio12, '{:.2%}'.format(sustainableGrowthRate12),
+                  '{:.2%}'.format(earningsYield12),
+                  "${:,.2f}".format(basicEPS12), "${:,.2f}".format(cashFlowPerShare12),
+                  "${:,.2f}".format(ebitdaPerShare12), "${:,.2f}".format(dividendsPerShare),
+                  '{:.2%}'.format(currentQuarterGrossProfitMargin12), '{:.2%}'.format(tTMGrossProfitMargin12),
+                  '{:.2%}'.format(currentQuarterOperatingMargin12),
+                  '{:.2%}'.format(tTMOperatingMargin12), '{:.2%}'.format(currentQuarterPreTaxMargin12),
+                  '{:.2%}'.format(tTMPreTaxMargin12), '{:.2%}'.format(currentQuarterNetProfitMargin12),
+                  '{:.2%}'.format(tTMNetProfitMargin12), '{:.2%}'.format(currentQuarterOperatingROA12),
+                  '{:.2%}'.format(tTMOperatingROA12),
+                  '{:.2%}'.format(currentQuarterROA12), '{:.2%}'.format(tTMROA12),
+                  '{:.2%}'.format(currentQuarterReturnOnTotalCapital12), '{:.2%}'.format(tTMReturnOnTotalCapital12),
+                  '{:.2%}'.format(currentQuarterROE12), '{:.2%}'.format(tTMROE12),
+                  '{:.2%}'.format(currentQuarterReturnOnCommonEquity12), '{:.2%}'.format(tTMReturnOnCommonEquity12),
+                  debtRatio12,
+                  debtToEquityRatio12,
+                  debtToAssetRatio12, debtToCapitalRatio12,
+                  financialLeverage12, interestCoverage12, fixedChargeCoverageRatio12, currentRatio12, quickRatio12,
+                  cashRatio12,
+                  payoutRatio12, retentionRateB12, sustainableGrowthRate12, inventoryTurnoverRatio12,
+                  daysOfInventoryOnHand12,
+                  recievablesTurnover12,
+                  daysOfSalesOutstanding12, payablesTurnover12, numberOfDaysOfPayables12, workingCapitalTurnover12,
+                  fixedAssetTurnover12, totalAssetTurnover12]
+
+    tStatsDf13 = [pE13, pCF13, pS13, pB13, pEGRatio13, '{:.2%}'.format(sustainableGrowthRate13),
+                  '{:.2%}'.format(earningsYield13),
+                  "${:,.2f}".format(basicEPS13), "${:,.2f}".format(cashFlowPerShare13),
+                  "${:,.2f}".format(ebitdaPerShare13), "${:,.2f}".format(dividendsPerShare),
+                  '{:.2%}'.format(currentQuarterGrossProfitMargin13), '{:.2%}'.format(tTMGrossProfitMargin13),
+                  '{:.2%}'.format(currentQuarterOperatingMargin13),
+                  '{:.2%}'.format(tTMOperatingMargin13), '{:.2%}'.format(currentQuarterPreTaxMargin13),
+                  '{:.2%}'.format(tTMPreTaxMargin13), '{:.2%}'.format(currentQuarterNetProfitMargin13),
+                  '{:.2%}'.format(tTMNetProfitMargin13), '{:.2%}'.format(currentQuarterOperatingROA13),
+                  '{:.2%}'.format(tTMOperatingROA13),
+                  '{:.2%}'.format(currentQuarterROA13), '{:.2%}'.format(tTMROA13),
+                  '{:.2%}'.format(currentQuarterReturnOnTotalCapital13), '{:.2%}'.format(tTMReturnOnTotalCapital13),
+                  '{:.2%}'.format(currentQuarterROE13), '{:.2%}'.format(tTMROE13),
+                  '{:.2%}'.format(currentQuarterReturnOnCommonEquity13), '{:.2%}'.format(tTMReturnOnCommonEquity13),
+                  debtRatio13,
+                  debtToEquityRatio13,
+                  debtToAssetRatio13, debtToCapitalRatio13,
+                  financialLeverage13, interestCoverage13, fixedChargeCoverageRatio13, currentRatio13, quickRatio13,
+                  cashRatio13,
+                  payoutRatio13, retentionRateB13, sustainableGrowthRate13, inventoryTurnoverRatio13,
+                  daysOfInventoryOnHand13,
+                  recievablesTurnover13,
+                  daysOfSalesOutstanding13, payablesTurnover13, numberOfDaysOfPayables13, workingCapitalTurnover13,
+                  fixedAssetTurnover13, totalAssetTurnover13]
+
+    tStatsDf14 = [pE14, pCF14, pS14, pB14, pEGRatio14, '{:.2%}'.format(sustainableGrowthRate14),
+                  '{:.2%}'.format(earningsYield14),
+                  "${:,.2f}".format(basicEPS14), "${:,.2f}".format(cashFlowPerShare14),
+                  "${:,.2f}".format(ebitdaPerShare14), "${:,.2f}".format(dividendsPerShare),
+                  '{:.2%}'.format(currentQuarterGrossProfitMargin14), '{:.2%}'.format(tTMGrossProfitMargin14),
+                  '{:.2%}'.format(currentQuarterOperatingMargin14),
+                  '{:.2%}'.format(tTMOperatingMargin14), '{:.2%}'.format(currentQuarterPreTaxMargin14),
+                  '{:.2%}'.format(tTMPreTaxMargin14), '{:.2%}'.format(currentQuarterNetProfitMargin14),
+                  '{:.2%}'.format(tTMNetProfitMargin14), '{:.2%}'.format(currentQuarterOperatingROA14),
+                  '{:.2%}'.format(tTMOperatingROA14),
+                  '{:.2%}'.format(currentQuarterROA14), '{:.2%}'.format(tTMROA14),
+                  '{:.2%}'.format(currentQuarterReturnOnTotalCapital14), '{:.2%}'.format(tTMReturnOnTotalCapital14),
+                  '{:.2%}'.format(currentQuarterROE14), '{:.2%}'.format(tTMROE14),
+                  '{:.2%}'.format(currentQuarterReturnOnCommonEquity14), '{:.2%}'.format(tTMReturnOnCommonEquity14),
+                  debtRatio14,
+                  debtToEquityRatio14,
+                  debtToAssetRatio14, debtToCapitalRatio14,
+                  financialLeverage14, interestCoverage14, fixedChargeCoverageRatio14, currentRatio14, quickRatio14,
+                  cashRatio14,
+                  payoutRatio14, retentionRateB14, sustainableGrowthRate14, inventoryTurnoverRatio14,
+                  daysOfInventoryOnHand14,
+                  recievablesTurnover14,
+                  daysOfSalesOutstanding14, payablesTurnover14, numberOfDaysOfPayables14, workingCapitalTurnover14,
+                  fixedAssetTurnover14, totalAssetTurnover14]
+
+    tStatsDf15 = [pE15, pCF15, pS15, pB15, pEGRatio15, '{:.2%}'.format(sustainableGrowthRate15),
+                  '{:.2%}'.format(earningsYield15),
+                  "${:,.2f}".format(basicEPS15), "${:,.2f}".format(cashFlowPerShare15),
+                  "${:,.2f}".format(ebitdaPerShare15), "${:,.2f}".format(dividendsPerShare),
+                  '{:.2%}'.format(currentQuarterGrossProfitMargin15), '{:.2%}'.format(tTMGrossProfitMargin15),
+                  '{:.2%}'.format(currentQuarterOperatingMargin15),
+                  '{:.2%}'.format(tTMOperatingMargin15), '{:.2%}'.format(currentQuarterPreTaxMargin15),
+                  '{:.2%}'.format(tTMPreTaxMargin15), '{:.2%}'.format(currentQuarterNetProfitMargin15),
+                  '{:.2%}'.format(tTMNetProfitMargin15), '{:.2%}'.format(currentQuarterOperatingROA15),
+                  '{:.2%}'.format(tTMOperatingROA15),
+                  '{:.2%}'.format(currentQuarterROA15), '{:.2%}'.format(tTMROA15),
+                  '{:.2%}'.format(currentQuarterReturnOnTotalCapital15), '{:.2%}'.format(tTMReturnOnTotalCapital15),
+                  '{:.2%}'.format(currentQuarterROE15), '{:.2%}'.format(tTMROE15),
+                  '{:.2%}'.format(currentQuarterReturnOnCommonEquity15), '{:.2%}'.format(tTMReturnOnCommonEquity15),
+                  debtRatio15,
+                  debtToEquityRatio15,
+                  debtToAssetRatio15, debtToCapitalRatio15,
+                  financialLeverage15, interestCoverage15, fixedChargeCoverageRatio15, currentRatio15, quickRatio15,
+                  cashRatio15,
+                  payoutRatio15, retentionRateB15, sustainableGrowthRate15, inventoryTurnoverRatio15,
+                  daysOfInventoryOnHand15,
+                  recievablesTurnover15,
+                  daysOfSalesOutstanding15, payablesTurnover15, numberOfDaysOfPayables15, workingCapitalTurnover15,
+                  fixedAssetTurnover15, totalAssetTurnover15]
+
+    tStatsDf16 = [pE16, pCF16, pS16, pB16, pEGRatio16, '{:.2%}'.format(sustainableGrowthRate16),
+                  '{:.2%}'.format(earningsYield16),
+                  "${:,.2f}".format(basicEPS16), "${:,.2f}".format(cashFlowPerShare16),
+                  "${:,.2f}".format(ebitdaPerShare16), "${:,.2f}".format(dividendsPerShare),
+                  '{:.2%}'.format(currentQuarterGrossProfitMargin16), '{:.2%}'.format(tTMGrossProfitMargin16),
+                  '{:.2%}'.format(currentQuarterOperatingMargin16),
+                  '{:.2%}'.format(tTMOperatingMargin16), '{:.2%}'.format(currentQuarterPreTaxMargin16),
+                  '{:.2%}'.format(tTMPreTaxMargin16), '{:.2%}'.format(currentQuarterNetProfitMargin16),
+                  '{:.2%}'.format(tTMNetProfitMargin16), '{:.2%}'.format(currentQuarterOperatingROA16),
+                  '{:.2%}'.format(tTMOperatingROA16),
+                  '{:.2%}'.format(currentQuarterROA16), '{:.2%}'.format(tTMROA16),
+                  '{:.2%}'.format(currentQuarterReturnOnTotalCapital16), '{:.2%}'.format(tTMReturnOnTotalCapital16),
+                  '{:.2%}'.format(currentQuarterROE16), '{:.2%}'.format(tTMROE16),
+                  '{:.2%}'.format(currentQuarterReturnOnCommonEquity16), '{:.2%}'.format(tTMReturnOnCommonEquity16),
+                  debtRatio16,
+                  debtToEquityRatio16,
+                  debtToAssetRatio16, debtToCapitalRatio16,
+                  financialLeverage16, interestCoverage16, fixedChargeCoverageRatio16, currentRatio16, quickRatio16,
+                  cashRatio16,
+                  payoutRatio16, retentionRateB16, sustainableGrowthRate16, inventoryTurnoverRatio16,
+                  daysOfInventoryOnHand16,
+                  recievablesTurnover16,
+                  daysOfSalesOutstanding16, payablesTurnover16, numberOfDaysOfPayables16, workingCapitalTurnover16,
+                  fixedAssetTurnover16, totalAssetTurnover16]
+
+    tStatsDf17 = [pE17, pCF17, pS17, pB17, pEGRatio17, '{:.2%}'.format(sustainableGrowthRate17),
+                  '{:.2%}'.format(earningsYield17),
+                  "${:,.2f}".format(basicEPS17), "${:,.2f}".format(cashFlowPerShare17),
+                  "${:,.2f}".format(ebitdaPerShare17), "${:,.2f}".format(dividendsPerShare),
+                  '{:.2%}'.format(currentQuarterGrossProfitMargin17), '{:.2%}'.format(tTMGrossProfitMargin17),
+                  '{:.2%}'.format(currentQuarterOperatingMargin17),
+                  '{:.2%}'.format(tTMOperatingMargin17), '{:.2%}'.format(currentQuarterPreTaxMargin17),
+                  '{:.2%}'.format(tTMPreTaxMargin17), '{:.2%}'.format(currentQuarterNetProfitMargin17),
+                  '{:.2%}'.format(tTMNetProfitMargin17), '{:.2%}'.format(currentQuarterOperatingROA17),
+                  '{:.2%}'.format(tTMOperatingROA17),
+                  '{:.2%}'.format(currentQuarterROA17), '{:.2%}'.format(tTMROA17),
+                  '{:.2%}'.format(currentQuarterReturnOnTotalCapital17), '{:.2%}'.format(tTMReturnOnTotalCapital17),
+                  '{:.2%}'.format(currentQuarterROE17), '{:.2%}'.format(tTMROE17),
+                  '{:.2%}'.format(currentQuarterReturnOnCommonEquity17), '{:.2%}'.format(tTMReturnOnCommonEquity17),
+                  debtRatio17,
+                  debtToEquityRatio17,
+                  debtToAssetRatio17, debtToCapitalRatio17,
+                  financialLeverage17, interestCoverage17, fixedChargeCoverageRatio17, currentRatio17, quickRatio17,
+                  cashRatio17,
+                  payoutRatio17, retentionRateB17, sustainableGrowthRate17, inventoryTurnoverRatio17,
+                  daysOfInventoryOnHand17,
+                  recievablesTurnover17,
+                  daysOfSalesOutstanding17, payablesTurnover17, numberOfDaysOfPayables17, workingCapitalTurnover17,
+                  fixedAssetTurnover17, totalAssetTurnover17]
+
+    tStatsDf18 = [pE18, pCF18, pS18, pB18, pEGRatio18, '{:.2%}'.format(sustainableGrowthRate18),
+                  '{:.2%}'.format(earningsYield18),
+                  "${:,.2f}".format(basicEPS18), "${:,.2f}".format(cashFlowPerShare18),
+                  "${:,.2f}".format(ebitdaPerShare18), "${:,.2f}".format(dividendsPerShare),
+                  '{:.2%}'.format(currentQuarterGrossProfitMargin18), '{:.2%}'.format(tTMGrossProfitMargin18),
+                  '{:.2%}'.format(currentQuarterOperatingMargin18),
+                  '{:.2%}'.format(tTMOperatingMargin18), '{:.2%}'.format(currentQuarterPreTaxMargin18),
+                  '{:.2%}'.format(tTMPreTaxMargin18), '{:.2%}'.format(currentQuarterNetProfitMargin18),
+                  '{:.2%}'.format(tTMNetProfitMargin18), '{:.2%}'.format(currentQuarterOperatingROA18),
+                  '{:.2%}'.format(tTMOperatingROA18),
+                  '{:.2%}'.format(currentQuarterROA18), '{:.2%}'.format(tTMROA18),
+                  '{:.2%}'.format(currentQuarterReturnOnTotalCapital18), '{:.2%}'.format(tTMReturnOnTotalCapital18),
+                  '{:.2%}'.format(currentQuarterROE18), '{:.2%}'.format(tTMROE18),
+                  '{:.2%}'.format(currentQuarterReturnOnCommonEquity18), '{:.2%}'.format(tTMReturnOnCommonEquity18),
+                  debtRatio18,
+                  debtToEquityRatio18,
+                  debtToAssetRatio18, debtToCapitalRatio18,
+                  financialLeverage18, interestCoverage18, fixedChargeCoverageRatio18, currentRatio18, quickRatio18,
+                  cashRatio18,
+                  payoutRatio18, retentionRateB18, sustainableGrowthRate18, inventoryTurnoverRatio18,
+                  daysOfInventoryOnHand18,
+                  recievablesTurnover18,
+                  daysOfSalesOutstanding18, payablesTurnover18, numberOfDaysOfPayables18, workingCapitalTurnover18,
+                  fixedAssetTurnover18, totalAssetTurnover18]
+
+    tStatsDf19 = [pE19, pCF19, pS19, pB19, pEGRatio19, '{:.2%}'.format(sustainableGrowthRate19),
+                  '{:.2%}'.format(earningsYield19),
+                  "${:,.2f}".format(basicEPS19), "${:,.2f}".format(cashFlowPerShare19),
+                  "${:,.2f}".format(ebitdaPerShare19), "${:,.2f}".format(dividendsPerShare),
+                  '{:.2%}'.format(currentQuarterGrossProfitMargin19), '{:.2%}'.format(tTMGrossProfitMargin19),
+                  '{:.2%}'.format(currentQuarterOperatingMargin19),
+                  '{:.2%}'.format(tTMOperatingMargin19), '{:.2%}'.format(currentQuarterPreTaxMargin19),
+                  '{:.2%}'.format(tTMPreTaxMargin19), '{:.2%}'.format(currentQuarterNetProfitMargin19),
+                  '{:.2%}'.format(tTMNetProfitMargin19), '{:.2%}'.format(currentQuarterOperatingROA19),
+                  '{:.2%}'.format(tTMOperatingROA19),
+                  '{:.2%}'.format(currentQuarterROA19), '{:.2%}'.format(tTMROA19),
+                  '{:.2%}'.format(currentQuarterReturnOnTotalCapital19), '{:.2%}'.format(tTMReturnOnTotalCapital19),
+                  '{:.2%}'.format(currentQuarterROE19), '{:.2%}'.format(tTMROE19),
+                  '{:.2%}'.format(currentQuarterReturnOnCommonEquity19), '{:.2%}'.format(tTMReturnOnCommonEquity19),
+                  debtRatio19,
+                  debtToEquityRatio19,
+                  debtToAssetRatio19, debtToCapitalRatio19,
+                  financialLeverage19, interestCoverage19, fixedChargeCoverageRatio19, currentRatio19, quickRatio19,
+                  cashRatio19,
+                  payoutRatio19, retentionRateB19, sustainableGrowthRate19, inventoryTurnoverRatio19,
+                  daysOfInventoryOnHand19,
+                  recievablesTurnover19,
+                  daysOfSalesOutstanding19, payablesTurnover19, numberOfDaysOfPayables19, workingCapitalTurnover19,
+                  fixedAssetTurnover19, totalAssetTurnover19]
+
+    masterStatsDf = pd.DataFrame(tStatsDf,index=statsDfIndexNames)
+    masterStatsDf1 = pd.DataFrame(tStatsDf1, index=statsDfIndexNames)
+    masterStatsDf2 = pd.DataFrame(tStatsDf2, index=statsDfIndexNames)
+    masterStatsDf3 = pd.DataFrame(tStatsDf3, index=statsDfIndexNames)
+    masterStatsDf4 = pd.DataFrame(tStatsDf4, index=statsDfIndexNames)
+    masterStatsDf5 = pd.DataFrame(tStatsDf5, index=statsDfIndexNames)
+    masterStatsDf6 = pd.DataFrame(tStatsDf6, index=statsDfIndexNames)
+    masterStatsDf7 = pd.DataFrame(tStatsDf7, index=statsDfIndexNames)
+    masterStatsDf8 = pd.DataFrame(tStatsDf8, index=statsDfIndexNames)
+    masterStatsDf9 = pd.DataFrame(tStatsDf9, index=statsDfIndexNames)
+    masterStatsDf10 = pd.DataFrame(tStatsDf10, index=statsDfIndexNames)
+    masterStatsDf11 = pd.DataFrame(tStatsDf11, index=statsDfIndexNames)
+    masterStatsDf12 = pd.DataFrame(tStatsDf12, index=statsDfIndexNames)
+    masterStatsDf13 = pd.DataFrame(tStatsDf13, index=statsDfIndexNames)
+    masterStatsDf14 = pd.DataFrame(tStatsDf14, index=statsDfIndexNames)
+    masterStatsDf15 = pd.DataFrame(tStatsDf15, index=statsDfIndexNames)
+    masterStatsDf16 = pd.DataFrame(tStatsDf16, index=statsDfIndexNames)
+    masterStatsDf17 = pd.DataFrame(tStatsDf17, index=statsDfIndexNames)
+    masterStatsDf18 = pd.DataFrame(tStatsDf18, index=statsDfIndexNames)
+    masterStatsDf19 = pd.DataFrame(tStatsDf19, index=statsDfIndexNames)
+    # masterStatsDf = pd.DataFrame(tStatsDf, tStatsDf1, tStatsDf2, tStatsDf3, tStatsDf4, tStatsDf5, tStatsDf6, tStatsDf7, tStatsDf8, tStatsDf9,
+    #                             tStatsDf10, tStatsDf11, tStatsDf12, tStatsDf13, tStatsDf14, tStatsDf15, tStatsDf16, tStatsDf18, tStatsDf19, index=statsDfIndexNames)
+    masterStatsDf = pd.concat(
+        [masterStatsDf19, masterStatsDf18, masterStatsDf17, masterStatsDf16, masterStatsDf15, masterStatsDf14,
+         masterStatsDf13, masterStatsDf12, masterStatsDf11, masterStatsDf10,
+         masterStatsDf9, masterStatsDf8, masterStatsDf7, masterStatsDf6, masterStatsDf5, masterStatsDf4, masterStatsDf3,
+         masterStatsDf2, masterStatsDf1, masterStatsDf], axis=1)
+    masterStatsDf.columns = ['tm19', 'tm18', 'tm17', 'tm16', 'tm15', 'tm14', 'tm13', 'tm12', 'tm11', 'tm10', 'tm9', 'tm8', 'tm7', 'tm6', 'tm5', 'tm4', 'tm3', 'tm2', 'tm1', 't']
+
+    dilutedEPS = np.nan
+    dilutedEPS1 = np.nan
+    dilutedEPS2 = np.nan
+    dilutedEPS3 = np.nan
+    dilutedEPS4 = np.nan
+    dilutedEPS5 = np.nan
+    dilutedEPS6 = np.nan
+    dilutedEPS7 = np.nan
+    dilutedEPS8 = np.nan
+    dilutedEPS9 = np.nan
+    dilutedEPS10 = np.nan
+    dilutedEPS11 = np.nan
+    dilutedEPS12 = np.nan
+    dilutedEPS13 = np.nan
+    dilutedEPS14 = np.nan
+    dilutedEPS15 = np.nan
+    dilutedEPS16 = np.nan
+    dilutedEPS17 = np.nan
+    dilutedEPS18 = np.nan
+    dilutedEPS19 = np.nan
+
+    context = {"pE": pE,
+               "pCF": pCF,
+               "pS": pS,
+               "pB": pB,
+               "pEGRatio": pEGRatio,
+               "earningsYield": earningsYield,
+
+               "basicEPS": basicEPS,
+               "dilutedEps": dilutedEPS,
+               "cashFlowPerShare": cashFlowPerShare,
+               "ebitdaPerShare": ebitdaPerShare,
+               "dividendsPerShare": dividendsPerShare,
+
+               "currentQuarterGrossProfitMargin": currentQuarterGrossProfitMargin,
+               "tTMGrossProfitMargin": tTMGrossProfitMargin,
+               "currentQuarterOperatingMargin": currentQuarterOperatingMargin,
+               "tTMOperatingMargin": tTMOperatingMargin,
+               "currentQuarterPreTaxMargin": currentQuarterPreTaxMargin,
+               "tTMPreTaxMargin": tTMPreTaxMargin,
+               "currentQuarterNetProfitMargin": currentQuarterNetProfitMargin,
+               "tTMNetProfitMargin": tTMNetProfitMargin,
+
+               "currentQuarterOperatingROA": currentQuarterOperatingROA,
+               "tTMOperatingROA": tTMOperatingROA,
+               "currentQuarterROA": currentQuarterROA,
+               "tTMROA": tTMROA,
+               "currentQuarterReturnOnTotalCapital": currentQuarterReturnOnTotalCapital,
+               "tTMReturnOnTotalCapital": tTMReturnOnTotalCapital,
+               "currentQuarterROE": currentQuarterROE,
+               "tTMROE": tTMROE,
+               "currentQuarterReturnOnCommonEquity": currentQuarterReturnOnCommonEquity,
+               "tTMReturnOnCommonEquity": tTMReturnOnCommonEquity,
+
+               "debtRatio": debtRatio,
+               "debtToEquityRatio": debtToEquityRatio,
+               "debtToAssetRatio": debtToAssetRatio,
+               "debtToCapitalRatio": debtToCapitalRatio,
+               "financialLeverage": financialLeverage,
+               "interestCoverage": interestCoverage,
+               "fixedChargeCoverageRatio": fixedChargeCoverageRatio,
+
+               "currentRatio": currentRatio,
+               "quickRatio": quickRatio,
+               "cashRatio": cashRatio,
+
+               "payoutRatio": payoutRatio,
+               "retentionRateB": retentionRateB,
+               "sustainableGrowthRate": sustainableGrowthRate,
+
+               "inventoryTurnoverRatio": inventoryTurnoverRatio,
+               "daysOfInventoryOnHand": daysOfInventoryOnHand,
+               "recievablesTurnover": recievablesTurnover,
+               "daysOfSalesOutstanding": daysOfSalesOutstanding,
+               "payablesTurnover": payablesTurnover,
+               "numberOfDaysOfPayables": numberOfDaysOfPayables,
+               "workingCapitalTurnover": workingCapitalTurnover,
+               "fixedAssetTurnover": fixedAssetTurnover,
+               "totalAssetTurnover": totalAssetTurnover,
+
+               "pE1": pE1,
+               "pCF1": pCF1,
+               "pS1": pS1,
+               "pB1": pB1,
+               "pEGRatio1": pEGRatio1,
+               "earningsYield1": earningsYield1,
+
+               "basicEPS1": basicEPS1,
+               "dilutedEps1": dilutedEPS1,
+               "cashFlowPerShare1": cashFlowPerShare1,
+               "ebitdaPerShare1": ebitdaPerShare1,
+               "dividendsPerShare1": dividendsPerShare1,
+
+               "currentQuarterGrossProfitMargin1": currentQuarterGrossProfitMargin1,
+               "tTMGrossProfitMargin1": tTMGrossProfitMargin1,
+               "currentQuarterOperatingMargin1": currentQuarterOperatingMargin1,
+               "tTMOperatingMargin1": tTMOperatingMargin1,
+               "currentQuarterPreTaxMargin1": currentQuarterPreTaxMargin1,
+               "tTMPreTaxMargin1": tTMPreTaxMargin1,
+               "currentQuarterNetProfitMargin1": currentQuarterNetProfitMargin1,
+               "tTMNetProfitMargin1": tTMNetProfitMargin1,
+
+               "currentQuarterOperatingROA1": currentQuarterOperatingROA1,
+               "tTMOperatingROA1": tTMOperatingROA1,
+               "currentQuarterROA1": currentQuarterROA1,
+               "tTMROA1": tTMROA1,
+               "currentQuarterReturnOnTotalCapital1": currentQuarterReturnOnTotalCapital1,
+               "tTMReturnOnTotalCapital1": tTMReturnOnTotalCapital1,
+               "currentQuarterROE1": currentQuarterROE1,
+               "tTMROE1": tTMROE1,
+               "currentQuarterReturnOnCommonEquity1": currentQuarterReturnOnCommonEquity1,
+               "tTMReturnOnCommonEquity1": tTMReturnOnCommonEquity1,
+
+               "debtRatio1": debtRatio1,
+               "debtToEquityRatio1": debtToEquityRatio1,
+               "debtToAssetRatio1": debtToAssetRatio1,
+               "debtToCapitalRatio1": debtToCapitalRatio1,
+               "financialLeverage1": financialLeverage1,
+               "interestCoverage1": interestCoverage1,
+               "fixedChargeCoverageRatio1": fixedChargeCoverageRatio1,
+
+               "currentRatio1": currentRatio1,
+               "quickRatio1": quickRatio1,
+               "cashRatio1": cashRatio1,
+
+               "payoutRatio1": payoutRatio1,
+               "retentionRateB1": retentionRateB1,
+               "sustainableGrowthRate1": sustainableGrowthRate1,
+
+               "inventoryTurnoverRatio1": inventoryTurnoverRatio1,
+               "daysOfInventoryOnHand1": daysOfInventoryOnHand1,
+               "recievablesTurnover1": recievablesTurnover1,
+               "daysOfSalesOutstanding1": daysOfSalesOutstanding1,
+               "payablesTurnover1": payablesTurnover1,
+               "numberOfDaysOfPayables1": numberOfDaysOfPayables1,
+               "workingCapitalTurnover1": workingCapitalTurnover1,
+               "fixedAssetTurnover1": fixedAssetTurnover1,
+               "totalAssetTurnover1": totalAssetTurnover1,
+
+               "pE2": pE2,
+               "pCF2": pCF2,
+               "pS2": pS2,
+               "pB2": pB2,
+               "pEGRatio2": pEGRatio2,
+               "earningsYield2": earningsYield2,
+
+               "basicEPS2": basicEPS2,
+               "dilutedEps2": dilutedEPS2,
+               "cashFlowPerShare2": cashFlowPerShare2,
+               "ebitdaPerShare2": ebitdaPerShare2,
+               "dividendsPerShare2": dividendsPerShare2,
+
+               "currentQuarterGrossProfitMargin2": currentQuarterGrossProfitMargin2,
+               "tTMGrossProfitMargin2": tTMGrossProfitMargin2,
+               "currentQuarterOperatingMargin2": currentQuarterOperatingMargin2,
+               "tTMOperatingMargin2": tTMOperatingMargin2,
+               "currentQuarterPreTaxMargin2": currentQuarterPreTaxMargin2,
+               "tTMPreTaxMargin2": tTMPreTaxMargin2,
+               "currentQuarterNetProfitMargin2": currentQuarterNetProfitMargin2,
+               "tTMNetProfitMargin2": tTMNetProfitMargin2,
+
+               "currentQuarterOperatingROA2": currentQuarterOperatingROA2,
+               "tTMOperatingROA2": tTMOperatingROA2,
+               "currentQuarterROA2": currentQuarterROA2,
+               "tTMROA2": tTMROA2,
+               "currentQuarterReturnOnTotalCapital2": currentQuarterReturnOnTotalCapital2,
+               "tTMReturnOnTotalCapital2": tTMReturnOnTotalCapital2,
+               "currentQuarterROE2": currentQuarterROE2,
+               "tTMROE2": tTMROE2,
+               "currentQuarterReturnOnCommonEquity2": currentQuarterReturnOnCommonEquity2,
+               "tTMReturnOnCommonEquity2": tTMReturnOnCommonEquity2,
+
+               "debtRatio2": debtRatio2,
+               "debtToEquityRatio2": debtToEquityRatio2,
+               "debtToAssetRatio2": debtToAssetRatio2,
+               "debtToCapitalRatio2": debtToCapitalRatio2,
+               "financialLeverage2": financialLeverage2,
+               "interestCoverage2": interestCoverage2,
+               "fixedChargeCoverageRatio2": fixedChargeCoverageRatio2,
+
+               "currentRatio2": currentRatio2,
+               "quickRatio2": quickRatio2,
+               "cashRatio2": cashRatio2,
+
+               "payoutRatio2": payoutRatio2,
+               "retentionRateB2": retentionRateB2,
+               "sustainableGrowthRate2": sustainableGrowthRate2,
+
+               "inventoryTurnoverRatio2": inventoryTurnoverRatio2,
+               "daysOfInventoryOnHand2": daysOfInventoryOnHand2,
+               "recievablesTurnover2": recievablesTurnover2,
+               "daysOfSalesOutstanding2": daysOfSalesOutstanding2,
+               "payablesTurnover2": payablesTurnover2,
+               "numberOfDaysOfPayables2": numberOfDaysOfPayables2,
+               "workingCapitalTurnover2": workingCapitalTurnover2,
+               "fixedAssetTurnover2": fixedAssetTurnover2,
+               "totalAssetTurnover2": totalAssetTurnover2,
+
+               "pE3": pE3,
+               "pCF3": pCF3,
+               "pS3": pS3,
+               "pB3": pB3,
+               "pEGRatio3": pEGRatio3,
+               "earningsYield3": earningsYield3,
+
+               "basicEPS3": basicEPS3,
+               "dilutedEps3": dilutedEPS3,
+               "cashFlowPerShare3": cashFlowPerShare3,
+               "ebitdaPerShare3": ebitdaPerShare3,
+               "dividendsPerShare3": dividendsPerShare3,
+
+               "currentQuarterGrossProfitMargin3": currentQuarterGrossProfitMargin3,
+               "tTMGrossProfitMargin3": tTMGrossProfitMargin3,
+               "currentQuarterOperatingMargin3": currentQuarterOperatingMargin3,
+               "tTMOperatingMargin3": tTMOperatingMargin3,
+               "currentQuarterPreTaxMargin3": currentQuarterPreTaxMargin3,
+               "tTMPreTaxMargin3": tTMPreTaxMargin3,
+               "currentQuarterNetProfitMargin3": currentQuarterNetProfitMargin3,
+               "tTMNetProfitMargin3": tTMNetProfitMargin3,
+
+               "currentQuarterOperatingROA3": currentQuarterOperatingROA3,
+               "tTMOperatingROA3": tTMOperatingROA3,
+               "currentQuarterROA3": currentQuarterROA3,
+               "tTMROA3": tTMROA3,
+               "currentQuarterReturnOnTotalCapital3": currentQuarterReturnOnTotalCapital3,
+               "tTMReturnOnTotalCapital3": tTMReturnOnTotalCapital3,
+               "currentQuarterROE3": currentQuarterROE3,
+               "tTMROE3": tTMROE3,
+               "currentQuarterReturnOnCommonEquity3": currentQuarterReturnOnCommonEquity3,
+               "tTMReturnOnCommonEquity3": tTMReturnOnCommonEquity3,
+
+               "debtRatio3": debtRatio3,
+               "debtToEquityRatio3": debtToEquityRatio3,
+               "debtToAssetRatio3": debtToAssetRatio3,
+               "debtToCapitalRatio3": debtToCapitalRatio3,
+               "financialLeverage3": financialLeverage3,
+               "interestCoverage3": interestCoverage3,
+               "fixedChargeCoverageRatio3": fixedChargeCoverageRatio3,
+
+               "currentRatio3": currentRatio3,
+               "quickRatio3": quickRatio3,
+               "cashRatio3": cashRatio3,
+
+               "payoutRatio3": payoutRatio3,
+               "retentionRateB3": retentionRateB3,
+               "sustainableGrowthRate3": sustainableGrowthRate3,
+
+               "inventoryTurnoverRatio3": inventoryTurnoverRatio3,
+               "daysOfInventoryOnHand3": daysOfInventoryOnHand3,
+               "recievablesTurnover3": recievablesTurnover3,
+               "daysOfSalesOutstanding3": daysOfSalesOutstanding3,
+               "payablesTurnover3": payablesTurnover3,
+               "numberOfDaysOfPayables3": numberOfDaysOfPayables3,
+               "workingCapitalTurnover3": workingCapitalTurnover3,
+               "fixedAssetTurnover3": fixedAssetTurnover3,
+               "totalAssetTurnover3": totalAssetTurnover3,
+
+               "pE4": pE4,
+               "pCF4": pCF4,
+               "pS4": pS4,
+               "pB4": pB4,
+               "pEGRatio4": pEGRatio4,
+               "earningsYield4": earningsYield4,
+
+               "basicEPS4": basicEPS4,
+               "dilutedEps4": dilutedEPS4,
+               "cashFlowPerShare4": cashFlowPerShare4,
+               "ebitdaPerShare4": ebitdaPerShare4,
+               "dividendsPerShare4": dividendsPerShare4,
+
+               "currentQuarterGrossProfitMargin4": currentQuarterGrossProfitMargin4,
+               "tTMGrossProfitMargin4": tTMGrossProfitMargin4,
+               "currentQuarterOperatingMargin4": currentQuarterOperatingMargin4,
+               "tTMOperatingMargin4": tTMOperatingMargin4,
+               "currentQuarterPreTaxMargin4": currentQuarterPreTaxMargin4,
+               "tTMPreTaxMargin4": tTMPreTaxMargin4,
+               "currentQuarterNetProfitMargin4": currentQuarterNetProfitMargin4,
+               "tTMNetProfitMargin4": tTMNetProfitMargin4,
+
+               "currentQuarterOperatingROA4": currentQuarterOperatingROA4,
+               "tTMOperatingROA4": tTMOperatingROA4,
+               "currentQuarterROA4": currentQuarterROA4,
+               "tTMROA4": tTMROA4,
+               "currentQuarterReturnOnTotalCapital4": currentQuarterReturnOnTotalCapital4,
+               "tTMReturnOnTotalCapital4": tTMReturnOnTotalCapital4,
+               "currentQuarterROE4": currentQuarterROE4,
+               "tTMROE4": tTMROE4,
+               "currentQuarterReturnOnCommonEquity4": currentQuarterReturnOnCommonEquity4,
+               "tTMReturnOnCommonEquity4": tTMReturnOnCommonEquity4,
+
+               "debtRatio4": debtRatio4,
+               "debtToEquityRatio4": debtToEquityRatio4,
+               "debtToAssetRatio4": debtToAssetRatio4,
+               "debtToCapitalRatio4": debtToCapitalRatio4,
+               "financialLeverage4": financialLeverage4,
+               "interestCoverage4": interestCoverage4,
+               "fixedChargeCoverageRatio4": fixedChargeCoverageRatio4,
+
+               "currentRatio4": currentRatio4,
+               "quickRatio4": quickRatio4,
+               "cashRatio4": cashRatio4,
+
+               "payoutRatio4": payoutRatio4,
+               "retentionRateB4": retentionRateB4,
+               "sustainableGrowthRate4": sustainableGrowthRate4,
+
+               "inventoryTurnoverRatio4": inventoryTurnoverRatio4,
+               "daysOfInventoryOnHand4": daysOfInventoryOnHand4,
+               "recievablesTurnover4": recievablesTurnover4,
+               "daysOfSalesOutstanding4": daysOfSalesOutstanding4,
+               "payablesTurnover4": payablesTurnover4,
+               "numberOfDaysOfPayables4": numberOfDaysOfPayables4,
+               "workingCapitalTurnover4": workingCapitalTurnover4,
+               "fixedAssetTurnover4": fixedAssetTurnover4,
+               "totalAssetTurnover4": totalAssetTurnover4,
+
+               "pE5": pE5,
+               "pCF5": pCF5,
+               "pS5": pS5,
+               "pB5": pB5,
+               "pEGRatio5": pEGRatio5,
+               "earningsYield5": earningsYield5,
+
+               "basicEPS5": basicEPS5,
+               "dilutedEps5": dilutedEPS5,
+               "cashFlowPerShare5": cashFlowPerShare5,
+               "ebitdaPerShare5": ebitdaPerShare5,
+               "dividendsPerShare5": dividendsPerShare5,
+
+               "currentQuarterGrossProfitMargin5": currentQuarterGrossProfitMargin5,
+               "tTMGrossProfitMargin5": tTMGrossProfitMargin5,
+               "currentQuarterOperatingMargin5": currentQuarterOperatingMargin5,
+               "tTMOperatingMargin5": tTMOperatingMargin5,
+               "currentQuarterPreTaxMargin5": currentQuarterPreTaxMargin5,
+               "tTMPreTaxMargin5": tTMPreTaxMargin5,
+               "currentQuarterNetProfitMargin5": currentQuarterNetProfitMargin5,
+               "tTMNetProfitMargin5": tTMNetProfitMargin5,
+
+               "currentQuarterOperatingROA5": currentQuarterOperatingROA5,
+               "tTMOperatingROA5": tTMOperatingROA5,
+               "currentQuarterROA5": currentQuarterROA5,
+               "tTMROA5": tTMROA5,
+               "currentQuarterReturnOnTotalCapital5": currentQuarterReturnOnTotalCapital5,
+               "tTMReturnOnTotalCapital5": tTMReturnOnTotalCapital5,
+               "currentQuarterROE5": currentQuarterROE5,
+               "tTMROE5": tTMROE5,
+               "currentQuarterReturnOnCommonEquity5": currentQuarterReturnOnCommonEquity5,
+               "tTMReturnOnCommonEquity5": tTMReturnOnCommonEquity5,
+
+               "debtRatio5": debtRatio5,
+               "debtToEquityRatio5": debtToEquityRatio5,
+               "debtToAssetRatio5": debtToAssetRatio5,
+               "debtToCapitalRatio5": debtToCapitalRatio5,
+               "financialLeverage5": financialLeverage5,
+               "interestCoverage5": interestCoverage5,
+               "fixedChargeCoverageRatio5": fixedChargeCoverageRatio5,
+
+               "currentRatio5": currentRatio5,
+               "quickRatio5": quickRatio5,
+               "cashRatio5": cashRatio5,
+
+               "payoutRatio5": payoutRatio5,
+               "retentionRateB5": retentionRateB5,
+               "sustainableGrowthRate5": sustainableGrowthRate5,
+
+               "inventoryTurnoverRatio5": inventoryTurnoverRatio5,
+               "daysOfInventoryOnHand5": daysOfInventoryOnHand5,
+               "recievablesTurnover5": recievablesTurnover5,
+               "daysOfSalesOutstanding5": daysOfSalesOutstanding5,
+               "payablesTurnover5": payablesTurnover5,
+               "numberOfDaysOfPayables5": numberOfDaysOfPayables5,
+               "workingCapitalTurnover5": workingCapitalTurnover5,
+               "fixedAssetTurnover5": fixedAssetTurnover5,
+               "totalAssetTurnover5": totalAssetTurnover5,
+
+               "pE6": pE6,
+               "pCF6": pCF6,
+               "pS6": pS6,
+               "pB6": pB6,
+               "pEGRatio6": pEGRatio6,
+               "earningsYield6": earningsYield6,
+
+               "basicEPS6": basicEPS6,
+               "dilutedEps6": dilutedEPS6,
+               "cashFlowPerShare6": cashFlowPerShare6,
+               "ebitdaPerShare6": ebitdaPerShare6,
+               "dividendsPerShare6": dividendsPerShare6,
+
+               "currentQuarterGrossProfitMargin6": currentQuarterGrossProfitMargin6,
+               "tTMGrossProfitMargin6": tTMGrossProfitMargin6,
+               "currentQuarterOperatingMargin6": currentQuarterOperatingMargin6,
+               "tTMOperatingMargin6": tTMOperatingMargin6,
+               "currentQuarterPreTaxMargin6": currentQuarterPreTaxMargin6,
+               "tTMPreTaxMargin6": tTMPreTaxMargin6,
+               "currentQuarterNetProfitMargin6": currentQuarterNetProfitMargin6,
+               "tTMNetProfitMargin6": tTMNetProfitMargin6,
+
+               "currentQuarterOperatingROA6": currentQuarterOperatingROA6,
+               "tTMOperatingROA6": tTMOperatingROA6,
+               "currentQuarterROA6": currentQuarterROA6,
+               "tTMROA6": tTMROA6,
+               "currentQuarterReturnOnTotalCapital6": currentQuarterReturnOnTotalCapital6,
+               "tTMReturnOnTotalCapital6": tTMReturnOnTotalCapital6,
+               "currentQuarterROE6": currentQuarterROE6,
+               "tTMROE6": tTMROE6,
+               "currentQuarterReturnOnCommonEquity6": currentQuarterReturnOnCommonEquity6,
+               "tTMReturnOnCommonEquity6": tTMReturnOnCommonEquity6,
+
+               "debtRatio6": debtRatio6,
+               "debtToEquityRatio6": debtToEquityRatio6,
+               "debtToAssetRatio6": debtToAssetRatio6,
+               "debtToCapitalRatio6": debtToCapitalRatio6,
+               "financialLeverage6": financialLeverage6,
+               "interestCoverage6": interestCoverage6,
+               "fixedChargeCoverageRatio6": fixedChargeCoverageRatio6,
+
+               "currentRatio6": currentRatio6,
+               "quickRatio6": quickRatio6,
+               "cashRatio6": cashRatio6,
+
+               "payoutRatio6": payoutRatio6,
+               "retentionRateB6": retentionRateB6,
+               "sustainableGrowthRate6": sustainableGrowthRate6,
+
+               "inventoryTurnoverRatio6": inventoryTurnoverRatio6,
+               "daysOfInventoryOnHand6": daysOfInventoryOnHand6,
+               "recievablesTurnover6": recievablesTurnover6,
+               "daysOfSalesOutstanding6": daysOfSalesOutstanding6,
+               "payablesTurnover6": payablesTurnover6,
+               "numberOfDaysOfPayables6": numberOfDaysOfPayables6,
+               "workingCapitalTurnover6": workingCapitalTurnover6,
+               "fixedAssetTurnover6": fixedAssetTurnover6,
+               "totalAssetTurnover6": totalAssetTurnover6,
+
+               "pE7": pE7,
+               "pCF7": pCF7,
+               "pS7": pS7,
+               "pB7": pB7,
+               "pEGRatio7": pEGRatio7,
+               "earningsYield7": earningsYield7,
+
+               "basicEPS7": basicEPS7,
+               "dilutedEps7": dilutedEPS7,
+               "cashFlowPerShare7": cashFlowPerShare7,
+               "ebitdaPerShare7": ebitdaPerShare7,
+               "dividendsPerShare7": dividendsPerShare7,
+
+               "currentQuarterGrossProfitMargin7": currentQuarterGrossProfitMargin7,
+               "tTMGrossProfitMargin7": tTMGrossProfitMargin7,
+               "currentQuarterOperatingMargin7": currentQuarterOperatingMargin7,
+               "tTMOperatingMargin7": tTMOperatingMargin7,
+               "currentQuarterPreTaxMargin7": currentQuarterPreTaxMargin7,
+               "tTMPreTaxMargin7": tTMPreTaxMargin7,
+               "currentQuarterNetProfitMargin7": currentQuarterNetProfitMargin7,
+               "tTMNetProfitMargin7": tTMNetProfitMargin7,
+
+               "currentQuarterOperatingROA7": currentQuarterOperatingROA7,
+               "tTMOperatingROA7": tTMOperatingROA7,
+               "currentQuarterROA7": currentQuarterROA7,
+               "tTMROA7": tTMROA7,
+               "currentQuarterReturnOnTotalCapital7": currentQuarterReturnOnTotalCapital7,
+               "tTMReturnOnTotalCapital7": tTMReturnOnTotalCapital7,
+               "currentQuarterROE7": currentQuarterROE7,
+               "tTMROE7": tTMROE7,
+               "currentQuarterReturnOnCommonEquity7": currentQuarterReturnOnCommonEquity7,
+               "tTMReturnOnCommonEquity7": tTMReturnOnCommonEquity7,
+
+               "debtRatio7": debtRatio7,
+               "debtToEquityRatio7": debtToEquityRatio7,
+               "debtToAssetRatio7": debtToAssetRatio7,
+               "debtToCapitalRatio7": debtToCapitalRatio7,
+               "financialLeverage7": financialLeverage7,
+               "interestCoverage7": interestCoverage7,
+               "fixedChargeCoverageRatio7": fixedChargeCoverageRatio7,
+
+               "currentRatio7": currentRatio7,
+               "quickRatio7": quickRatio7,
+               "cashRatio7": cashRatio7,
+
+               "payoutRatio7": payoutRatio7,
+               "retentionRateB7": retentionRateB7,
+               "sustainableGrowthRate7": sustainableGrowthRate7,
+
+               "inventoryTurnoverRatio7": inventoryTurnoverRatio7,
+               "daysOfInventoryOnHand7": daysOfInventoryOnHand7,
+               "recievablesTurnover7": recievablesTurnover7,
+               "daysOfSalesOutstanding7": daysOfSalesOutstanding7,
+               "payablesTurnover7": payablesTurnover7,
+               "numberOfDaysOfPayables7": numberOfDaysOfPayables7,
+               "workingCapitalTurnover7": workingCapitalTurnover7,
+               "fixedAssetTurnover7": fixedAssetTurnover7,
+               "totalAssetTurnover7": totalAssetTurnover7,
+
+               "pE8": pE8,
+               "pCF8": pCF8,
+               "pS8": pS8,
+               "pB8": pB8,
+               "pEGRatio8": pEGRatio8,
+               "earningsYield8": earningsYield8,
+
+               "basicEPS8": basicEPS8,
+               "dilutedEps8": dilutedEPS8,
+               "cashFlowPerShare8": cashFlowPerShare8,
+               "ebitdaPerShare8": ebitdaPerShare8,
+               "dividendsPerShare8": dividendsPerShare8,
+
+               "currentQuarterGrossProfitMargin8": currentQuarterGrossProfitMargin8,
+               "tTMGrossProfitMargin8": tTMGrossProfitMargin8,
+               "currentQuarterOperatingMargin8": currentQuarterOperatingMargin8,
+               "tTMOperatingMargin8": tTMOperatingMargin8,
+               "currentQuarterPreTaxMargin8": currentQuarterPreTaxMargin8,
+               "tTMPreTaxMargin8": tTMPreTaxMargin8,
+               "currentQuarterNetProfitMargin8": currentQuarterNetProfitMargin8,
+               "tTMNetProfitMargin8": tTMNetProfitMargin8,
+
+               "currentQuarterOperatingROA8": currentQuarterOperatingROA8,
+               "tTMOperatingROA8": tTMOperatingROA8,
+               "currentQuarterROA8": currentQuarterROA8,
+               "tTMROA8": tTMROA8,
+               "currentQuarterReturnOnTotalCapital8": currentQuarterReturnOnTotalCapital8,
+               "tTMReturnOnTotalCapital8": tTMReturnOnTotalCapital8,
+               "currentQuarterROE8": currentQuarterROE8,
+               "tTMROE8": tTMROE8,
+               "currentQuarterReturnOnCommonEquity8": currentQuarterReturnOnCommonEquity8,
+               "tTMReturnOnCommonEquity8": tTMReturnOnCommonEquity8,
+
+               "debtRatio8": debtRatio8,
+               "debtToEquityRatio8": debtToEquityRatio8,
+               "debtToAssetRatio8": debtToAssetRatio8,
+               "debtToCapitalRatio8": debtToCapitalRatio8,
+               "financialLeverage8": financialLeverage8,
+               "interestCoverage8": interestCoverage8,
+               "fixedChargeCoverageRatio8": fixedChargeCoverageRatio8,
+
+               "currentRatio8": currentRatio8,
+               "quickRatio8": quickRatio8,
+               "cashRatio8": cashRatio8,
+
+               "payoutRatio8": payoutRatio8,
+               "retentionRateB8": retentionRateB8,
+               "sustainableGrowthRate8": sustainableGrowthRate8,
+
+               "inventoryTurnoverRatio8": inventoryTurnoverRatio8,
+               "daysOfInventoryOnHand8": daysOfInventoryOnHand8,
+               "recievablesTurnover8": recievablesTurnover8,
+               "daysOfSalesOutstanding8": daysOfSalesOutstanding8,
+               "payablesTurnover8": payablesTurnover8,
+               "numberOfDaysOfPayables8": numberOfDaysOfPayables8,
+               "workingCapitalTurnover8": workingCapitalTurnover8,
+               "fixedAssetTurnover8": fixedAssetTurnover8,
+               "totalAssetTurnover8": totalAssetTurnover8,
+
+               "pE9": pE9,
+               "pCF9": pCF9,
+               "pS9": pS9,
+               "pB9": pB9,
+               "pEGRatio9": pEGRatio9,
+               "earningsYield9": earningsYield9,
+
+               "basicEPS9": basicEPS9,
+               "dilutedEps9": dilutedEPS9,
+               "cashFlowPerShare9": cashFlowPerShare9,
+               "ebitdaPerShare9": ebitdaPerShare9,
+               "dividendsPerShare9": dividendsPerShare9,
+
+               "currentQuarterGrossProfitMargin9": currentQuarterGrossProfitMargin9,
+               "tTMGrossProfitMargin9": tTMGrossProfitMargin9,
+               "currentQuarterOperatingMargin9": currentQuarterOperatingMargin9,
+               "tTMOperatingMargin9": tTMOperatingMargin9,
+               "currentQuarterPreTaxMargin9": currentQuarterPreTaxMargin9,
+               "tTMPreTaxMargin9": tTMPreTaxMargin9,
+               "currentQuarterNetProfitMargin9": currentQuarterNetProfitMargin9,
+               "tTMNetProfitMargin9": tTMNetProfitMargin9,
+
+               "currentQuarterOperatingROA9": currentQuarterOperatingROA9,
+               "tTMOperatingROA9": tTMOperatingROA9,
+               "currentQuarterROA9": currentQuarterROA9,
+               "tTMROA9": tTMROA9,
+               "currentQuarterReturnOnTotalCapital9": currentQuarterReturnOnTotalCapital9,
+               "tTMReturnOnTotalCapital9": tTMReturnOnTotalCapital9,
+               "currentQuarterROE9": currentQuarterROE9,
+               "tTMROE9": tTMROE9,
+               "currentQuarterReturnOnCommonEquity9": currentQuarterReturnOnCommonEquity9,
+               "tTMReturnOnCommonEquity9": tTMReturnOnCommonEquity9,
+
+               "debtRatio9": debtRatio9,
+               "debtToEquityRatio9": debtToEquityRatio9,
+               "debtToAssetRatio9": debtToAssetRatio9,
+               "debtToCapitalRatio9": debtToCapitalRatio9,
+               "financialLeverage9": financialLeverage9,
+               "interestCoverage9": interestCoverage9,
+               "fixedChargeCoverageRatio9": fixedChargeCoverageRatio9,
+
+               "currentRatio9": currentRatio9,
+               "quickRatio9": quickRatio9,
+               "cashRatio9": cashRatio9,
+
+               "payoutRatio9": payoutRatio9,
+               "retentionRateB9": retentionRateB9,
+               "sustainableGrowthRate9": sustainableGrowthRate9,
+
+               "inventoryTurnoverRatio9": inventoryTurnoverRatio9,
+               "daysOfInventoryOnHand9": daysOfInventoryOnHand9,
+               "recievablesTurnover9": recievablesTurnover9,
+               "daysOfSalesOutstanding9": daysOfSalesOutstanding9,
+               "payablesTurnover9": payablesTurnover9,
+               "numberOfDaysOfPayables9": numberOfDaysOfPayables9,
+               "workingCapitalTurnover9": workingCapitalTurnover9,
+               "fixedAssetTurnover9": fixedAssetTurnover9,
+               "totalAssetTurnover9": totalAssetTurnover9,
+
+               "pE10": pE10,
+               "pCF10": pCF10,
+               "pS10": pS10,
+               "pB10": pB10,
+               "pEGRatio10": pEGRatio10,
+               "earningsYield10": earningsYield10,
+
+               "basicEPS10": basicEPS10,
+               "dilutedEps10": dilutedEPS10,
+               "cashFlowPerShare10": cashFlowPerShare10,
+               "ebitdaPerShare10": ebitdaPerShare10,
+               "dividendsPerShare10": dividendsPerShare10,
+
+               "currentQuarterGrossProfitMargin10": currentQuarterGrossProfitMargin10,
+               "tTMGrossProfitMargin10": tTMGrossProfitMargin10,
+               "currentQuarterOperatingMargin10": currentQuarterOperatingMargin10,
+               "tTMOperatingMargin10": tTMOperatingMargin10,
+               "currentQuarterPreTaxMargin10": currentQuarterPreTaxMargin10,
+               "tTMPreTaxMargin10": tTMPreTaxMargin10,
+               "currentQuarterNetProfitMargin10": currentQuarterNetProfitMargin10,
+               "tTMNetProfitMargin10": tTMNetProfitMargin10,
+
+               "currentQuarterOperatingROA10": currentQuarterOperatingROA10,
+               "tTMOperatingROA10": tTMOperatingROA10,
+               "currentQuarterROA10": currentQuarterROA10,
+               "tTMROA10": tTMROA10,
+               "currentQuarterReturnOnTotalCapital10": currentQuarterReturnOnTotalCapital10,
+               "tTMReturnOnTotalCapital10": tTMReturnOnTotalCapital10,
+               "currentQuarterROE10": currentQuarterROE10,
+               "tTMROE10": tTMROE10,
+               "currentQuarterReturnOnCommonEquity10": currentQuarterReturnOnCommonEquity10,
+               "tTMReturnOnCommonEquity10": tTMReturnOnCommonEquity10,
+
+               "debtRatio10": debtRatio10,
+               "debtToEquityRatio10": debtToEquityRatio10,
+               "debtToAssetRatio10": debtToAssetRatio10,
+               "debtToCapitalRatio10": debtToCapitalRatio10,
+               "financialLeverage10": financialLeverage10,
+               "interestCoverage10": interestCoverage10,
+               "fixedChargeCoverageRatio10": fixedChargeCoverageRatio10,
+
+               "currentRatio10": currentRatio10,
+               "quickRatio10": quickRatio10,
+               "cashRatio10": cashRatio10,
+
+               "payoutRatio10": payoutRatio10,
+               "retentionRateB10": retentionRateB10,
+               "sustainableGrowthRate10": sustainableGrowthRate10,
+
+               "inventoryTurnoverRatio10": inventoryTurnoverRatio10,
+               "daysOfInventoryOnHand10": daysOfInventoryOnHand10,
+               "recievablesTurnover10": recievablesTurnover10,
+               "daysOfSalesOutstanding10": daysOfSalesOutstanding10,
+               "payablesTurnover10": payablesTurnover10,
+               "numberOfDaysOfPayables10": numberOfDaysOfPayables10,
+               "workingCapitalTurnover10": workingCapitalTurnover10,
+               "fixedAssetTurnover10": fixedAssetTurnover10,
+               "totalAssetTurnover10": totalAssetTurnover10,
+
+               "pE11": pE11,
+               "pCF11": pCF11,
+               "pS11": pS11,
+               "pB11": pB11,
+               "pEGRatio11": pEGRatio11,
+               "earningsYield11": earningsYield11,
+
+               "basicEPS11": basicEPS11,
+               "dilutedEps11": dilutedEPS11,
+               "cashFlowPerShare11": cashFlowPerShare11,
+               "ebitdaPerShare11": ebitdaPerShare11,
+               "dividendsPerShare11": dividendsPerShare11,
+
+               "currentQuarterGrossProfitMargin11": currentQuarterGrossProfitMargin11,
+               "tTMGrossProfitMargin11": tTMGrossProfitMargin11,
+               "currentQuarterOperatingMargin11": currentQuarterOperatingMargin11,
+               "tTMOperatingMargin11": tTMOperatingMargin11,
+               "currentQuarterPreTaxMargin11": currentQuarterPreTaxMargin11,
+               "tTMPreTaxMargin11": tTMPreTaxMargin11,
+               "currentQuarterNetProfitMargin11": currentQuarterNetProfitMargin11,
+               "tTMNetProfitMargin11": tTMNetProfitMargin11,
+
+               "currentQuarterOperatingROA11": currentQuarterOperatingROA11,
+               "tTMOperatingROA11": tTMOperatingROA11,
+               "currentQuarterROA11": currentQuarterROA11,
+               "tTMROA11": tTMROA11,
+               "currentQuarterReturnOnTotalCapital11": currentQuarterReturnOnTotalCapital11,
+               "tTMReturnOnTotalCapital11": tTMReturnOnTotalCapital11,
+               "currentQuarterROE11": currentQuarterROE11,
+               "tTMROE11": tTMROE11,
+               "currentQuarterReturnOnCommonEquity11": currentQuarterReturnOnCommonEquity11,
+               "tTMReturnOnCommonEquity11": tTMReturnOnCommonEquity11,
+
+               "debtRatio11": debtRatio11,
+               "debtToEquityRatio11": debtToEquityRatio11,
+               "debtToAssetRatio11": debtToAssetRatio11,
+               "debtToCapitalRatio11": debtToCapitalRatio11,
+               "financialLeverage11": financialLeverage11,
+               "interestCoverage11": interestCoverage11,
+               "fixedChargeCoverageRatio11": fixedChargeCoverageRatio11,
+
+               "currentRatio11": currentRatio11,
+               "quickRatio11": quickRatio11,
+               "cashRatio11": cashRatio11,
+
+               "payoutRatio11": payoutRatio11,
+               "retentionRateB11": retentionRateB11,
+               "sustainableGrowthRate11": sustainableGrowthRate11,
+
+               "inventoryTurnoverRatio11": inventoryTurnoverRatio11,
+               "daysOfInventoryOnHand11": daysOfInventoryOnHand11,
+               "recievablesTurnover11": recievablesTurnover11,
+               "daysOfSalesOutstanding11": daysOfSalesOutstanding11,
+               "payablesTurnover11": payablesTurnover11,
+               "numberOfDaysOfPayables11": numberOfDaysOfPayables11,
+               "workingCapitalTurnover11": workingCapitalTurnover11,
+               "fixedAssetTurnover11": fixedAssetTurnover11,
+               "totalAssetTurnover11": totalAssetTurnover11,
+
+               "pE12": pE12,
+               "pCF12": pCF12,
+               "pS12": pS12,
+               "pB12": pB12,
+               "pEGRatio12": pEGRatio12,
+               "earningsYield12": earningsYield12,
+
+               "basicEPS12": basicEPS12,
+               "dilutedEps12": dilutedEPS12,
+               "cashFlowPerShare12": cashFlowPerShare12,
+               "ebitdaPerShare12": ebitdaPerShare12,
+               "dividendsPerShare12": dividendsPerShare12,
+
+               "currentQuarterGrossProfitMargin12": currentQuarterGrossProfitMargin12,
+               "tTMGrossProfitMargin12": tTMGrossProfitMargin12,
+               "currentQuarterOperatingMargin12": currentQuarterOperatingMargin12,
+               "tTMOperatingMargin12": tTMOperatingMargin12,
+               "currentQuarterPreTaxMargin12": currentQuarterPreTaxMargin12,
+               "tTMPreTaxMargin12": tTMPreTaxMargin12,
+               "currentQuarterNetProfitMargin12": currentQuarterNetProfitMargin12,
+               "tTMNetProfitMargin12": tTMNetProfitMargin12,
+
+               "currentQuarterOperatingROA12": currentQuarterOperatingROA12,
+               "tTMOperatingROA12": tTMOperatingROA12,
+               "currentQuarterROA12": currentQuarterROA12,
+               "tTMROA12": tTMROA12,
+               "currentQuarterReturnOnTotalCapital12": currentQuarterReturnOnTotalCapital12,
+               "tTMReturnOnTotalCapital12": tTMReturnOnTotalCapital12,
+               "currentQuarterROE12": currentQuarterROE12,
+               "tTMROE12": tTMROE12,
+               "currentQuarterReturnOnCommonEquity12": currentQuarterReturnOnCommonEquity12,
+               "tTMReturnOnCommonEquity12": tTMReturnOnCommonEquity12,
+
+               "debtRatio12": debtRatio12,
+               "debtToEquityRatio12": debtToEquityRatio12,
+               "debtToAssetRatio12": debtToAssetRatio12,
+               "debtToCapitalRatio12": debtToCapitalRatio12,
+               "financialLeverage12": financialLeverage12,
+               "interestCoverage12": interestCoverage12,
+               "fixedChargeCoverageRatio12": fixedChargeCoverageRatio12,
+
+               "currentRatio12": currentRatio12,
+               "quickRatio12": quickRatio12,
+               "cashRatio12": cashRatio12,
+
+               "payoutRatio12": payoutRatio12,
+               "retentionRateB12": retentionRateB12,
+               "sustainableGrowthRate12": sustainableGrowthRate12,
+
+               "inventoryTurnoverRatio12": inventoryTurnoverRatio12,
+               "daysOfInventoryOnHand12": daysOfInventoryOnHand12,
+               "recievablesTurnover12": recievablesTurnover12,
+               "daysOfSalesOutstanding12": daysOfSalesOutstanding12,
+               "payablesTurnover12": payablesTurnover12,
+               "numberOfDaysOfPayables12": numberOfDaysOfPayables12,
+               "workingCapitalTurnover12": workingCapitalTurnover12,
+               "fixedAssetTurnover12": fixedAssetTurnover12,
+               "totalAssetTurnover12": totalAssetTurnover12,
+
+               "pE13": pE13,
+               "pCF13": pCF13,
+               "pS13": pS13,
+               "pB13": pB13,
+               "pEGRatio13": pEGRatio13,
+               "earningsYield13": earningsYield13,
+
+               "basicEPS13": basicEPS13,
+               "dilutedEps13": dilutedEPS13,
+               "cashFlowPerShare13": cashFlowPerShare13,
+               "ebitdaPerShare13": ebitdaPerShare13,
+               "dividendsPerShare13": dividendsPerShare13,
+
+               "currentQuarterGrossProfitMargin13": currentQuarterGrossProfitMargin13,
+               "tTMGrossProfitMargin13": tTMGrossProfitMargin13,
+               "currentQuarterOperatingMargin13": currentQuarterOperatingMargin13,
+               "tTMOperatingMargin13": tTMOperatingMargin13,
+               "currentQuarterPreTaxMargin13": currentQuarterPreTaxMargin13,
+               "tTMPreTaxMargin13": tTMPreTaxMargin13,
+               "currentQuarterNetProfitMargin13": currentQuarterNetProfitMargin13,
+               "tTMNetProfitMargin13": tTMNetProfitMargin13,
+
+               "currentQuarterOperatingROA13": currentQuarterOperatingROA13,
+               "tTMOperatingROA13": tTMOperatingROA13,
+               "currentQuarterROA13": currentQuarterROA13,
+               "tTMROA13": tTMROA13,
+               "currentQuarterReturnOnTotalCapital13": currentQuarterReturnOnTotalCapital13,
+               "tTMReturnOnTotalCapital13": tTMReturnOnTotalCapital13,
+               "currentQuarterROE13": currentQuarterROE13,
+               "tTMROE13": tTMROE13,
+               "currentQuarterReturnOnCommonEquity13": currentQuarterReturnOnCommonEquity13,
+               "tTMReturnOnCommonEquity13": tTMReturnOnCommonEquity13,
+
+               "debtRatio13": debtRatio13,
+               "debtToEquityRatio13": debtToEquityRatio13,
+               "debtToAssetRatio13": debtToAssetRatio13,
+               "debtToCapitalRatio13": debtToCapitalRatio13,
+               "financialLeverage13": financialLeverage13,
+               "interestCoverage13": interestCoverage13,
+               "fixedChargeCoverageRatio13": fixedChargeCoverageRatio13,
+
+               "currentRatio13": currentRatio13,
+               "quickRatio13": quickRatio13,
+               "cashRatio13": cashRatio13,
+
+               "payoutRatio13": payoutRatio13,
+               "retentionRateB13": retentionRateB13,
+               "sustainableGrowthRate13": sustainableGrowthRate13,
+
+               "inventoryTurnoverRatio13": inventoryTurnoverRatio13,
+               "daysOfInventoryOnHand13": daysOfInventoryOnHand13,
+               "recievablesTurnover13": recievablesTurnover13,
+               "daysOfSalesOutstanding13": daysOfSalesOutstanding13,
+               "payablesTurnover13": payablesTurnover13,
+               "numberOfDaysOfPayables13": numberOfDaysOfPayables13,
+               "workingCapitalTurnover13": workingCapitalTurnover13,
+               "fixedAssetTurnover13": fixedAssetTurnover13,
+               "totalAssetTurnover13": totalAssetTurnover13,
+
+               "pE14": pE14,
+               "pCF14": pCF14,
+               "pS14": pS14,
+               "pB14": pB14,
+               "pEGRatio14": pEGRatio14,
+               "earningsYield14": earningsYield14,
+
+               "basicEPS14": basicEPS14,
+               "dilutedEps14": dilutedEPS14,
+               "cashFlowPerShare14": cashFlowPerShare14,
+               "ebitdaPerShare14": ebitdaPerShare14,
+               "dividendsPerShare14": dividendsPerShare14,
+
+               "currentQuarterGrossProfitMargin14": currentQuarterGrossProfitMargin14,
+               "tTMGrossProfitMargin14": tTMGrossProfitMargin14,
+               "currentQuarterOperatingMargin14": currentQuarterOperatingMargin14,
+               "tTMOperatingMargin14": tTMOperatingMargin14,
+               "currentQuarterPreTaxMargin14": currentQuarterPreTaxMargin14,
+               "tTMPreTaxMargin14": tTMPreTaxMargin14,
+               "currentQuarterNetProfitMargin14": currentQuarterNetProfitMargin14,
+               "tTMNetProfitMargin14": tTMNetProfitMargin14,
+
+               "currentQuarterOperatingROA14": currentQuarterOperatingROA14,
+               "tTMOperatingROA14": tTMOperatingROA14,
+               "currentQuarterROA14": currentQuarterROA14,
+               "tTMROA14": tTMROA14,
+               "currentQuarterReturnOnTotalCapital14": currentQuarterReturnOnTotalCapital14,
+               "tTMReturnOnTotalCapital14": tTMReturnOnTotalCapital14,
+               "currentQuarterROE14": currentQuarterROE14,
+               "tTMROE14": tTMROE14,
+               "currentQuarterReturnOnCommonEquity14": currentQuarterReturnOnCommonEquity14,
+               "tTMReturnOnCommonEquity14": tTMReturnOnCommonEquity14,
+
+               "debtRatio14": debtRatio14,
+               "debtToEquityRatio14": debtToEquityRatio14,
+               "debtToAssetRatio14": debtToAssetRatio14,
+               "debtToCapitalRatio14": debtToCapitalRatio14,
+               "financialLeverage14": financialLeverage14,
+               "interestCoverage14": interestCoverage14,
+               "fixedChargeCoverageRatio14": fixedChargeCoverageRatio14,
+
+               "currentRatio14": currentRatio14,
+               "quickRatio14": quickRatio14,
+               "cashRatio14": cashRatio14,
+
+               "payoutRatio14": payoutRatio14,
+               "retentionRateB14": retentionRateB14,
+               "sustainableGrowthRate14": sustainableGrowthRate14,
+
+               "inventoryTurnoverRatio14": inventoryTurnoverRatio14,
+               "daysOfInventoryOnHand14": daysOfInventoryOnHand14,
+               "recievablesTurnover14": recievablesTurnover14,
+               "daysOfSalesOutstanding14": daysOfSalesOutstanding14,
+               "payablesTurnover14": payablesTurnover14,
+               "numberOfDaysOfPayables14": numberOfDaysOfPayables14,
+               "workingCapitalTurnover14": workingCapitalTurnover14,
+               "fixedAssetTurnover14": fixedAssetTurnover14,
+               "totalAssetTurnover14": totalAssetTurnover14,
+
+               "pE15": pE15,
+               "pCF15": pCF15,
+               "pS15": pS15,
+               "pB15": pB15,
+               "pEGRatio15": pEGRatio15,
+               "earningsYield15": earningsYield15,
+
+               "basicEPS15": basicEPS15,
+               "dilutedEps15": dilutedEPS15,
+               "cashFlowPerShare15": cashFlowPerShare15,
+               "ebitdaPerShare15": ebitdaPerShare15,
+               "dividendsPerShare15": dividendsPerShare15,
+
+               "currentQuarterGrossProfitMargin15": currentQuarterGrossProfitMargin15,
+               "tTMGrossProfitMargin15": tTMGrossProfitMargin15,
+               "currentQuarterOperatingMargin15": currentQuarterOperatingMargin15,
+               "tTMOperatingMargin15": tTMOperatingMargin15,
+               "currentQuarterPreTaxMargin15": currentQuarterPreTaxMargin15,
+               "tTMPreTaxMargin15": tTMPreTaxMargin15,
+               "currentQuarterNetProfitMargin15": currentQuarterNetProfitMargin15,
+               "tTMNetProfitMargin15": tTMNetProfitMargin15,
+
+               "currentQuarterOperatingROA15": currentQuarterOperatingROA15,
+               "tTMOperatingROA15": tTMOperatingROA15,
+               "currentQuarterROA15": currentQuarterROA15,
+               "tTMROA15": tTMROA15,
+               "currentQuarterReturnOnTotalCapital15": currentQuarterReturnOnTotalCapital15,
+               "tTMReturnOnTotalCapital15": tTMReturnOnTotalCapital15,
+               "currentQuarterROE15": currentQuarterROE15,
+               "tTMROE15": tTMROE15,
+               "currentQuarterReturnOnCommonEquity15": currentQuarterReturnOnCommonEquity15,
+               "tTMReturnOnCommonEquity15": tTMReturnOnCommonEquity15,
+
+               "debtRatio15": debtRatio15,
+               "debtToEquityRatio15": debtToEquityRatio15,
+               "debtToAssetRatio15": debtToAssetRatio15,
+               "debtToCapitalRatio15": debtToCapitalRatio15,
+               "financialLeverage15": financialLeverage15,
+               "interestCoverage15": interestCoverage15,
+               "fixedChargeCoverageRatio15": fixedChargeCoverageRatio15,
+
+               "currentRatio15": currentRatio15,
+               "quickRatio15": quickRatio15,
+               "cashRatio15": cashRatio15,
+
+               "payoutRatio15": payoutRatio15,
+               "retentionRateB15": retentionRateB15,
+               "sustainableGrowthRate15": sustainableGrowthRate15,
+
+               "inventoryTurnoverRatio15": inventoryTurnoverRatio15,
+               "daysOfInventoryOnHand15": daysOfInventoryOnHand15,
+               "recievablesTurnover15": recievablesTurnover15,
+               "daysOfSalesOutstanding15": daysOfSalesOutstanding15,
+               "payablesTurnover15": payablesTurnover15,
+               "numberOfDaysOfPayables15": numberOfDaysOfPayables15,
+               "workingCapitalTurnover15": workingCapitalTurnover15,
+               "fixedAssetTurnover15": fixedAssetTurnover15,
+               "totalAssetTurnover15": totalAssetTurnover15,
+
+               "pE16": pE16,
+               "pCF16": pCF16,
+               "pS16": pS16,
+               "pB16": pB16,
+               "pEGRatio16": pEGRatio16,
+               "earningsYield16": earningsYield16,
+
+               "basicEPS16": basicEPS16,
+               "dilutedEps16": dilutedEPS16,
+               "cashFlowPerShare16": cashFlowPerShare16,
+               "ebitdaPerShare16": ebitdaPerShare16,
+               "dividendsPerShare16": dividendsPerShare16,
+
+               "currentQuarterGrossProfitMargin16": currentQuarterGrossProfitMargin16,
+               "tTMGrossProfitMargin16": tTMGrossProfitMargin16,
+               "currentQuarterOperatingMargin16": currentQuarterOperatingMargin16,
+               "tTMOperatingMargin16": tTMOperatingMargin16,
+               "currentQuarterPreTaxMargin16": currentQuarterPreTaxMargin16,
+               "tTMPreTaxMargin16": tTMPreTaxMargin16,
+               "currentQuarterNetProfitMargin16": currentQuarterNetProfitMargin16,
+               "tTMNetProfitMargin16": tTMNetProfitMargin16,
+
+               "currentQuarterOperatingROA16": currentQuarterOperatingROA16,
+               "tTMOperatingROA16": tTMOperatingROA16,
+               "currentQuarterROA16": currentQuarterROA16,
+               "tTMROA16": tTMROA16,
+               "currentQuarterReturnOnTotalCapital16": currentQuarterReturnOnTotalCapital16,
+               "tTMReturnOnTotalCapital16": tTMReturnOnTotalCapital16,
+               "currentQuarterROE16": currentQuarterROE16,
+               "tTMROE16": tTMROE16,
+               "currentQuarterReturnOnCommonEquity16": currentQuarterReturnOnCommonEquity16,
+               "tTMReturnOnCommonEquity16": tTMReturnOnCommonEquity16,
+
+               "debtRatio16": debtRatio16,
+               "debtToEquityRatio16": debtToEquityRatio16,
+               "debtToAssetRatio16": debtToAssetRatio16,
+               "debtToCapitalRatio16": debtToCapitalRatio16,
+               "financialLeverage16": financialLeverage16,
+               "interestCoverage16": interestCoverage16,
+               "fixedChargeCoverageRatio16": fixedChargeCoverageRatio16,
+
+               "currentRatio16": currentRatio16,
+               "quickRatio16": quickRatio16,
+               "cashRatio16": cashRatio16,
+
+               "payoutRatio16": payoutRatio16,
+               "retentionRateB16": retentionRateB16,
+               "sustainableGrowthRate16": sustainableGrowthRate16,
+
+               "inventoryTurnoverRatio16": inventoryTurnoverRatio16,
+               "daysOfInventoryOnHand16": daysOfInventoryOnHand16,
+               "recievablesTurnover16": recievablesTurnover16,
+               "daysOfSalesOutstanding16": daysOfSalesOutstanding16,
+               "payablesTurnover16": payablesTurnover16,
+               "numberOfDaysOfPayables16": numberOfDaysOfPayables16,
+               "workingCapitalTurnover16": workingCapitalTurnover16,
+               "fixedAssetTurnover16": fixedAssetTurnover16,
+               "totalAssetTurnover16": totalAssetTurnover16,
+
+               "pE17": pE17,
+               "pCF17": pCF17,
+               "pS17": pS17,
+               "pB17": pB17,
+               "pEGRatio17": pEGRatio17,
+               "earningsYield17": earningsYield17,
+
+               "basicEPS17": basicEPS17,
+               "dilutedEps17": dilutedEPS17,
+               "cashFlowPerShare17": cashFlowPerShare17,
+               "ebitdaPerShare17": ebitdaPerShare17,
+               "dividendsPerShare17": dividendsPerShare17,
+
+               "currentQuarterGrossProfitMargin17": currentQuarterGrossProfitMargin17,
+               "tTMGrossProfitMargin17": tTMGrossProfitMargin17,
+               "currentQuarterOperatingMargin17": currentQuarterOperatingMargin17,
+               "tTMOperatingMargin17": tTMOperatingMargin17,
+               "currentQuarterPreTaxMargin17": currentQuarterPreTaxMargin17,
+               "tTMPreTaxMargin17": tTMPreTaxMargin17,
+               "currentQuarterNetProfitMargin17": currentQuarterNetProfitMargin17,
+               "tTMNetProfitMargin17": tTMNetProfitMargin17,
+
+               "currentQuarterOperatingROA17": currentQuarterOperatingROA17,
+               "tTMOperatingROA17": tTMOperatingROA17,
+               "currentQuarterROA17": currentQuarterROA17,
+               "tTMROA17": tTMROA17,
+               "currentQuarterReturnOnTotalCapital17": currentQuarterReturnOnTotalCapital17,
+               "tTMReturnOnTotalCapital17": tTMReturnOnTotalCapital17,
+               "currentQuarterROE17": currentQuarterROE17,
+               "tTMROE17": tTMROE17,
+               "currentQuarterReturnOnCommonEquity17": currentQuarterReturnOnCommonEquity17,
+               "tTMReturnOnCommonEquity17": tTMReturnOnCommonEquity17,
+
+               "debtRatio17": debtRatio17,
+               "debtToEquityRatio17": debtToEquityRatio17,
+               "debtToAssetRatio17": debtToAssetRatio17,
+               "debtToCapitalRatio17": debtToCapitalRatio17,
+               "financialLeverage17": financialLeverage17,
+               "interestCoverage17": interestCoverage17,
+               "fixedChargeCoverageRatio17": fixedChargeCoverageRatio17,
+
+               "currentRatio17": currentRatio17,
+               "quickRatio17": quickRatio17,
+               "cashRatio17": cashRatio17,
+
+               "payoutRatio17": payoutRatio17,
+               "retentionRateB17": retentionRateB17,
+               "sustainableGrowthRate17": sustainableGrowthRate17,
+
+               "inventoryTurnoverRatio17": inventoryTurnoverRatio17,
+               "daysOfInventoryOnHand17": daysOfInventoryOnHand17,
+               "recievablesTurnover17": recievablesTurnover17,
+               "daysOfSalesOutstanding17": daysOfSalesOutstanding17,
+               "payablesTurnover17": payablesTurnover17,
+               "numberOfDaysOfPayables17": numberOfDaysOfPayables17,
+               "workingCapitalTurnover17": workingCapitalTurnover17,
+               "fixedAssetTurnover17": fixedAssetTurnover17,
+               "totalAssetTurnover17": totalAssetTurnover17,
+
+               "pE18": pE18,
+               "pCF18": pCF18,
+               "pS18": pS18,
+               "pB18": pB18,
+               "pEGRatio18": pEGRatio18,
+               "earningsYield18": earningsYield18,
+
+               "basicEPS18": basicEPS18,
+               "dilutedEps18": dilutedEPS18,
+               "cashFlowPerShare18": cashFlowPerShare18,
+               "ebitdaPerShare18": ebitdaPerShare18,
+               "dividendsPerShare18": dividendsPerShare18,
+
+               "currentQuarterGrossProfitMargin18": currentQuarterGrossProfitMargin18,
+               "tTMGrossProfitMargin18": tTMGrossProfitMargin18,
+               "currentQuarterOperatingMargin18": currentQuarterOperatingMargin18,
+               "tTMOperatingMargin18": tTMOperatingMargin18,
+               "currentQuarterPreTaxMargin18": currentQuarterPreTaxMargin18,
+               "tTMPreTaxMargin18": tTMPreTaxMargin18,
+               "currentQuarterNetProfitMargin18": currentQuarterNetProfitMargin18,
+               "tTMNetProfitMargin18": tTMNetProfitMargin18,
+
+               "currentQuarterOperatingROA18": currentQuarterOperatingROA18,
+               "tTMOperatingROA18": tTMOperatingROA18,
+               "currentQuarterROA18": currentQuarterROA18,
+               "tTMROA18": tTMROA18,
+               "currentQuarterReturnOnTotalCapital18": currentQuarterReturnOnTotalCapital18,
+               "tTMReturnOnTotalCapital18": tTMReturnOnTotalCapital18,
+               "currentQuarterROE18": currentQuarterROE18,
+               "tTMROE18": tTMROE18,
+               "currentQuarterReturnOnCommonEquity18": currentQuarterReturnOnCommonEquity18,
+               "tTMReturnOnCommonEquity18": tTMReturnOnCommonEquity18,
+
+               "debtRatio18": debtRatio18,
+               "debtToEquityRatio18": debtToEquityRatio18,
+               "debtToAssetRatio18": debtToAssetRatio18,
+               "debtToCapitalRatio18": debtToCapitalRatio18,
+               "financialLeverage18": financialLeverage18,
+               "interestCoverage18": interestCoverage18,
+               "fixedChargeCoverageRatio18": fixedChargeCoverageRatio18,
+
+               "currentRatio18": currentRatio18,
+               "quickRatio18": quickRatio18,
+               "cashRatio18": cashRatio18,
+
+               "payoutRatio18": payoutRatio18,
+               "retentionRateB18": retentionRateB18,
+               "sustainableGrowthRate18": sustainableGrowthRate18,
+
+               "inventoryTurnoverRatio18": inventoryTurnoverRatio18,
+               "daysOfInventoryOnHand18": daysOfInventoryOnHand18,
+               "recievablesTurnover18": recievablesTurnover18,
+               "daysOfSalesOutstanding18": daysOfSalesOutstanding18,
+               "payablesTurnover18": payablesTurnover18,
+               "numberOfDaysOfPayables18": numberOfDaysOfPayables18,
+               "workingCapitalTurnover18": workingCapitalTurnover18,
+               "fixedAssetTurnover18": fixedAssetTurnover18,
+               "totalAssetTurnover18": totalAssetTurnover18,
+
+               "pE19": pE19,
+               "pCF19": pCF19,
+               "pS19": pS19,
+               "pB19": pB19,
+               "pEGRatio19": pEGRatio19,
+               "earningsYield19": earningsYield19,
+
+               "basicEPS19": basicEPS19,
+               "dilutedEps19": dilutedEPS19,
+               "cashFlowPerShare19": cashFlowPerShare19,
+               "ebitdaPerShare19": ebitdaPerShare19,
+               "dividendsPerShare19": dividendsPerShare19,
+
+               "currentQuarterGrossProfitMargin19": currentQuarterGrossProfitMargin19,
+               "tTMGrossProfitMargin19": tTMGrossProfitMargin19,
+               "currentQuarterOperatingMargin19": currentQuarterOperatingMargin19,
+               "tTMOperatingMargin19": tTMOperatingMargin19,
+               "currentQuarterPreTaxMargin19": currentQuarterPreTaxMargin19,
+               "tTMPreTaxMargin19": tTMPreTaxMargin19,
+               "currentQuarterNetProfitMargin19": currentQuarterNetProfitMargin19,
+               "tTMNetProfitMargin19": tTMNetProfitMargin19,
+
+               "currentQuarterOperatingROA19": currentQuarterOperatingROA19,
+               "tTMOperatingROA19": tTMOperatingROA19,
+               "currentQuarterROA19": currentQuarterROA19,
+               "tTMROA19": tTMROA19,
+               "currentQuarterReturnOnTotalCapital19": currentQuarterReturnOnTotalCapital19,
+               "tTMReturnOnTotalCapital19": tTMReturnOnTotalCapital19,
+               "currentQuarterROE19": currentQuarterROE19,
+               "tTMROE19": tTMROE19,
+               "currentQuarterReturnOnCommonEquity19": currentQuarterReturnOnCommonEquity19,
+               "tTMReturnOnCommonEquity19": tTMReturnOnCommonEquity19,
+
+               "debtRatio19": debtRatio19,
+               "debtToEquityRatio19": debtToEquityRatio19,
+               "debtToAssetRatio19": debtToAssetRatio19,
+               "debtToCapitalRatio19": debtToCapitalRatio19,
+               "financialLeverage19": financialLeverage19,
+               "interestCoverage19": interestCoverage19,
+               "fixedChargeCoverageRatio19": fixedChargeCoverageRatio19,
+
+               "currentRatio19": currentRatio19,
+               "quickRatio19": quickRatio19,
+               "cashRatio19": cashRatio19,
+
+               "payoutRatio19": payoutRatio19,
+               "retentionRateB19": retentionRateB19,
+               "sustainableGrowthRate19": sustainableGrowthRate19,
+
+               "inventoryTurnoverRatio19": inventoryTurnoverRatio19,
+               "daysOfInventoryOnHand19": daysOfInventoryOnHand19,
+               "recievablesTurnover19": recievablesTurnover19,
+               "daysOfSalesOutstanding19": daysOfSalesOutstanding19,
+               "payablesTurnover19": payablesTurnover19,
+               "numberOfDaysOfPayables19": numberOfDaysOfPayables19,
+               "workingCapitalTurnover19": workingCapitalTurnover19,
+               "fixedAssetTurnover19": fixedAssetTurnover19,
+               "totalAssetTurnover19": totalAssetTurnover19,
+
+               "quote": quote,
+               #"freeCashFlowPerShareforpsm": freeCashFlowPerShareforpsm,
+               }
+
+
+    print(masterStatsDf)
 
 
 
 
-
-
-    print('-----------------------------------')
-    print('P/E =' + str(pE))
-    print('P/CF =' + str(pCF))
-    print('P/S =' + str(pS))
-    print('P/B =' + str(pB))
-    print('PEG Ratio =' + str(pEGRatio))
-    print('growthrate =' + str(sustainableGrowthRate))
-    print('Earnings Yield =' + str(earningsYield))
-    print('Basic EPS =' + str(basicEPS))
-    print('cashFlowPerShare =' + str(cashFlowPerShare))
-    print('ebitdaPerShare =' + str(ebitdaPerShare))
-    print('dividendsPerShare =' + str(dividendsPerShare))
-    print('Current Quarter Gross Profit Margin =' + str(currentQuarterGrossProfitMargin))
-    print('TTM Gross Profit Margin =' + str(tTMGrossProfitMargin))
-    print('Current Quarter Operating Margin =' + str(currentQuarterOperatingMargin))
-    print('TTM Operating Margin  =' + str(tTMOperatingMargin))
-    print('Current Quarter Pre-Tax Margin =' + str(currentQuarterPreTaxMargin))
-    print('TTM Pre-Tax Margin =' + str(tTMPreTaxMargin))
-    print('Current Quarter Net Profit Margin =' + str(currentQuarterNetProfitMargin))
-    print('TTM Net Profit Margin  =' + str(tTMNetProfitMargin))
-    print('Current Quarter Operating ROA =' + str(currentQuarterOperatingROA))
-    print('TTM Operating ROA  =' + str(tTMOperatingROA))
-    print('Current Quarter  ROA =' + str(currentQuarterROA))
-    print('TTM  ROA  =' + str(tTMROA))
-    print('Current Quarter Return On Total Capital  =' + str(currentQuarterReturnOnTotalCapital))
-    print('TTM Return On Total Capital  =' + str(tTMReturnOnTotalCapital))
-    print('Current Quarter  ROE =' + str(currentQuarterROE))
-    print('TTM  ROE  =' + str(tTMROE))
-    print('Current Quarter Return on Common Equity =' + str(currentQuarterReturnOnCommonEquity))
-    print('TTM  Return on Common Equity  =' + str(tTMReturnOnCommonEquity))
-    print('Debt Ratio  =' + str(debtRatio))
-    print('Debt to Equity Ratio  =' + str(debtToEquityRatio))
-    print('Debt to Asset Ratio  =' + str(debtToAssetRatio))
-    print('Debt to Capital Ratio  =' + str(debtToCapitalRatio))
-    print('Financial Legerage Ratio  =' + str(financialLeverage))
-    print('Fixed-Charge Coverage Ratio  =' + str(fixedChargeCoverageRatio))
-
-    print(quote)
-
-build_master('SQ')
+build_master('AAPL')
