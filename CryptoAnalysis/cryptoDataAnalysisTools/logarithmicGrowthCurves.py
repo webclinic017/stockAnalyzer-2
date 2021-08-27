@@ -5,15 +5,27 @@ import matplotlib.pyplot as plt
 import datetime as dt
 
 df = pd.read_csv('btcPriceHistory.csv')
+df2 = pd.read_csv('btcPriceHistory.csv', index_col='Date')
+#df2 = df.iloc[::-1]
+df2 = df2.sort_index()
 df = df.iloc[::-1]
 df = df[df['Value'] > 0]
 df['Date'] = pd.to_datetime(df['Date'])
 #seriesdf = pd.to_datetime(df)
 
-#series1 = seriesdf[:['2012-11-28']]
-#print(series1)
-
-print(df)
+series1 = df2.loc['2008-01-01':'2012-11-28']
+series2 = df2.loc['2012-11-28':'2016-07-09']
+series3 = df2.loc['2016-07-09':'2020-05-11']
+series4 = df2.loc['2020-05-11':]
+print(series1)
+print('---------------------')
+print(series2)
+print('---------------------')
+print(series3)
+print('---------------------')
+print(series4)
+print('---------------------')
+print(df2)
 
 
 #regression fitting
