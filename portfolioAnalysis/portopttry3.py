@@ -33,6 +33,8 @@ def optimize(tickers):
     plt.show()
     plt.savefig("covMatrix.png")
 
+
+
     # Calculating mu (eRi) for the tickers using capm returns, not historical mean returns
     mu = expected_returns.capm_return(prices)
     print(mu)
@@ -40,6 +42,8 @@ def optimize(tickers):
     mu.plot.barh(figsize=(10,6));
     plt.show()
     plt.savefig("expReturns.png")
+
+
 
     #Calculating Long only Minimum Variance Portfolio (GMVP)
     S = risk_models.CovarianceShrinkage(prices).ledoit_wolf()
@@ -55,6 +59,7 @@ def optimize(tickers):
     plt.savefig("longOnlyGMVP.png")
 
 
+
     #Calculating Long/Short Minimum Variance (GMVP)
     S = risk_models.CovarianceShrinkage(prices).ledoit_wolf()
 
@@ -67,6 +72,9 @@ def optimize(tickers):
     pd.Series(weights_min_volatility_long_short).plot.barh();
     plt.show()
     plt.savefig("longShortGMVP.png")
+
+
+
 
     # Calculating Long only Tangency Portfolio (Max Sharpe)
     S = risk_models.CovarianceShrinkage(prices).ledoit_wolf()
@@ -81,11 +89,14 @@ def optimize(tickers):
     plt.show()
     plt.savefig("longOnlyMaxSharpe.png")
 
+
+
+
     # Calculating Long/Short Tangency Portfolio (Max Sharpe)
     S = risk_models.CovarianceShrinkage(prices).ledoit_wolf()
 
     # You don't have to provide expected returns in this case
-    ef = EfficientFrontier(None, S, weight_bounds=(-1, 1))
+    ef = EfficientFrontier(mu, S, weight_bounds=(-1, 1))
     ef.max_sharpe()
     weights_max_sharpe_long_short = ef.clean_weights()
     print(weights_max_sharpe_long_short)
