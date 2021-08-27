@@ -7,6 +7,7 @@ from dataAnalyzerService.stockstatcalculations import *
 import numpy as np
 import time
 import datetime
+import yfinance as yf
 
 finnhub_client = finnhub.Client(api_key=FINNHUB_API_KEY)
 
@@ -160,6 +161,104 @@ def build_master(ticker):
     print(quarterly_statementsDump)
     # print(quarterly_statementsDumpHtml)
     # print(type(quarterly_statementsDumpHtml))
+
+    statementDate19 = quarterly_statementsDump.iloc[0][0]
+    statementDate19datetime = datetime.datetime.strptime(statementDate19, '%Y-%m-%d')
+    statementDate18 = quarterly_statementsDump.iloc[0][1]
+    statementDate18datetime = datetime.datetime.strptime(statementDate18, '%Y-%m-%d')
+    statementDate17 = quarterly_statementsDump.iloc[0][2]
+    statementDate17datetime = datetime.datetime.strptime(statementDate17, '%Y-%m-%d')
+    statementDate16 = quarterly_statementsDump.iloc[0][3]
+    statementDate16datetime = datetime.datetime.strptime(statementDate16, '%Y-%m-%d')
+    statementDate15 = quarterly_statementsDump.iloc[0][4]
+    statementDate15datetime = datetime.datetime.strptime(statementDate15, '%Y-%m-%d')
+    statementDate14 = quarterly_statementsDump.iloc[0][5]
+    statementDate14datetime = datetime.datetime.strptime(statementDate14, '%Y-%m-%d')
+    statementDate13 = quarterly_statementsDump.iloc[0][6]
+    statementDate13datetime = datetime.datetime.strptime(statementDate13, '%Y-%m-%d')
+    statementDate12 = quarterly_statementsDump.iloc[0][7]
+    statementDate12datetime = datetime.datetime.strptime(statementDate12, '%Y-%m-%d')
+    statementDate11 = quarterly_statementsDump.iloc[0][8]
+    statementDate11datetime = datetime.datetime.strptime(statementDate11, '%Y-%m-%d')
+    statementDate10 = quarterly_statementsDump.iloc[0][9]
+    statementDate10datetime = datetime.datetime.strptime(statementDate10, '%Y-%m-%d')
+    statementDate9 = quarterly_statementsDump.iloc[0][10]
+    statementDate9datetime = datetime.datetime.strptime(statementDate9, '%Y-%m-%d')
+    statementDate8 = quarterly_statementsDump.iloc[0][11]
+    statementDate8datetime = datetime.datetime.strptime(statementDate8, '%Y-%m-%d')
+    statementDate7 = quarterly_statementsDump.iloc[0][12]
+    statementDate7datetime = datetime.datetime.strptime(statementDate7, '%Y-%m-%d')
+    statementDate6 = quarterly_statementsDump.iloc[0][13]
+    statementDate6datetime = datetime.datetime.strptime(statementDate6, '%Y-%m-%d')
+    statementDate5 = quarterly_statementsDump.iloc[0][14]
+    statementDate5datetime = datetime.datetime.strptime(statementDate5, '%Y-%m-%d')
+    statementDate4 = quarterly_statementsDump.iloc[0][15]
+    statementDate4datetime = datetime.datetime.strptime(statementDate4, '%Y-%m-%d')
+    statementDate3 = quarterly_statementsDump.iloc[0][16]
+    statementDate3datetime = datetime.datetime.strptime(statementDate3, '%Y-%m-%d')
+    statementDate2 = quarterly_statementsDump.iloc[0][17]
+    statementDate2datetime = datetime.datetime.strptime(statementDate2, '%Y-%m-%d')
+    statementDate1 = quarterly_statementsDump.iloc[0][18]
+    statementDate1datetime = datetime.datetime.strptime(statementDate1, '%Y-%m-%d')
+    statementDate = quarterly_statementsDump.iloc[0][19]
+    statementDatedatetime = datetime.datetime.strptime(statementDate, '%Y-%m-%d')
+    print(statementDate19)
+    print(statementDate18)
+    print(statementDate17)
+    print(statementDate16)
+    print(statementDate15)
+    print(statementDate14)
+    print(statementDate13)
+    print(statementDate12)
+    print(statementDate11)
+    print(statementDate10)
+    print(statementDate9)
+    print(statementDate8)
+    print(statementDate7)
+    print(statementDate6)
+    print(statementDate5)
+    print(statementDate4)
+    print(statementDate3)
+    print(statementDate2)
+    print(statementDate1)
+    print(statementDate)
+
+    ohlc = yf.download(ticker, period="max")
+    #print(ohlc)
+    prices = ohlc["Adj Close"].dropna(how="all")
+    #prices.index.name = 'Date'
+    print(prices.tail())
+
+    # prices2 = pd.date(data=prices)
+    # print(prices2)
+
+    # prices.index.dt.day = pd.to_datetime(prices['Date'])
+    # r = pd.date_range(start=prices.dt.min(), end=prices.dt.max())
+    # print(r)
+
+    # for date in prices:
+    #     if (prices['Date'][i] - prices['Date'][i-1]).days == 1:
+
+
+    statementDatesList = [statementDate19, statementDate18, statementDate17, statementDate16, statementDate15, statementDate14, statementDate13, statementDate12, statementDate11, statementDate10, statementDate9, statementDate8, statementDate7, statementDate6, statementDate5, statementDate4, statementDate3, statementDate2, statementDate1, statementDate]
+    statementDatePrices = []
+
+    checkpoint = []
+
+    for i in statementDatesList:
+        if str(i) in list(prices.keys()):
+            checkpoint = prices[str(i)]
+        try:
+            statementDatePrices.append(prices[str(i)])
+        except Exception:
+            statementDatePrices.append(checkpoint)
+
+    data = [statementDatesList, statementDatePrices]
+
+    intermediate_dictionary = {'statementDatesList':statementDatesList, 'statementDatePrices':statementDatePrices}
+    df = pd.DataFrame(intermediate_dictionary)
+    print(df)
+    print(statementDatePrices)
 
     ## tm19  VARIABLES
     # Income Statement Variables for tm19
@@ -615,17 +714,17 @@ def build_master(ticker):
     weightedAvgCommShrsOutstanding19 = (
             (float(commonStockSharesOutstanding19) + float(commonStockSharesOutstanding19) + float(
                 commonStockSharesOutstanding19) + float(commonStockSharesOutstanding19)) / 4)
-    statementDate19 = quarterly_statementsDump.iloc[0][1]
-    statementDate19datetime = datetime.datetime.strptime(statementDate19, '%Y-%m-%d' )
-    print(statementDate19)
-    statementsDateUnix19 = int(time.mktime(statementDate19datetime.timetuple()))
-    print(statementsDateUnix19)
-    quoteUnformatted19request = finnhub_client.stock_candles(ticker, 'D', statementsDateUnix19, statementsDateUnix19)
-    print(quoteUnformatted19request)
+
+    # print(statementDate19)
+    # statementsDateUnix19 = int(time.mktime(statementDate19datetime.timetuple()))
+    # print(statementsDateUnix19)
+    # quoteUnformatted19request = finnhub_client.stock_candles(ticker, 'D', statementsDateUnix19, statementsDateUnix19)
+    # print(quoteUnformatted19request)
     # quoteUnformatted19df = pd.DataFrame.from_dict(quoteUnformatted19request[0])
     # print(quoteUnformatted19df)
     # quoteUnformatted19 = quoteUnformatted19df.iloc[0]
     # print(quoteUnformatted19)
+    quoteUnformatted19 = quoteUnformatted
 
     marketCap19 = calculateMarketCap(quoteUnformatted19, commonStockSharesOutstanding19)
     basicEPS19 = calculateBasicEPS(tTMnetIncome19, tTMpreferredDivs19, weightedAvgCommShrsOutstanding19)
