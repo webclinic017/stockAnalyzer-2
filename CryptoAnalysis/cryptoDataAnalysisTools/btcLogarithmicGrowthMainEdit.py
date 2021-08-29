@@ -40,11 +40,11 @@ bitcoinFullPriceHistory = df2.loc['2009-01-03':]
 epoch_1_high = series1['Value'].max()
 epoch_2_high = series2['Value'].max()
 epoch_3_high = series3['Value'].max()
-epoch_4_high = series4['Value'].max()
+#epoch_4_high = series4['Value'].max()
 
 
 print('---------------------')
-highs = [epoch_1_high, epoch_2_high, epoch_3_high, epoch_4_high]
+highs = [epoch_1_high, epoch_2_high, epoch_3_high]
 print('Highs =' + str(highs))
 print('---------------------')
 
@@ -52,11 +52,11 @@ print('---------------------')
 epoch_1_low = series1['Value'].min()
 epoch_2_low = series2['Value'].min()
 epoch_3_low = series3['Value'].min()
-epoch_4_low = series4['Value'].min()
+#epoch_4_low = series4['Value'].min()
 
 
 print('---------------------')
-lows = [epoch_1_low, epoch_2_low, epoch_3_low, epoch_4_low]
+lows = [epoch_1_low, epoch_2_low, epoch_3_low]
 print('Lows =' + str(lows))
 print('---------------------')
 
@@ -83,9 +83,9 @@ fittedyLowdata = funct(xdata, lopt[0], lopt[1])
 
 
 plt.style.use('dark_background')
-plt.loglog(daysSinceGenesis, df['Value'])
+plt.semilogy(daysSinceGenesis, df['Value'])
 
-for i in range(-6, 6):
+for i in range(-4, 6):
     #plt.plot(df['Date'], np.exp(fittedydata))
     # plt.plot(df['Date'], np.exp(fittedydata + i))
      plt.plot(daysSinceGenesis, np.exp(fittedydata+(i/2)))
@@ -93,6 +93,7 @@ for i in range(-6, 6):
 
 
 plt.ylim(bottom = 0.02)
+plt.xlim(left=0.01)
 # plt.axvline(dt.datetime(2012, 11, 28))
 # plt.axvline(dt.datetime(2016, 7, 9))
 # plt.axvline(dt.datetime(2020, 5, 11))
