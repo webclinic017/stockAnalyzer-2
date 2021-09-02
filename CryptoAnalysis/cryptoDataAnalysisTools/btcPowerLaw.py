@@ -85,7 +85,7 @@ fittedyLowdata = funct(xdata, lopt[0], lopt[1])
 plt.style.use('dark_background')
 plt.loglog(daysSinceGenesis, df['Value'])
 
-for i in range(-6, 6):
+for i in range(-5, 6):
     #plt.plot(df['Date'], np.exp(fittedydata))
     # plt.plot(df['Date'], np.exp(fittedydata + i))
      plt.plot(daysSinceGenesis, np.exp(fittedydata+(i/2)))
@@ -93,6 +93,7 @@ for i in range(-6, 6):
 
 
 plt.ylim(bottom = 0.02)
+plt.xlim(left = 50)
 # plt.axvline(dt.datetime(2012, 11, 28))
 # plt.axvline(dt.datetime(2016, 7, 9))
 # plt.axvline(dt.datetime(2020, 5, 11))

@@ -23,7 +23,7 @@ for x in myresult:
 
 
 # mycursor.execute(
-#     "CREATE TABLE ohlc (id INT AUTO_INCREMENT PRIMARY KEY, open VARCHAR(50), high VARCHAR(50), low VARCHAR(50), close VARCHAR(50), volume bigint, timestamp TIMESTAMP(6), ticker VARCHAR(10))"
+#     "CREATE TABLE spohlc (id INT AUTO_INCREMENT PRIMARY KEY, open VARCHAR(50), high VARCHAR(50), low VARCHAR(50), close VARCHAR(50), volume bigint, timestamp TIMESTAMP(6), ticker VARCHAR(10))"
 #
 # )
 
