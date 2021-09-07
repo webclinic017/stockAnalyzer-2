@@ -2,6 +2,7 @@ from dbpass import db_password
 import psycopg2
 import pandas as pd
 import mplfinance as mpf
+import plotly.graph_objects as go
 
 
 
@@ -33,7 +34,50 @@ def chartOHLC(ticker):
     print(df)
     print(len(df))
 
-    mpf.plot(df, type='candle')
+    df['111MA'] = df['close'].rolling(111).mean()
+    df['350MA'] = df['close'].rolling(350).mean()
+    df['2x350'] = 2 * df['350MA']
+
+    stmav = df['111MA'].round(2)
+    test = df['350MA'].round(2)
+    ltmav = df['2x350'].round(2)
+
+
+
+    figure = go.Figure(
+        data=[
+            go.Candlestick(
+                x=df.index,
+                open=df['open'],
+                high=df['high'],
+                low=df['low'],
+                close=df['close'],
+
+            )
+        ]
+    )
+
+    figure.add_trace(
+        go.Scatter(
+            x=df.index,
+            y=df['111MA'],
+            line=dict(color='#e74c3c'),
+            name= '111MA'
+        )
+    )
+
+    figure.add_trace(
+        go.Scatter(
+            x=df.index,
+            y=df['2x350'],
+            line=dict(color='#263238'),
+            name='2x350MA'
+        )
+    )
+    figure.update_yaxes(type="log")
+    figure.show()
+
+    #mpf.plot(df, type='candle')
 
 
 chartOHLC('MSTR')

@@ -2,12 +2,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import mplfinance as mpf
-import matplotlib.dates  as mdates
-import matplotlib.pyplot as plt
-import matplotlib.colors as mcolors
-import matplotlib.axes   as mpl_axes
-import matplotlib.figure as mpl_fig
-import finplot as fplt
+import plotly.graph_objects as go
 
 #Creating Dataframe for Historical Prices
 dfForPiCycle = pd.read_csv('btcPriceHistory1.csv', index_col='Date', thousands=',', parse_dates=True)
@@ -37,29 +32,40 @@ studiesData = [stmav, test, ltmav]
 headers = ['111MA', '350MA', '2x350']
 studies = pd.concat(studiesData, axis=1, keys = headers)
 
-dfForPiCycle = dfForPiCycle.iloc[::-1]
-print(dfForPiCycle)
+df = dfForPiCycle.iloc[::-1]
+print(df)
 
-mpf.plot(dfForPiCycle, type='candle' )
+mpf.plot(df, type='candle' )
 
-print('----------------------------------------')
+figure = go.Figure(
+    data=[
+        go.Candlestick(
+            x=df.index,
+            open=df['Open'],
+            high=df['High'],
+            low=df['Low'],
+            close=df['Close'],
 
-fig, ax = plt.subplots(figsize = (12,6))
-mpf.plot(dfForPiCycle, type='candle', returnfig=True)
-ax.plot(dfForPiCycle.index, dfForPiCycle['111MA'], color = 'blue')
-ax.plot(dfForPiCycle.index, dfForPiCycle['2x350'], color= 'red')
-ax.set_yscale('log')
+        )
+    ]
+)
 
+figure.add_trace(
+    go.Scatter(
+        x=df.index,
+        y=df['111MA'],
+        line=dict(color='#e74c3c'),
+        name='111MA'
+    )
+)
 
-plt.show()
-
-print('----------------------------------------')
-
-ax,ax2 = fplt.create_plot('ticker', rows=2)
-candles = ['Open', 'Close', 'High', 'Low']
-fplt.candlestick_ochl(candles, ax=ax)
-fplt.plot(ohlc['Date'], ohlc['Close'].rolling(25).mean(), ax=ax, legend='ma-25')
-
-#fplt.volume_ocv(ohlcdf[['Open', 'Close', 'Volume']], ax=ax.overlay())
-
-fplt.show()
+figure.add_trace(
+    go.Scatter(
+        x=df.index,
+        y=df['2x350'],
+        line=dict(color='#263238'),
+        name='2x350MA'
+    )
+)
+figure.update_yaxes(type="log")
+figure.show()
