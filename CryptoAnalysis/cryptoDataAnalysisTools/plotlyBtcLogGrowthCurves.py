@@ -1,12 +1,11 @@
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
-import mplfinance as mpf
 import plotly.graph_objects as go
+from scipy.optimize import curve_fit
 
-#Creating Dataframe for Historical Prices
-dfForPiCycle = pd.read_csv('btcPriceHistory1.csv', index_col='Date', thousands=',', parse_dates=True)
-dfForPiDate = pd.read_csv('btcPriceHistory1.csv', thousands=',', parse_dates=True)
+
+dfForPiCycle = pd.read_csv('btcHistoricalPrices9.7.21.csv', index_col='Date', thousands=',', parse_dates=True)
+dfForPiDate = pd.read_csv('btcHistoricalPrices9.7.21.csv', thousands=',', parse_dates=True)
 dfForPiCycle['Date'] = pd.to_datetime(dfForPiDate['Date'])
 print(dfForPiCycle)
 dfForPiCycle['Close']= pd.to_numeric(dfForPiCycle['Price'])
@@ -33,18 +32,31 @@ headers = ['111MA', '350MA', '2x350']
 studies = pd.concat(studiesData, axis=1, keys = headers)
 
 df = dfForPiCycle.iloc[::-1]
-print(df)
 
-#mpf.plot(df, type='candle' )
+def funct(x, p1, p2):
+    return p1*np.log(x) + p2
 
+xdata = (np.array([x+1 for x in range(len(df))]))
+#xHighsData = np.array([x+1 for x in range(len(df))])
+ydata = np.log(df['Close'])
+popt, pcov = curve_fit(funct, xdata, ydata, p0=(10.0,-10))
+fittedydata = funct(xdata, popt[0], popt[1])
+df['fittedYdata'] = fittedydata
+
+#log_x_data = np.log(x_data)
+
+log_y_data = np.log(ydata)
+
+
+
+#Plotting BTC price
 figure = go.Figure(
     data=[
-        go.Candlestick(
+        go.Scatter(
             x=df.index,
-            open=df['Open'],
-            high=df['High'],
-            low=df['Low'],
-            close=df['Close'],
+            y=df['Close'],
+            line=dict(color='#263238',width=1),
+            name='Price'
 
         )
     ]
@@ -53,43 +65,10 @@ figure = go.Figure(
 figure.add_trace(
     go.Scatter(
         x=df.index,
-        y=df['111MA'],
+        y=df['fittedYdata'],
         line=dict(color='#e74c3c',width=1),
         name='111MA'
     )
-)
-
-figure.add_trace(
-    go.Scatter(
-        x=df.index,
-        y=df['2x350'],
-        line=dict(color='#263238',width=1),
-        name='2x350MA'
-    )
-)
-
-# First Pi-Cycle Cross April 6, 2013
-figure.add_shape(type="line",
-    x0=1365231600000, y0=35, x1=1365231600000, y1=100000,
-    line=dict(color="RoyalBlue",width=1, dash='dash')
-)
-
-#Second Pi-Cycle Cross December 3, 2013
-figure.add_shape(type="line",
-    x0=1386057600000, y0=290, x1=1386057600000, y1=100000,
-    line=dict(color="RoyalBlue",width=1, dash='dash')
-)
-
-#Third Pi-Cycle Cross December 16, 2017
-figure.add_shape(type="line",
-    x0=1513411200000, y0=7000, x1=1513411200000, y1=100000,
-    line=dict(color="RoyalBlue",width=1, dash='dash')
-)
-
-#Fourth Pi-Cycle Cross April 12, 2021
-figure.add_shape(type="line",
-    x0=1618210800000, y0=46000, x1=1618210800000, y1=100000,
-    line=dict(color="RoyalBlue",width=1, dash='dash')
 )
 
 figure.update_yaxes(type="log")
