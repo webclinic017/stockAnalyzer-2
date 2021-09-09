@@ -45,8 +45,6 @@ def scrape_crypto_metrics(cryptoName):
     # driver.get(coingeckoURL)
     driver.get(coinmarketcapURL)
 
-
-
     marketCap = driver.find_element_by_css_selector('div.statsBlock:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1)')
     circulatingSupply = driver.find_element_by_css_selector('.hWTiuI > div:nth-child(2)')
     maxSupply = driver.find_element_by_css_selector('.dwCYJB > div:nth-child(2)')
@@ -89,6 +87,13 @@ def scrape_crypto_metrics(cryptoName):
     volumePast24hr = volumePast24hr.text
     marketCapRank = marketCapRank.text
     marketCapDominace = marketCapDominace.text
+    volumePast24hrToMC = (volumePast24hr / marketCap)
+
+    try:
+        fdvTOtvl = (fullyDilutedValuation / tvl)
+        print('fdvTOtvl=' + fdvTOtvl)
+    except Exception:
+        pass
     # ath = ath.text
     # ttmHigh = ttmHigh.text
     # ttmLow = ttmLow.text
@@ -100,12 +105,29 @@ def scrape_crypto_metrics(cryptoName):
     print('Past 24Hr Volume =' + volumePast24hr)
     print('Market Cap Rank =' + marketCapRank)
     print('MarketCap Dominance' + marketCapDominace)
+    print('24Hr Volume / Mkt Cap=' + volumePast24hrToMC)
     # print('All Time High =' + ath)
     # print('52 week high' + ttmHigh)
     # print('52 week low'+ ttmLow)
 
 
     driver.close()
+    driver = webdriver.Chrome('chromedriver.exe')
     driver.get(messariURL)
 
-scrape_crypto_metrics('aave')
+    inflationRate = driver.find_element_by_css_selector('#root > div > div.MuiContainer-root.jss167.MuiContainer-maxWidthXl > div > div.MuiBox-root.jss330 > div.MuiBox-root.jss404 > div.MuiGrid-root.MuiGrid-container > div:nth-child(2) > div.jss337 > div.jss343.jss437.undefined > div > div.MuiBox-root.jss438.jss346 > p:nth-child(2)')
+    inflationRate = inflationRate.text
+    print(inflationRate)
+
+    # try:
+    #     inflationRate = driver.find_element_by_css_selector('#root > div > div.MuiContainer-root.jss167.MuiContainer-maxWidthXl > div > div.MuiBox-root.jss330 > div.MuiBox-root.jss404 > div.MuiGrid-root.MuiGrid-container > div:nth-child(2) > div.jss337 > div.jss343.jss437.undefined > div > div.MuiBox-root.jss438.jss346 > p:nth-child(2)')
+    #     inflationRate = inflationRate.text
+    #     print(inflationRate)
+    # except Exception:
+    #     pass
+
+
+
+
+    driver.close()
+scrape_crypto_metrics('bitcoin')
