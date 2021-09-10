@@ -1,5 +1,5 @@
 from selenium import webdriver
-
+import numpy as np
 
 
 
@@ -56,9 +56,13 @@ def scrape_crypto_metrics(cryptoName):
     try:
         tvl = driver.find_element_by_css_selector('div.statsBlock:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1)')
         tvl = tvl.text
+
+        tvlNoFormat = volumePast24hr.replace('$', '')
+        tvlNoFormat = tvlNoFormat.replace(',', '')
         print('TVL =' + tvl)
     except Exception:
-        pass
+        tvl = np.nan
+        tvlNoFormat = np.nan
 
     try:
         MktCapToTVL = driver.find_element_by_css_selector('div.statsBlock:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1)')
@@ -87,13 +91,32 @@ def scrape_crypto_metrics(cryptoName):
     volumePast24hr = volumePast24hr.text
     marketCapRank = marketCapRank.text
     marketCapDominace = marketCapDominace.text
-    volumePast24hrToMC = (volumePast24hr / marketCap)
+
+    volNoFormat = volumePast24hr.replace('$', '')
+    volNoFormat = volNoFormat.replace(',', '')
+
+    mcNoFormat = marketCap.replace('$', '')
+    mcNoFormat = mcNoFormat.replace(',', '')
+
+    fdvNoFormat = fullyDilutedValuation.replace('$', '')
+    fdvNoFormat = fdvNoFormat.replace(',', '')
+
+    volumePast24hrToMC = (int(volNoFormat) / int(mcNoFormat))
+    print('mcNoform' + (mcNoFormat))
+    print('vol Nofomat' + volNoFormat)
+
 
     try:
-        fdvTOtvl = (fullyDilutedValuation / tvl)
+        fdvTOtvl = (int(fdvNoFormat) / int(tvlNoFormat))
         print('fdvTOtvl=' + fdvTOtvl)
     except Exception:
-        pass
+        fdvTOtvl = np.nan
+
+    try:
+        mcToTvl = (int(mcNoFormat) / int(tvlNoFormat))
+        print('fdvTOtvl=' + fdvTOtvl)
+    except Exception:
+        mcToTvl = np.nan
     # ath = ath.text
     # ttmHigh = ttmHigh.text
     # ttmLow = ttmLow.text
@@ -105,7 +128,11 @@ def scrape_crypto_metrics(cryptoName):
     print('Past 24Hr Volume =' + volumePast24hr)
     print('Market Cap Rank =' + marketCapRank)
     print('MarketCap Dominance' + marketCapDominace)
-    print('24Hr Volume / Mkt Cap=' + volumePast24hrToMC)
+    print('24Hr Volume / Mkt Cap=' + str(volumePast24hrToMC))
+
+    print('mcNoform' + (mcNoFormat))
+    print('vol Nofomat' + volNoFormat)
+
     # print('All Time High =' + ath)
     # print('52 week high' + ttmHigh)
     # print('52 week low'+ ttmLow)
@@ -115,9 +142,9 @@ def scrape_crypto_metrics(cryptoName):
     driver = webdriver.Chrome('chromedriver.exe')
     driver.get(messariURL)
 
-    inflationRate = driver.find_element_by_css_selector('#root > div > div.MuiContainer-root.jss167.MuiContainer-maxWidthXl > div > div.MuiBox-root.jss330 > div.MuiBox-root.jss404 > div.MuiGrid-root.MuiGrid-container > div:nth-child(2) > div.jss337 > div.jss343.jss437.undefined > div > div.MuiBox-root.jss438.jss346 > p:nth-child(2)')
-    inflationRate = inflationRate.text
-    print(inflationRate)
+    #inflationRate = driver.find_element_by_css_selector('#root > div > div.MuiContainer-root.jss167.MuiContainer-maxWidthXl > div > div.MuiBox-root.jss330 > div.MuiBox-root.jss404 > div.MuiGrid-root.MuiGrid-container > div:nth-child(2) > div.jss337 > div.jss343.jss437.undefined > div > div.MuiBox-root.jss438.jss346 > p:nth-child(2)')
+    #inflationRate = inflationRate.text
+    #print(inflationRate)
 
     # try:
     #     inflationRate = driver.find_element_by_css_selector('#root > div > div.MuiContainer-root.jss167.MuiContainer-maxWidthXl > div > div.MuiBox-root.jss330 > div.MuiBox-root.jss404 > div.MuiGrid-root.MuiGrid-container > div:nth-child(2) > div.jss337 > div.jss343.jss437.undefined > div > div.MuiBox-root.jss438.jss346 > p:nth-child(2)')
