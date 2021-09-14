@@ -10,7 +10,7 @@ from pypfopt import EfficientFrontier
 
 tickers = ["MSFT", "AMZN", "KO", "MA", "COST",
            "LUV", "XOM", "PFE", "JPM", "UNH",
-           "ACN", "DIS", "GILD", "F", "TSLA", "AAP", "MARA"]
+           "ACN", "DIS", "GILD", "F", "TSLA", "AAP", "MARA", "ETH-USD"]
 
 def optimize(tickers):
     #Retreive historical price data
@@ -40,6 +40,7 @@ def optimize(tickers):
     print(mu)
 
     mu.plot.barh(figsize=(10,6));
+    plt.xlabel('Expected Return for Selected Symbols')
     plt.show()
     plt.savefig("expReturns.png")
 
@@ -55,6 +56,7 @@ def optimize(tickers):
     print(weights_min_volatility_long_only)
 
     pd.Series(weights_min_volatility_long_only).plot.barh();
+    plt.xlabel('Optimal Weights for Long-Only GMVP')
     plt.show()
     plt.savefig("longOnlyGMVP.png")
 
@@ -70,6 +72,7 @@ def optimize(tickers):
     print(weights_min_volatility_long_short)
 
     pd.Series(weights_min_volatility_long_short).plot.barh();
+    plt.xlabel('Optimal Weights for Long/Short GMVP')
     plt.show()
     plt.savefig("longShortGMVP.png")
 
@@ -86,6 +89,7 @@ def optimize(tickers):
     print(weights_max_sharpe_long_only)
 
     pd.Series(weights_max_sharpe_long_only).plot.barh();
+    plt.xlabel('Optimal Weights for Long-Only Tangency Portfolio')
     plt.show()
     plt.savefig("longOnlyMaxSharpe.png")
 
@@ -102,8 +106,42 @@ def optimize(tickers):
     print(weights_max_sharpe_long_short)
 
     pd.Series(weights_max_sharpe_long_short).plot.barh();
+    plt.xlabel('Optimal Weights for Long/Short Tangency Portfolio')
     plt.show()
     plt.savefig("longShortMaxSharpe.png")
+
+
+
+    # Monte Carlo Efficient Frontier
+    n_samples = 10000
+    w = np.random.dirichlet(np.ones(len(mu)), n_samples)
+    rets = w.dot(mu)
+    stds = np.sqrt((w.T * (S @ w.T)).sum(axis=0))
+    sharpes = rets / stds
+
+    print("Sample portfolio returns:", rets)
+    print("Sample portfolio volatilities:", stds)
+
+    # Plot efficient frontier with Monte Carlo sim
+    ef = EfficientFrontier(mu, S)
+
+    fig, ax = plt.subplots()
+    plotting.plot_efficient_frontier(ef, ax=ax, show_assets=False)
+
+    # Find and plot the tangency portfolio
+    ef.max_sharpe()
+    ret_tangent, std_tangent, _ = ef.portfolio_performance()
+    ax.scatter(std_tangent, ret_tangent, marker="*", s=100, c="r", label="Max Sharpe")
+
+    # Plot random portfolios
+    ax.scatter(stds, rets, marker=".", c=sharpes, cmap="viridis_r")
+
+    # Format
+    ax.set_title("Efficient Frontier with MonteCarlo Simulation")
+    ax.legend()
+    plt.tight_layout()
+    plt.savefig("monteCarloEfficientFrontier.png")
+    plt.show()
 
 
 optimize(tickers)

@@ -12,18 +12,32 @@ def getStockPriceHistory(ticker):
     ohlc = yf.download(ticker, period="max")
     prices = ohlc["Adj Close"].dropna(how="all")
     print(prices.tail())
+    return ohlc, prices
 
-#getStockPriceHistory('AAPL')
+#ohlc, prices = getStockPriceHistory('AAPL')
 
 
 def getCryptoPriceHistory(crypto_currency, start, end):
     currency_against = 'USD'
-    ohlc = web.DataReader(f'{crypto_currency}-{currency_against}', 'yahoo', start=start, end=end)
+    ohlc = web.DataReader(f'{crypto_currency}-{currency_against}', 'yahoo', period="max")
     prices = ohlc["Adj Close"].dropna(how="all")
     print(prices)
+    return ohlc, prices
 
 
-start = '2009/01/01'
-end = date.today()
+def getPriceHistory(ticker):
+    try:
+        ohlc, prices = getStockPriceHistory(ticker)
+    except Exception:
+        print('Failed to find ticker for stock, trying crypto...')
+        try:
+            ohlc, prices = getCryptoPriceHistory(ticker)
+        except Exception:
+            print(' Both stock price history search and crypto price history search failed. Investigate issue.')
 
-getCryptoPriceHistory('BTC', start, end)
+    return ohlc, prices
+
+#start = '2009/01/01'
+#end = date.today()
+
+#getCryptoPriceHistory('BTC', start, end)
