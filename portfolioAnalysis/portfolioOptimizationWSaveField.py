@@ -25,7 +25,7 @@ def calculateCovMatrix(tickers):
     # plt.show()
 
     #Calculating Covariance Matrix, using Ledoit-Wolf shrinkage, which reduces the extreme values in the covariance matrix
-    sample_cov = risk_models.sample_cov(prices, frequency=1000)
+    sample_cov = risk_models.sample_cov(prices, frequency=252)
     print(sample_cov)
 
     # Heat Map of Cov Matrix
@@ -36,7 +36,7 @@ def calculateCovMatrix(tickers):
     plotting.plot_covariance(S, plot_correlation=True);
     plt.show(block=False)
     plt.savefig("static/app1/assets/img/covMatrix.png")
-    plt.close()
+    #plt.close()
 
 
 def calculateExpReturnsForTickers(tickers):
@@ -53,10 +53,10 @@ def calculateExpReturnsForTickers(tickers):
     plt.xlabel('Expected Return for Selected Symbols')
     plt.show(block=False)
     plt.savefig("static/app1/assets/img/expReturns.png")
-    plt.close()
+    #plt.close()
 
 
-def calculateOptWeightsForLongOnlyGMVP(tickers):
+def calculateOptWeightsForLongOnlyGMVP(tickers, saveAs):
     #Retreive historical price data
     ohlc = yf.download(tickers, period="max")
     prices = ohlc["Adj Close"].dropna(how="all")
@@ -76,11 +76,11 @@ def calculateOptWeightsForLongOnlyGMVP(tickers):
     pd.Series(weights_min_volatility_long_only).plot.barh();
     plt.xlabel('Optimal Weights for Long-Only GMVP')
     plt.show(block=False)
-    plt.savefig("longOnlyGMVP.png")
+    plt.savefig("twgPortPlots/longOnlyGMVP" + saveAs + ".png")
     #plt.close()
 
 
-def calculateOptWeightsForLongShortGMVP(tickers):
+def calculateOptWeightsForLongShortGMVP(tickers, saveAs):
     #Retreive historical price data
     ohlc = yf.download(tickers, period="max")
     prices = ohlc["Adj Close"].dropna(how="all")
@@ -98,11 +98,11 @@ def calculateOptWeightsForLongShortGMVP(tickers):
     pd.Series(weights_min_volatility_long_short).plot.barh();
     plt.xlabel('Optimal Weights for Long/Short GMVP')
     #plt.show()
-    plt.savefig("longShortGMVP.png")
+    plt.savefig("twgPortPlots/longShortGMVP" + saveAs + ".png")
     #plt.close()
 
 
-def calculateOptWeightsForLongOnlyTangencyPortfolio(tickers):
+def calculateOptWeightsForLongOnlyTangencyPortfolio(tickers, saveAs):
     #Retreive historical price data
     ohlc = yf.download(tickers, period="max")
     prices = ohlc["Adj Close"].dropna(how="all")
@@ -120,12 +120,12 @@ def calculateOptWeightsForLongOnlyTangencyPortfolio(tickers):
 
     pd.Series(weights_max_sharpe_long_only).plot.barh();
     plt.xlabel('Optimal Weights for Long-Only Tangency Portfolio')
-    plt.show()
-    plt.savefig("longOnlyMaxSharpe.png")
+    #plt.show()
+    plt.savefig("twgPortPlots/longOnlyMaxSharpe" + saveAs + ".png")
     #plt.close()
 
 
-def calculateOptWeightsForLongShortTangencyPortffolio(tickers):
+def calculateOptWeightsForLongShortTangencyPortffolio(tickers, saveAs):
     #Retreive historical price data
     ohlc = yf.download(tickers, period="max")
     prices = ohlc["Adj Close"].dropna(how="all")
@@ -143,25 +143,16 @@ def calculateOptWeightsForLongShortTangencyPortffolio(tickers):
 
     pd.Series(weights_max_sharpe_long_short).plot.barh();
     plt.xlabel('Optimal Weights for Long/Short Tangency Portfolio')
-    plt.savefig("longShortMaxSharpe.png")
-    plt.show(block=False)
+    plt.savefig("twgPortPlots/longShortMaxSharpe" + saveAs + ".png")
+    #plt.show(block=False)
     #plt.close()
 
 
-pd.set_option('display.max_rows', None)
-pd.set_option('display.max_columns', None)
-pd.set_option('display.width', None)
-
-def monteCarloEfficientFrontier(tickers):
-    # pd.set_option('display.max_rows', None)
-    # pd.set_option('display.max_columns', None)
-    # pd.set_option('display.width', None)
-
+def monteCarloEfficientFrontier(tickers, saveAs):
     #Retreive historical price data
     ohlc = yf.download(tickers, period="max")
     prices = ohlc["Adj Close"].dropna(how="all")
-    prices = prices.fillna(method='ffill', axis=0)
-    print(prices)
+    print(prices.tail())
 
     mu = expected_returns.capm_return(prices)
     S = risk_models.CovarianceShrinkage(prices).ledoit_wolf()
@@ -172,8 +163,8 @@ def monteCarloEfficientFrontier(tickers):
     stds = np.sqrt((w.T * (S @ w.T)).sum(axis=0))
     sharpes = rets / stds
 
-    # print("Sample portfolio returns:", rets)
-    # print("Sample portfolio volatilities:", stds)
+    print("Sample portfolio returns:", rets)
+    print("Sample portfolio volatilities:", stds)
 
     # Plot efficient frontier with Monte Carlo sim
     ef = EfficientFrontier(mu, S)
@@ -195,8 +186,8 @@ def monteCarloEfficientFrontier(tickers):
     ax.set_title("Efficient Frontier with MonteCarlo Simulation")
     ax.legend()
     plt.tight_layout()
-    plt.savefig("monteCarloEfficientFrontier.png")
-    plt.show(block=True)
+    plt.savefig("twgPortPlots/monteCarloEfficientFrontier" + saveAs + ".png")
+    #plt.show(block=False)
     #plt.close()
 
     std_tangent = "{:,.2f}".format(std_tangent)
@@ -208,8 +199,6 @@ def optimize(tickers):
     #Retreive historical price data
     ohlc = yf.download(tickers, period="max")
     prices = ohlc["Adj Close"].dropna(how="all")
-    btc = pd.read_csv('btcPriceHistoryCopy.csv')
-    prices['btc'] = btc.loc['Value']
     print(prices.tail())
 
 
@@ -218,7 +207,7 @@ def optimize(tickers):
     # plt.show()
 
     #Calculating Covariance Matrix, using Ledoit-Wolf shrinkage, which reduces the extreme values in the covariance matrix
-    sample_cov = risk_models.sample_cov(prices, frequency=1000)
+    sample_cov = risk_models.sample_cov(prices, frequency=252)
     print(sample_cov)
 
     # Heat Map of Cov Matrix

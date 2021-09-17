@@ -8,7 +8,7 @@ import numpy as np
 import time
 from datetime import date
 import datetime
-
+from stockstatcalculations import *
 import yfinance as yf
 
 finnhub_client = finnhub.Client(api_key=FINNHUB_API_KEY)
@@ -38,8 +38,10 @@ def automatefundamentalanalysis(ticker):
     bsData = bsr.json()
     cfData = cfr.json()
 
-    print(len(isData))
-    print(isData)
+
+
+    # print(len(isData))
+    # print(isData)
 
     print('-------------------------------------------')
     pd.set_option('display.max_rows', None)
@@ -54,7 +56,7 @@ def automatefundamentalanalysis(ticker):
         # print(current)
         # print(incomeStatementsDf)
     incomeStatements = incomeStatementsDf.iloc[:, ::-1]
-    print(incomeStatements)
+    #print(incomeStatements)
 
     #Consolidating Balance Sheets into DataFrame
     balanceSheetsDf = pd.DataFrame()
@@ -64,7 +66,7 @@ def automatefundamentalanalysis(ticker):
         # print(current)
         # print(balanceSheetsDf)
     balanceSheets = balanceSheetsDf.iloc[:, ::-1]
-    print(balanceSheets)
+    #print(balanceSheets)
 
     # Consolidating CashFlow Statements into DataFrame
     cashFlowsDf = pd.DataFrame()
@@ -74,17 +76,62 @@ def automatefundamentalanalysis(ticker):
         # print(current)
         # print(cashFlowsDf)
     cashFlows = cashFlowsDf.iloc[:, ::-1]
-    print(cashFlows)
+    #print(cashFlows)
 
     #Aggregating Statements
     isAndBsDf = incomeStatements.append(balanceSheets)
     aggregateStatement = isAndBsDf.append(cashFlows)
-    aggregateStatement.columns = ['tm19', 'tm18', 'tm17', 'tm16', 'tm15', 'tm14', 'tm13', 'tm12', 'tm11', 'tm10',
-                                         'tm9', 'tm8', 'tm7', 'tm6', 'tm5', 'tm4', 'tm3', 'tm2', 'tm1', 't']
+
+    if aggregateStatement.shape[1] == 20:
+        aggregateStatement.columns = ['tm19', 'tm18', 'tm17', 'tm16', 'tm15', 'tm14', 'tm13', 'tm12', 'tm11','tm10', 'tm9', 'tm8', 'tm7', 'tm6', 'tm5', 'tm4', 'tm3', 'tm2', 'tm1', 't']
+    elif aggregateStatement.shape[1] == 19:
+        aggregateStatement.columns = ['tm18', 'tm17', 'tm16', 'tm15', 'tm14', 'tm13', 'tm12', 'tm11', 'tm10','tm9', 'tm8', 'tm7', 'tm6', 'tm5', 'tm4', 'tm3', 'tm2', 'tm1', 't']
+    elif aggregateStatement.shape[1] == 18:
+        aggregateStatement.columns = ['tm17', 'tm16', 'tm15', 'tm14', 'tm13', 'tm12', 'tm11', 'tm10', 'tm9','tm8', 'tm7', 'tm6', 'tm5', 'tm4', 'tm3', 'tm2', 'tm1', 't']
+    elif aggregateStatement.shape[1] == 17:
+        aggregateStatement.columns = ['tm16', 'tm15', 'tm14', 'tm13', 'tm12', 'tm11', 'tm10', 'tm9', 'tm8', 'tm7','tm6', 'tm5', 'tm4', 'tm3', 'tm2', 'tm1', 't']
+    elif aggregateStatement.shape[1] == 16:
+        aggregateStatement.columns = ['tm15', 'tm14', 'tm13', 'tm12', 'tm11', 'tm10', 'tm9', 'tm8', 'tm7', 'tm6','tm5', 'tm4', 'tm3', 'tm2', 'tm1', 't']
+    elif aggregateStatement.shape[1] == 15:
+        aggregateStatement.columns = ['tm14', 'tm13', 'tm12', 'tm11', 'tm10', 'tm9', 'tm8', 'tm7', 'tm6', 'tm5','tm4', 'tm3', 'tm2', 'tm1', 't']
+    elif aggregateStatement.shape[1] == 14:
+        aggregateStatement.columns = ['tm13', 'tm12', 'tm11', 'tm10', 'tm9', 'tm8', 'tm7', 'tm6', 'tm5', 'tm4','tm3', 'tm2', 'tm1', 't']
+    elif aggregateStatement.shape[1] == 13:
+        aggregateStatement.columns = ['tm12', 'tm11', 'tm10', 'tm9', 'tm8', 'tm7', 'tm6', 'tm5', 'tm4', 'tm3','tm2', 'tm1', 't']
+    elif aggregateStatement.shape[1] == 12:
+        aggregateStatement.columns = ['tm11', 'tm10', 'tm9', 'tm8', 'tm7', 'tm6', 'tm5', 'tm4', 'tm3', 'tm2','tm1', 't']
+    elif aggregateStatement.shape[1] == 11:
+        aggregateStatement.columns = ['tm10', 'tm9', 'tm8', 'tm7', 'tm6', 'tm5', 'tm4', 'tm3', 'tm2', 'tm1', 't']
+    elif aggregateStatement.shape[1] == 10:
+        aggregateStatement.columns = ['tm9', 'tm8', 'tm7', 'tm6', 'tm5', 'tm4', 'tm3', 'tm2', 'tm1', 't']
+    elif aggregateStatement.shape[1] == 9:
+        aggregateStatement.columns = ['tm8', 'tm7', 'tm6', 'tm5', 'tm4', 'tm3', 'tm2', 'tm1', 't']
+    elif aggregateStatement.shape[1] == 8:
+        aggregateStatement.columns = ['tm7', 'tm6', 'tm5', 'tm4', 'tm3', 'tm2', 'tm1', 't']
+    elif aggregateStatement.shape[1] == 7:
+        aggregateStatement.columns = ['tm6', 'tm5', 'tm4', 'tm3', 'tm2', 'tm1', 't']
+    elif aggregateStatement.shape[1] == 6:
+        aggregateStatement.columns = ['tm5', 'tm4', 'tm3', 'tm2', 'tm1', 't']
+    elif aggregateStatement.shape[1] == 5:
+        aggregateStatement.columns = ['tm4', 'tm3', 'tm2', 'tm1', 't']
+    elif aggregateStatement.shape[1] == 4:
+        aggregateStatement.columns = ['tm3', 'tm2', 'tm1', 't']
+    elif aggregateStatement.shape[1] == 3:
+        aggregateStatement.columns = ['tm2', 'tm1', 't']
+    elif aggregateStatement.shape[1] == 2:
+        aggregateStatement.columns = ['tm1', 't']
+    elif aggregateStatement.shape[1] == 1:
+        aggregateStatement.columns = ['t']
+    else:
+        print('Length Mismatch error!')
+
+
+    # aggregateStatement.columns = ['tm19', 'tm18', 'tm17', 'tm16', 'tm15', 'tm14', 'tm13', 'tm12', 'tm11', 'tm10',
+    #                                      'tm9', 'tm8', 'tm7', 'tm6', 'tm5', 'tm4', 'tm3', 'tm2', 'tm1', 't']
 
     #Replacing None with np.Nan vals (prevent conflicts in many calcs)
     aggregateStatement.replace(to_replace=['None'], value=np.nan, inplace=True)
-    print(aggregateStatement)
+    #print(aggregateStatement)
     print(aggregateStatement.shape)
 
     #Dropping Duplicates
@@ -92,19 +139,16 @@ def automatefundamentalanalysis(ticker):
     # for i in range(len(aggregateStatement)):
     #     aggregateStatement.drop_duplicates(subset=None, keep='first', inplace=True)
 
-    print(aggregateStatement)
+    #print(aggregateStatement)
     print(aggregateStatement.shape)
 
     statementsDates = aggregateStatement.iloc[0]
-    print(statementsDates)
-    print(type(aggregateStatement.iloc[0][1]))
-
+    #print(statementsDates)
+    #print(type(aggregateStatement.iloc[0][1]))
 
     ohlc = yf.download(ticker, period="max")
     prices = ohlc["Adj Close"].dropna(how="all")
-
     statementDatePrices = []
-
     checkpoint = []
 
     for i in statementsDates:
@@ -116,7 +160,6 @@ def automatefundamentalanalysis(ticker):
             statementDatePrices.append(checkpoint)
 
     data = [statementsDates, statementDatePrices]
-
     intermediate_dictionary = {'statementsDates': statementsDates, 'statementDatePrices': statementDatePrices}
     df = pd.DataFrame(intermediate_dictionary)
     print(df)
@@ -127,7 +170,7 @@ def automatefundamentalanalysis(ticker):
         current = np.array(current)
         print(current)
         print(i)
-        print('-----------')
+        #print('-----------')
         empty = []
         if current.size == 0:
             allDates = ohlc.index
@@ -138,30 +181,60 @@ def automatefundamentalanalysis(ticker):
                 abs(test_date - date.timestamp()) : date for date in allDates
             }
             closestDate = cloz_dict[min(cloz_dict.keys())]
-            print(test_date)
-            print('Closest Date with Price =' + str(closestDate))
-            # cd = closestDate.strftime('%Y-%m-%d')
-            # print(cd)
+            #print('Test Date' + str(test_date))
+            #print('Closest Date with Price =' + str(closestDate))
+            cd = closestDate.strftime('%Y-%m-%d')
+            #print(cd)
             checkpoint = []
             for i in prices.keys():
                 if str(i) == str(closestDate):
                     checkpoint = prices[str(i)]
                     print(checkpoint)
-                    continue
+                    for i in range(len(df)):
+                        current = df.iloc[int(i)][1]
+                        print('Current = ' + str(current))
+                        current = np.array(current)
+                        if current.size == 0:
+                            df.iloc[int(i)][1] = checkpoint
+                            break
+
+            #print(statementDatePrices)
+    #print(df)
+    prices = df['statementDatePrices']
+    aggregateStatement = aggregateStatement.append(prices)
+
+    print(aggregateStatement)
+
+    statsColumns = ['tm19', 'tm18', 'tm17', 'tm16', 'tm15', 'tm14', 'tm13', 'tm12', 'tm11', 'tm10', 'tm9', 'tm8', 'tm7',
+                    'tm6', 'tm5', 'tm4', 'tm3', 'tm2', 'tm1', 't']
+    statsRows = ['priceToEarnings', 'priceToCashFlow', 'priceToSales', 'priceToBook', 'pEG', 'earningsYield',
+                 'grossProfitMargin', 'operatingProfitMargin', 'netProfitMargin', 'ttmgrossProfitMargin',
+                 'ttmoperatingProfitMargin', 'ttmnetProfitMargin', 'basicEPS', 'dilutedEPS', 'cashFlowPerShare',
+                 'eBITDAperShare', 'divPerShare', 'operatinROA', 'rOA', 'returnOnTotalCapital', 'rOE',
+                 'returnOnCommonEquity', 'debtRatio', 'debtToEquity', 'debtToAsset', 'debtToCapital',
+                 'financialLeverage', 'currentRatio', 'quickRatio', 'cashRatio', 'deffensiveInterval',
+                 'cashConversionCycle', 'interestCoverage', 'fixedChargeCoverage', 'divPayoutRatio', 'retentionRateB',
+                 'sustainableGrowthRate', 'inventoryTurnoverRatio', ' daysOfInvOnHand', 'recievablesTurnover',
+                 'daysOfSalesOutstanding', 'payableTurnover', 'numDaysofPayables', 'workingCapitalTurnover',
+                 'fixedAssetTurnover', 'totalAssetTurnover']
+
+    metricsDf = pd.DataFrame(data=np.nan, columns=statsColumns, index=statsRows)
+    print(metricsDf)
+
+    for i in range(len(metricsDf.loc['priceToEarnings'])):
+        print(metricsDf.loc['priceToEarnings'][int(i)])
 
 
-            print('-----------')
-            print('-----------')
-            #print(closestDate)
-
-    #print(ohlc)
-    #allDates = ohlc.index
-    #print(allDates)
-    #print(prices)
-
+        current1= calculatePE(quoteUnformatted, calculateBasicEPS(ttmNetIncome(aggregateStatement.loc['netIncome'][int(i)], aggregateStatement.loc['netIncome'][int(int(i)-1)], aggregateStatement.loc['netIncome'][int(int(i)-2)], aggregateStatement.loc['netIncome'][int(int(i)-3)]), calculatedWeightedAverageSharesOutstanding(aggregateStatement.loc['commonStockSharesOutstanding'][int(i)], aggregateStatement.loc['commonStockSharesOutstanding'][int(i-1)], aggregateStatement.loc['commonStockSharesOutstanding'][int(i-2)], aggregateStatement.loc['commonStockSharesOutstanding'][int(i-3)])))
+        ni = aggregateStatement.loc['netIncome'][int(i)]
+        #prefd = ttmPreferedDivs(aggregateStatement.loc['dividendPayoutPreferredStock'][int(i)],aggregateStatement.loc['dividendPayoutPreferredStock'][int(i-1)], aggregateStatement.loc['dividendPayoutPreferredStock'][int(i-2)],aggregateStatement.loc['dividendPayoutPreferredStock'][int(i-3)])
+        #print(prefd)
+        print(ni)
+        metricsDf.loc['priceToEarnings'][int(i)] = current1
+        #print('current1! = ' + str(current1))
 
 
-
+        #print(metricsDf)
 
 
 
