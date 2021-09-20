@@ -9,15 +9,124 @@ def calTtmeps(nI, nIm1, nIm2, nIm3, comShrsOutstnd, comShrsOutstndm1, comShrsOut
     ttmEps = (curmEPS + curm1EPS + curm2EPS + curm3EPS)
     return ttmEps
 
-def calTrailingPE(sharePrice, nI, nIm1, nIm2, nIm3, comShrsOutstnd, comShrsOutstndm1, comShrsOutstndm2, comShrsOutstndm3):
+def calTrailingPEandEY(sharePrice, nI, nIm1, nIm2, nIm3, comShrsOutstnd, comShrsOutstndm1, comShrsOutstndm2, comShrsOutstndm3):
     ttmweightedAvgShrs = ((float(comShrsOutstnd) + float(comShrsOutstndm1) + float(comShrsOutstndm2) + float(comShrsOutstndm3))/4)
     print('WeightedAvgShrs = ' + str(ttmweightedAvgShrs))
     ttmNetIncome = ((float(nI) + float(nIm1) + float(nIm2) + float(nIm3)))
     print( 'ttmNetIncome=' + str(ttmNetIncome))
     ttmEps = (float(ttmNetIncome)/float(ttmweightedAvgShrs))
+    basicEPS = (float(nI) / float(comShrsOutstnd))
     print( 'ttmEPS' + str(ttmEps))
     trailingPE = (float(sharePrice) / float(ttmEps))
-    return trailingPE
+    earningsYield = (float(ttmEps) / float(sharePrice))
+    return trailingPE, earningsYield, ttmEps, basicEPS
+
+def calPCF(currentPrice, opCF, opCFm1, opCFm2, opCFm3,commShrsOutst, commShrsOutstm1, commShrsOutstm2, commShrsOutstm3):
+    ttmweightedAvgShrs = ((float(commShrsOutst) + float(commShrsOutstm1) + float(commShrsOutstm2) + float(commShrsOutstm3))/4)
+    ttmOpCF = (float(opCF) + float(opCFm1) + float(opCFm2) + float(opCFm3))
+    ttmOpCFps = (ttmOpCF / ttmweightedAvgShrs)
+    cFpS = (float(opCF)/ float(commShrsOutst))
+    pCF = (currentPrice / ttmOpCFps)
+    return pCF, ttmOpCFps, cFpS
+
+def calPS(currentPrice, rev, revm1, revm2, revm3,commShrsOutst, commShrsOutstm1, commShrsOutstm2, commShrsOutstm3):
+    ttmweightedAvgShrs = ((float(commShrsOutst) + float(commShrsOutstm1) + float(commShrsOutstm2) + float(commShrsOutstm3))/4)
+    ttmRev = (float(rev) + float(revm1) + float(revm2) + float(revm3))
+    ttmSps = (ttmRev / ttmweightedAvgShrs)
+    pS = (currentPrice / ttmSps)
+    return pS
+
+def calpB(currentPrice, comEq, comShrsOutst):
+    bv = (float(comEq) / float(comShrsOutst))
+    pB = (currentPrice / bv)
+    return bv, pB
+
+
+def calCurrentMargins(rev, oI, nI, cogs):
+    gpm = ((float(rev) - float(cogs)) / float(rev))
+    opM = (float(oI) / float(rev))
+    nPM = (float(nI) / float(rev))
+    return gpm, opM, nPM
+
+def calTtmMargins(rev, revm1, revm2, revm3, oi, oim1, oim2, oim3, ni, nim1, nim2, nim3, cogs, cogsm1, cogsm2, cogsm3):
+    ttmRev = (float(rev) + float(revm1)+ float(revm2) + float(revm3))
+    ttmOI = (float(oi) + float(oim1)+ float(oim2) + float(oim3))
+    ttmNI = (float(ni) + float(nim1)+ float(nim2) + float(nim3))
+    ttmCOGS = (float(cogs) + float(cogsm1)+ float(cogsm2) + float(cogsm3))
+    ttmGPM = ((ttmRev - ttmCOGS)/ttmRev)
+    ttmOPM = (ttmOI/ttmRev)
+    ttmNPM = (ttmNI/ttmRev)
+    return ttmGPM, ttmOPM, ttmNPM
+
+
+def calTtmEBITDApS(ebitda, ebitdam1, ebitdam2, ebitdam3, commShrsOutst, commShrsOutstm1, commShrsOutstm2, commShrsOutstm3):
+    ttmweightedAvgShrs = ((float(commShrsOutst) + float(commShrsOutstm1) + float(commShrsOutstm2) + float(commShrsOutstm3))/4)
+    ttmEBITDA = (float(ebitda) + float(ebitdam1) + float(ebitdam2) + float(ebitdam3))
+    ttmEbitdaPs = (ttmEBITDA/ttmweightedAvgShrs)
+    return ttmEbitdaPs
+
+def calDivPerShare(dividendPayout, comShrsOutstanding, netIncome):
+    divPs = (float(dividendPayout) / float(comShrsOutstanding))
+    divPayoutRatio = (float(dividendPayout)/ float(netIncome))
+    retentionRateB = (1-divPayoutRatio)
+    return divPs, divPayoutRatio, retentionRateB
+
+def calReturnOns(nI, oI, tA, tAm1, tSE, tSEm1, comShrsOutstanding, dividendPayout ):
+    divPs = (float(dividendPayout) / float(comShrsOutstanding))
+    divPayoutRatio = (float(dividendPayout) / float(nI))
+    retentionRateB = (1 - divPayoutRatio)
+
+    avgAssets = ((float(tA) + float(tAm1))/2)
+    avgEquity = ((float(tSE) + float(tSEm1))/2)
+
+    roa = (float(nI) / avgAssets)
+    roe = (float(nI) / avgEquity)
+    opRoa = (float(oI) / avgAssets)
+    opRoe = (float(oI) / avgEquity)
+
+    sustainableGrowthRate = (roe * retentionRateB)
+    return roa, roe, opRoa, opRoe, divPs, divPayoutRatio, retentionRateB, sustainableGrowthRate
+
+def calBsRatios(tA, tL,tD, tSE, inv, cA, cL, cash):
+    debtToAsset = (float(tD) / float(tA))
+    debtToEquity = (float(tD) / float(tSE))
+    financialLeverage = (float(tA) / float(tSE))
+    debtToCapital = (float(tD) / (float(tD) + float(tSE)))
+    currentRatio = (float(cA) / float(cL))
+    quickRatio = ((float(cA) - float(inv))/float(cA))
+    cashRatio = (float(cash) / float(cL))
+    return debtToAsset, debtToEquity, financialLeverage, debtToCapital, currentRatio, quickRatio, cashRatio
+
+def calDefInt(currentAssets, opExp, opExpm1, opExpm2, opExpm3, noncashchgs,noncashchgsm1,noncashchgsm2,noncashchg3):
+    tTMoperatingExpenses = (float(opExp) + float(opExpm1) + float(opExpm2) + float(opExpm3))
+    tTMnonCashCharges = (float(noncashchgs) + float(noncashchgsm1) + float(noncashchgsm2) + float(noncashchg3))
+    defensiveInterval = (float(currentAssets) / ((float(tTMoperatingExpenses)-float(tTMnonCashCharges))/365))
+    return defensiveInterval
+
+
+def calCashConvCycle(inv, invm1, cogs, aR, nCS, aP):
+    avgInv = ((float(inv) + float(invm1))/2)
+    daysOfInvOutstanding = ((float(avgInv)/float(cogs))*365)
+    daysOfSalesOutstanding = ((float(aR)/float(nCS))*365)
+    daysOfPayablesOutstanding = ((float(aP))/(float(cogs)/365))
+    cashConvCycle = daysOfInvOutstanding + daysOfSalesOutstanding - daysOfPayablesOutstanding
+
+    return cashConvCycle
+
+def calculateInterestCoverageRatio(ebit, leasePayments, interestExpense):
+    fixedChargeCoverageRatio = ((float(ebit) + float(leasePayments)) / (float(interestExpense) + float(leasePayments)))
+    interestCoverageRatio = (float(ebit) / float(interestExpense))
+    return interestCoverageRatio, fixedChargeCoverageRatio
+
+def invRatios(inv, invm1, cogs):
+    avgInv = ((float(inv) + float(invm1)) / 2)
+    inventoryTurnoverRatio = (float(cogs) / avgInv)
+    daysOfInvOnHand = ((avgInv)/(float(cogs)/365))
+    return inventoryTurnoverRatio, daysOfInvOnHand
+
+
+
+
 
 
 
@@ -126,15 +235,6 @@ def calculateDividendsPerShare(dividendPayout, weightedAverageSharesOutstanding)
     dividendsPerShare = (float(dividendPayout) / weightedAverageSharesOutstanding)
     return dividendsPerShare
 
-def calculateGrossProfitMargin(totalRevenue, cogs, costofRevenue):
-    try:
-        grossProfitMargin = ((float(totalRevenue) - float(cogs)) / float(totalRevenue))
-    except Exception:
-        grossProfitMargin = ((float(totalRevenue) - float(costofRevenue)) / float(totalRevenue))
-
-    if cogs == 0:
-        grossProfitMargin = ((float(totalRevenue) - float(costofRevenue)) / float(totalRevenue))
-    return grossProfitMargin
 
 
 def calculateOperatingMargin(operatingIncome, totalRevenue):
@@ -245,9 +345,7 @@ def calculateCashRatio(cashAndCashEquivalentsAtCarryingValue, currentLiabilities
     cashRatio = (float(cashAndCashEquivalentsAtCarryingValue) / float(currentLiabilities))
     return cashRatio
 
-def calculateDefensiveInterval(currentAssets, avgDailyExpenditures):
-    defensiveInterval = (float(currentAssets) / float(avgDailyExpenditures))
-    return defensiveInterval
+
 
 # lIQUIDITY Ratios
 
@@ -259,13 +357,7 @@ def calculateInterestCoverageRatio(ebit, interestExpense):
     return interestCoverageRatio
 
 
-def calculateFixedChargeCoverage(ebit, leasePayments, interestExpense):
-    try:
-        fixedChargeCoverageRatio = (
-                    (float(ebit) + float(leasePayments)) / (float(interestExpense) + float(leasePayments)))
-    except Exception:
-        fixedChargeCoverageRatio = np.nan
-    return fixedChargeCoverageRatio
+
 
 
 

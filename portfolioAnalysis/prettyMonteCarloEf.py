@@ -12,17 +12,17 @@ from finquant.portfolio import build_portfolio
 twgGrowth = ['AMZN', 'AZO', 'HD', 'PEP', 'ALLY', 'BLK', 'BX', 'JPM', 'SCHW', 'AMGN', 'ANTM', 'BMY', 'ISRG', 'SYK', 'TMO', 'UNH', 'CAT', 'DE', 'FTV', 'LUV', 'AAPL', 'ADBE', 'ADP', 'AKAM', 'GLW', 'MSFT', 'NVDA', 'PYPL', 'V', 'SHW', 'ATVI', 'CMCSA', 'DIS', 'FB', 'GOOGL', 'NEE', 'RSP']
 growthCons = ['GOOG', 'AAPL', 'MSFT', 'NEE', 'AMZN', 'UNH', 'FTV', 'SHW', 'ADBE']
 
-twgQuantitativeMomentum = ['AZO', 'DG', 'ETSY', 'TPX', 'TSCO', 'MNST', 'USFD', 'AJG', 'MMC', 'DHR', 'WST', 'KSU', 'ODFL', 'MSI', 'ORCL', 'TTD', 'TYL', 'WORK', 'FCX', 'ATVI', 'LBRDK', 'PINS', 'ROKU', 'TMUS', 'AWK']
+twgQuantitativeMomentum = ['AZO', 'DG', 'ETSY', 'TPX', 'TSCO', 'MNST', 'USFD', 'AJG', 'MMC', 'DHR', 'WST', 'KSU', 'ODFL', 'MSI', 'ORCL', 'TTD', 'TYL', 'WORK', 'FCX', 'ATVI', 'LBRDK', 'PINS', 'ROKU', 'TMUS', 'AWK', 'BTC-USD']
 
 quantMoMoCons = ['ODFL', 'DHR', 'WST', 'AWK', 'PINS', 'TMUS', 'ETSY', 'TPX', 'TTD']
 
-twgDividendPortfolio = ['MCD', 'TGT', 'KO', 'PG', 'PM', 'WMT', 'CVX', 'AXP', 'BAC', 'BLK', 'C', 'CB', 'JPM', 'KRE', 'MET', 'ABBV', 'BMY', 'CVS', 'JNJ', 'MDT', 'UNH', 'EMR', 'LMT', 'NOC', 'PH', 'AAPl', 'CSCO', 'MSFT', 'HUM', 'CMCSA', 'VZ', 'NEE', 'SRE', 'CCI', 'SPG']
+twgDividendPortfolio = ['MCD', 'TGT', 'KO', 'PG', 'PM', 'WMT', 'CVX', 'AXP', 'BAC', 'BLK', 'C', 'CB', 'JPM', 'KRE', 'MET', 'ABBV', 'BMY', 'CVS', 'JNJ', 'MDT', 'UNH', 'EMR', 'LMT', 'NOC', 'PH', 'AAPl', 'CSCO', 'MSFT', 'HUM', 'CMCSA', 'VZ', 'NEE', 'SRE', 'CCI', 'SPG', 'BTC-USD']
 divCon = ['BAC', 'KO', 'AAPL', 'MSFT', 'TGT', 'PG', 'BYM', 'AXP', 'CVX', 'KRE']
-twgDynamic = ['APTV', 'DG', 'DHI', 'KMX', 'LULU', 'MAR', 'PDD', 'TSLA', 'CFG', 'SYF', 'INCY', 'MRNA', 'TDOC', 'LUV', 'UBER', 'URI', 'ASML', 'DOCU', 'QCOM', 'SEDG', 'ZBRA', 'FCX', 'FB', 'MTCH', 'NFLX', 'TTWO', 'VICI', 'CWI', 'IWM']
+twgDynamic = ['APTV', 'DG', 'DHI', 'KMX', 'LULU', 'MAR', 'PDD', 'TSLA', 'CFG', 'SYF', 'INCY', 'MRNA', 'TDOC', 'LUV', 'UBER', 'URI', 'ASML', 'DOCU', 'QCOM', 'SEDG', 'ZBRA', 'FCX', 'FB', 'MTCH', 'NFLX', 'TTWO', 'VICI', 'CWI', 'IWM', 'BTC-USD']
 
 dynamicCons = [ 'QCOM', 'FB', 'NFLX', 'TDOC', 'DG','LUV','CFG', 'KMX', 'TSLA']
 
-twgMidCapPortfolio = ['AAP', 'FIVE', 'PVH', 'ROST', 'CAG', 'VLO', 'ALLY', 'EWBC', 'FRC', 'HLNE', 'SIVB', 'HAE', 'HOLX', 'IQV', 'LH', 'DCI', 'FTV', 'INFO', 'KNX', 'LUV', 'OSK', 'PH', 'ST', 'SQK', 'TRU', 'ANET', 'APH', 'CDK', 'CIEN', 'IIVI', 'IT', 'PANW', 'RAMP', 'SAIC', 'WEX', 'FCX', 'FMC', 'PPG', 'SIRI', 'TTWO', 'AES', 'CONE', 'GLPI', 'WELL']
+twgMidCapPortfolio = ['AAP', 'FIVE', 'PVH', 'ROST', 'CAG', 'VLO', 'ALLY', 'EWBC', 'FRC', 'HLNE', 'SIVB', 'HAE', 'HOLX', 'IQV', 'LH', 'DCI', 'FTV', 'INFO', 'KNX', 'LUV', 'OSK', 'PH', 'ST',  'TRU', 'ANET', 'APH', 'CDK', 'CIEN', 'IIVI', 'IT', 'PANW', 'RAMP', 'SAIC', 'WEX', 'FCX', 'FMC', 'PPG', 'SIRI', 'TTWO', 'AES', 'CONE', 'GLPI', 'WELL', 'BTC-USD']
 midCapCons = ['AAP', 'CAG', 'FIVE', 'ALLY', 'HAE', 'DCF', 'HOLX', 'LH', 'DCI', 'OSK',]
 
 
@@ -42,7 +42,7 @@ plt.rcParams["ytick.labelsize"] = 10
 # set figure size
 plt.rcParams["figure.figsize"] = (10, 6)
 
-prices = yf.download(dynamicCons, period="max")
+prices = yf.download(twgGrowth, period="max")
 df_data = prices["Adj Close"].dropna(how="all")
 
 
@@ -99,6 +99,10 @@ pf.ef_efficient_volatility(0.22, verbose=True)
 # <codecell>
 
 from finquant.efficient_frontier import EfficientFrontier
+
+pd.set_option('display.max_rows', None)
+pd.set_option('display.max_columns', None)
+pd.set_option('display.width', None)
 
 # creating an instance of EfficientFrontier
 ef = EfficientFrontier(pf.comp_mean_returns(freq=1), pf.comp_cov())

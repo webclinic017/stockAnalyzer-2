@@ -207,55 +207,283 @@ def automatefundamentalanalysis(ticker):
 
     statsColumns = ['tm19', 'tm18', 'tm17', 'tm16', 'tm15', 'tm14', 'tm13', 'tm12', 'tm11', 'tm10', 'tm9', 'tm8', 'tm7',
                     'tm6', 'tm5', 'tm4', 'tm3', 'tm2', 'tm1', 't']
-    statsRows = ['priceAtTime','trailingPE', 'forwardPE','priceToCashFlow', 'priceToSales', 'priceToBook', 'pEG', 'earningsYield',
+    statsRows = ['priceAtTime','trailingPE', 'forwardPE','priceToCashFlow', 'priceToSales', 'bookValue','priceToBook', 'pEG', 'earningsYield',
                  'grossProfitMargin', 'operatingProfitMargin', 'netProfitMargin', 'ttmgrossProfitMargin',
-                 'ttmoperatingProfitMargin', 'ttmnetProfitMargin', 'basicEPS', 'dilutedEPS', 'cashFlowPerShare',
-                 'eBITDAperShare', 'divPerShare', 'operatinROA', 'rOA', 'returnOnTotalCapital', 'rOE',
+                 'ttmoperatingProfitMargin', 'ttmnetProfitMargin', 'ttmEPS','currentBasicEPS', 'dilutedEPS', 'cashFlowPerShare',
+                 'tTMeBITDAperShare', 'divPerShare', 'operatingROA', 'rOA', 'returnOnTotalCapital', 'rOE',
                  'returnOnCommonEquity', 'debtRatio', 'debtToEquity', 'debtToAsset', 'debtToCapital',
                  'financialLeverage', 'currentRatio', 'quickRatio', 'cashRatio', 'deffensiveInterval',
                  'cashConversionCycle', 'interestCoverage', 'fixedChargeCoverage', 'divPayoutRatio', 'retentionRateB',
-                 'sustainableGrowthRate', 'inventoryTurnoverRatio', ' daysOfInvOnHand', 'recievablesTurnover',
+                 'sustainableGrowthRate', 'inventoryTurnoverRatio', 'daysOfInvOnHand', 'recievablesTurnover',
                  'daysOfSalesOutstanding', 'payableTurnover', 'numDaysofPayables', 'workingCapitalTurnover',
                  'fixedAssetTurnover', 'totalAssetTurnover']
 
     metricsDf = pd.DataFrame(data=np.nan, columns=statsColumns, index=statsRows)
     print(metricsDf)
 
-    for i in range(len(metricsDf.loc['trailingPE'])):
+    for i in reversed(range(len(metricsDf.loc['trailingPE']))):
         currentprice = aggregateStatement.loc['statementDatePrices'][i]
 
+        if int(i) < 3:
+            revenue = aggregateStatement.loc['totalRevenue'][int(i)]
+            revenuem1 = aggregateStatement.loc['totalRevenue'][int(i)]
+            revenuem2 = aggregateStatement.loc['totalRevenue'][int(i)]
+            revenuem3 = aggregateStatement.loc['totalRevenue'][int(i)]
 
-        netIncome = aggregateStatement.loc['netIncome'][int(i)]
-        netIncomem1 = aggregateStatement.loc['netIncome'][int(i)]
-        netIncomem2 = aggregateStatement.loc['netIncome'][int(i)]
-        netIncomem3 = aggregateStatement.loc['netIncome'][int(i)]
+            costOfRev = aggregateStatement.loc['costOfRevenue'][int(i)]
+            costOfRev = aggregateStatement.loc['costOfRevenue'][int(i)]
+            costOfRev = aggregateStatement.loc['costOfRevenue'][int(i)]
+            costOfRev = aggregateStatement.loc['costOfRevenue'][int(i)]
 
-        commonStockSharesOutstanding = aggregateStatement.loc['commonStockSharesOutstanding'][int(i)]
-        commonStockSharesOutstandingm1 = aggregateStatement.loc['commonStockSharesOutstanding'][int(i)]
-        commonStockSharesOutstandingm2 = aggregateStatement.loc['commonStockSharesOutstanding'][int(i)]
-        commonStockSharesOutstandingm3 = aggregateStatement.loc['commonStockSharesOutstanding'][int(i)]
+            operatingIncome = aggregateStatement.loc['operatingIncome'][int(i)]
+            operatingIncomem1 = aggregateStatement.loc['operatingIncome'][int(i)]
+            operatingIncomem2 = aggregateStatement.loc['operatingIncome'][int(i)]
+            operatingIncomem3 = aggregateStatement.loc['operatingIncome'][int(i)]
 
-        # elif i >= 3:
-        #     netIncome = aggregateStatement.loc['netIncome'][int(i)]
-        #     netIncomem1 = aggregateStatement.loc['netIncome'][int(i-1)]
-        #     netIncomem2 = aggregateStatement.loc['netIncome'][int(i-2)]
-        #     netIncomem3 = aggregateStatement.loc['netIncome'][int(i-3)]
-        #
-        #     commonStockSharesOutstanding = aggregateStatement.loc['commonStockSharesOutstanding'][int(i)]
-        #     commonStockSharesOutstandingm1 = aggregateStatement.loc['commonStockSharesOutstanding'][int(i - 1)]
-        #     commonStockSharesOutstandingm2 = aggregateStatement.loc['commonStockSharesOutstanding'][int(i - 2)]
-        #     commonStockSharesOutstandingm3 = aggregateStatement.loc['commonStockSharesOutstanding'][int(i - 3)]
+            operatingExp = aggregateStatement.loc['operatingExpenses'][int(i)]
+            operatingExpm1 = aggregateStatement.loc['operatingExpenses'][int(i)]
+            operatingExpm2 = aggregateStatement.loc['operatingExpenses'][int(i)]
+            operatingExpm3 = aggregateStatement.loc['operatingExpenses'][int(i)]
+
+            intAndDebtExp = aggregateStatement.loc['interestAndDebtExpense'][int(i)]
+            intAndDebtExpm1 = aggregateStatement.loc['interestAndDebtExpense'][int(i)]
+            intAndDebtExpm2 = aggregateStatement.loc['interestAndDebtExpense'][int(i)]
+            intAndDebtExpm3 = aggregateStatement.loc['interestAndDebtExpense'][int(i)]
+
+            ebit = aggregateStatement.loc['ebit'][int(i)]
+            ebitm1 = aggregateStatement.loc['ebit'][int(i)]
+            ebitm2 = aggregateStatement.loc['ebit'][int(i)]
+            ebitm3 = aggregateStatement.loc['ebit'][int(i)]
+
+            ebitda = aggregateStatement.loc['ebitda'][int(i)]
+            ebitdam1 = aggregateStatement.loc['ebitda'][int(i)]
+            ebitdam2 = aggregateStatement.loc['ebitda'][int(i)]
+            ebitdam3 = aggregateStatement.loc['ebitda'][int(i)]
+
+            netIncome = aggregateStatement.loc['netIncome'][int(i)]
+            netIncomem1 = aggregateStatement.loc['netIncome'][int(i)]
+            netIncomem2 = aggregateStatement.loc['netIncome'][int(i)]
+            netIncomem3 = aggregateStatement.loc['netIncome'][int(i)]
+
+            divPayout = aggregateStatement.loc['dividendPayout'][int(i)]
+            divPayoutm1 = aggregateStatement.loc['dividendPayout'][int(i)]
+            divPayoutm2 = aggregateStatement.loc['dividendPayout'][int(i)]
+            divPayoutm3 = aggregateStatement.loc['dividendPayout'][int(i)]
+
+            cash = aggregateStatement.loc['cashAndCashEquivalentsAtCarryingValue'][int(i)]
+            cashm1 = aggregateStatement.loc['cashAndCashEquivalentsAtCarryingValue'][int(i)]
+            cashm2 = aggregateStatement.loc['cashAndCashEquivalentsAtCarryingValue'][int(i)]
+            cashm3 = aggregateStatement.loc['cashAndCashEquivalentsAtCarryingValue'][int(i)]
+
+            inventory = aggregateStatement.loc['inventory'][int(i)]
+            inventorym1 = aggregateStatement.loc['inventory'][int(i)]
+            inventorym2 = aggregateStatement.loc['inventory'][int(i)]
+            inventorym3 = aggregateStatement.loc['inventory'][int(i)]
+
+            totalAssets = aggregateStatement.loc['totalAssets'][int(i)]
+            totalAssetsm1 = aggregateStatement.loc['totalAssets'][int(i)]
+            totalAssetsm2 = aggregateStatement.loc['totalAssets'][int(i)]
+            totalAssetsm3 = aggregateStatement.loc['totalAssets'][int(i)]
+
+            totalLiabilities = aggregateStatement.loc['totalLiabilities'][int(i)]
+            totalLiabilitiesm1 = aggregateStatement.loc['totalLiabilities'][int(i)]
+            totalLiabilitiesm2 = aggregateStatement.loc['totalLiabilities'][int(i)]
+            totalLiabilitiesm3 = aggregateStatement.loc['totalLiabilities'][int(i)]
+
+            currentAssets = aggregateStatement.loc['totalCurrentAssets'][int(i)]
+            currentAssetsm1 = aggregateStatement.loc['totalCurrentAssets'][int(i)]
+            currentAssetsm2 = aggregateStatement.loc['totalCurrentAssets'][int(i)]
+            currentAssetsm3 = aggregateStatement.loc['totalCurrentAssets'][int(i)]
+
+            currentLiabilities = aggregateStatement.loc['totalCurrentLiabilities'][int(i)]
+            currentLiabilitiesm1 = aggregateStatement.loc['totalCurrentLiabilities'][int(i)]
+            currentLiabilitiesm2 = aggregateStatement.loc['totalCurrentLiabilities'][int(i)]
+            currentLiabilitiesm3 = aggregateStatement.loc['totalCurrentLiabilities'][int(i)]
+
+            totalDebt = aggregateStatement.loc['shortLongTermDebtTotal'][int(i)]
+            totalDebtm1 = aggregateStatement.loc['shortLongTermDebtTotal'][int(i)]
+            totalDebtm2 = aggregateStatement.loc['shortLongTermDebtTotal'][int(i)]
+            totalDebtm3 = aggregateStatement.loc['shortLongTermDebtTotal'][int(i)]
+
+            noncashcharges = aggregateStatement.loc['accumulatedDepreciationAmortizationPPE'][int(i)]
+            noncashchargesm1 = aggregateStatement.loc['accumulatedDepreciationAmortizationPPE'][int(i)]
+            noncashchargesm2 = aggregateStatement.loc['accumulatedDepreciationAmortizationPPE'][int(i)]
+            noncashchargesm3 = aggregateStatement.loc['accumulatedDepreciationAmortizationPPE'][int(i)]
+
+            totalShareholderEquity = aggregateStatement.loc['totalShareholderEquity'][int(i)]
+            totalShareholderEquitym1 = aggregateStatement.loc['totalShareholderEquity'][int(i)]
+            totalShareholderEquitym2 = aggregateStatement.loc['totalShareholderEquity'][int(i)]
+            totalShareholderEquitym3 = aggregateStatement.loc['totalShareholderEquity'][int(i)]
+
+            commonStockSharesOutstanding = aggregateStatement.loc['commonStockSharesOutstanding'][int(i)]
+            commonStockSharesOutstandingm1 = aggregateStatement.loc['commonStockSharesOutstanding'][int(i)]
+            commonStockSharesOutstandingm2 = aggregateStatement.loc['commonStockSharesOutstanding'][int(i)]
+            commonStockSharesOutstandingm3 = aggregateStatement.loc['commonStockSharesOutstanding'][int(i)]
+
+        elif int(i) >= 3:
+            revenue = aggregateStatement.loc['totalRevenue'][int(i)]
+            revenuem1 = aggregateStatement.loc['totalRevenue'][int(i - 1)]
+            revenuem2 = aggregateStatement.loc['totalRevenue'][int(i - 2)]
+            revenuem3 = aggregateStatement.loc['totalRevenue'][int(i - 3)]
+
+            operatingIncome = aggregateStatement.loc['operatingIncome'][int(i)]
+            operatingIncomem1 = aggregateStatement.loc['operatingIncome'][int(i - 1)]
+            operatingIncomem2 = aggregateStatement.loc['operatingIncome'][int(i - 2)]
+            operatingIncomem3 = aggregateStatement.loc['operatingIncome'][int(i - 3)]
+
+            operatingExp = aggregateStatement.loc['operatingExpenses'][int(i)]
+            operatingExpm1 = aggregateStatement.loc['operatingExpenses'][int(i - 1)]
+            operatingExpm2 = aggregateStatement.loc['operatingExpenses'][int(i - 2)]
+            operatingExpm3 = aggregateStatement.loc['operatingExpenses'][int(i - 3)]
+
+            intAndDebtExp = aggregateStatement.loc['interestAndDebtExpense'][int(i)]
+            intAndDebtExpm1 = aggregateStatement.loc['interestAndDebtExpense'][int(i-1)]
+            intAndDebtExpm2 = aggregateStatement.loc['interestAndDebtExpense'][int(i-2)]
+            intAndDebtExpm3 = aggregateStatement.loc['interestAndDebtExpense'][int(i-3)]
+
+            ebit = aggregateStatement.loc['ebit'][int(i)]
+            ebitm1 = aggregateStatement.loc['ebit'][int(i-1)]
+            ebitm2 = aggregateStatement.loc['ebit'][int(i-2)]
+            ebitm3 = aggregateStatement.loc['ebit'][int(i-3)]
+
+            ebitda = aggregateStatement.loc['ebitda'][int(i)]
+            ebitdam1 = aggregateStatement.loc['ebitda'][int(i - 1)]
+            ebitdam2 = aggregateStatement.loc['ebitda'][int(i - 2)]
+            ebitdam3 = aggregateStatement.loc['ebitda'][int(i - 3)]
+
+            netIncome = aggregateStatement.loc['netIncome'][int(i)]
+            netIncomem1 = aggregateStatement.loc['netIncome'][int(i-1)]
+            netIncomem2 = aggregateStatement.loc['netIncome'][int(i-2)]
+            netIncomem3 = aggregateStatement.loc['netIncome'][int(i-3)]
+
+            costOfRev = aggregateStatement.loc['costOfRevenue'][int(i)]
+            costOfRevm1 = aggregateStatement.loc['costOfRevenue'][int(i-1)]
+            costOfRevm2 = aggregateStatement.loc['costOfRevenue'][int(i-2)]
+            costOfRevm3 = aggregateStatement.loc['costOfRevenue'][int(i-3)]
+
+            divPayout = aggregateStatement.loc['dividendPayout'][int(i)]
+            divPayoutm1 = aggregateStatement.loc['dividendPayout'][int(i-1)]
+            divPayoutm2 = aggregateStatement.loc['dividendPayout'][int(i-2)]
+            divPayoutm3 = aggregateStatement.loc['dividendPayout'][int(i-3)]
+
+            cash = aggregateStatement.loc['cashAndCashEquivalentsAtCarryingValue'][int(i)]
+            cashm1 = aggregateStatement.loc['cashAndCashEquivalentsAtCarryingValue'][int(i - 1)]
+            cashm2 = aggregateStatement.loc['cashAndCashEquivalentsAtCarryingValue'][int(i - 2)]
+            cashm3 = aggregateStatement.loc['cashAndCashEquivalentsAtCarryingValue'][int(i - 3)]
+
+            inventory = aggregateStatement.loc['inventory'][int(i)]
+            inventorym1 = aggregateStatement.loc['inventory'][int(i - 1)]
+            inventorym2 = aggregateStatement.loc['inventory'][int(i - 2)]
+            inventorym3 = aggregateStatement.loc['inventory'][int(i - 3)]
+
+            totalAssets = aggregateStatement.loc['totalAssets'][int(i)]
+            totalAssetsm1 = aggregateStatement.loc['totalAssets'][int(i-1)]
+            totalAssetsm2 = aggregateStatement.loc['totalAssets'][int(i-2)]
+            totalAssetsm3 = aggregateStatement.loc['totalAssets'][int(i-3)]
+
+            totalLiabilities = aggregateStatement.loc['totalLiabilities'][int(i)]
+            totalLiabilitiesm1 = aggregateStatement.loc['totalLiabilities'][int(i-1)]
+            totalLiabilitiesm2 = aggregateStatement.loc['totalLiabilities'][int(i-2)]
+            totalLiabilitiesm3 = aggregateStatement.loc['totalLiabilities'][int(i-3)]
+
+            currentAssets = aggregateStatement.loc['totalCurrentAssets'][int(i)]
+            currentAssetsm1 = aggregateStatement.loc['totalCurrentAssets'][int(i-1)]
+            currentAssetsm2 = aggregateStatement.loc['totalCurrentAssets'][int(i-2)]
+            currentAssetsm3 = aggregateStatement.loc['totalCurrentAssets'][int(i-3)]
+
+            currentLiabilities = aggregateStatement.loc['totalCurrentLiabilities'][int(i)]
+            currentLiabilitiesm1 = aggregateStatement.loc['totalCurrentLiabilities'][int(i-1)]
+            currentLiabilitiesm2 = aggregateStatement.loc['totalCurrentLiabilities'][int(i-2)]
+            currentLiabilitiesm3 = aggregateStatement.loc['totalCurrentLiabilities'][int(i-3)]
+
+            totalDebt = aggregateStatement.loc['shortLongTermDebtTotal'][int(i)]
+            totalDebtm1 = aggregateStatement.loc['shortLongTermDebtTotal'][int(i-1)]
+            totalDebtm2 = aggregateStatement.loc['shortLongTermDebtTotal'][int(i-2)]
+            totalDebtm3 = aggregateStatement.loc['shortLongTermDebtTotal'][int(i-3)]
+
+            noncashcharges = aggregateStatement.loc['accumulatedDepreciationAmortizationPPE'][int(i)]
+            noncashchargesm1 = aggregateStatement.loc['accumulatedDepreciationAmortizationPPE'][int(i-1)]
+            noncashchargesm2 = aggregateStatement.loc['accumulatedDepreciationAmortizationPPE'][int(i-2)]
+            noncashchargesm3 = aggregateStatement.loc['accumulatedDepreciationAmortizationPPE'][int(i-3)]
+
+            totalShareholderEquity = aggregateStatement.loc['totalShareholderEquity'][int(i)]
+            totalShareholderEquitym1 = aggregateStatement.loc['totalShareholderEquity'][int(i-1)]
+            totalShareholderEquitym2 = aggregateStatement.loc['totalShareholderEquity'][int(i-2)]
+            totalShareholderEquitym3 = aggregateStatement.loc['totalShareholderEquity'][int(i-3)]
+
+            commonStockSharesOutstanding = aggregateStatement.loc['commonStockSharesOutstanding'][int(i)]
+            commonStockSharesOutstandingm1 = aggregateStatement.loc['commonStockSharesOutstanding'][int(i - 1)]
+            commonStockSharesOutstandingm2 = aggregateStatement.loc['commonStockSharesOutstanding'][int(i - 2)]
+            commonStockSharesOutstandingm3 = aggregateStatement.loc['commonStockSharesOutstanding'][int(i - 3)]
+
         print('NI =' + str(netIncome))
         print('NIm3 =' + str(netIncomem3))
-
-
 
         metricsDf.loc['priceAtTime'][int(i)] = currentprice
         print('Current Price =' + str(currentprice))
 
-        currentTrailingPE = calTrailingPE(currentprice, netIncome,  netIncomem1, netIncomem2, netIncomem3, commonStockSharesOutstanding, commonStockSharesOutstandingm1, commonStockSharesOutstandingm2, commonStockSharesOutstandingm3)
+        currentTrailingPE, earnignsYield, ttmEPS, basicEPS = calTrailingPEandEY(currentprice, netIncome,  netIncomem1, netIncomem2, netIncomem3, commonStockSharesOutstanding, commonStockSharesOutstandingm1, commonStockSharesOutstandingm2, commonStockSharesOutstandingm3)
+        currentPcF, ttmOpCFps, cFpS = calPCF(currentprice, operatingIncome, operatingIncomem1, operatingIncomem2, operatingIncomem3, commonStockSharesOutstanding, commonStockSharesOutstandingm1, commonStockSharesOutstandingm2, commonStockSharesOutstandingm3)
+        currentpS = calPS(currentprice, revenue, revenuem1, revenuem2, revenuem3, commonStockSharesOutstanding, commonStockSharesOutstandingm1, commonStockSharesOutstandingm2, commonStockSharesOutstandingm3)
+        ttmEbitdaPs = calTtmEBITDApS(ebitda, ebitdam1, ebitdam2, ebitdam3, commonStockSharesOutstanding, commonStockSharesOutstandingm1, commonStockSharesOutstandingm2, commonStockSharesOutstandingm3)
+
+        currentBV, currentpB = calpB(currentprice, totalShareholderEquity, commonStockSharesOutstanding)
+        gpM, opM, npM = calCurrentMargins(revenue, operatingIncome, netIncome, costOfRev)
+        ttmGPM, ttmOPM, ttmNPM = calTtmMargins(revenue, revenuem1, revenuem2, revenuem3, operatingIncome, operatingIncomem1, operatingIncomem2, operatingIncomem3, netIncome, netIncomem1, netIncomem2, netIncomem3, costOfRev, costOfRevm1, costOfRevm2, costOfRevm3)
+        divPerShare, divPayoutRatio, retentionRateB = calDivPerShare(divPayout, commonStockSharesOutstanding, netIncome)
+
+        roa, roe, opRoa, opRoe, interestCoverageRatio, fixedChargeCoverageRatio, retentionRateB, sustainableGrowthRate = calReturnOns(netIncome, operatingIncome, totalAssets, totalAssetsm1, totalShareholderEquity, totalShareholderEquitym1, commonStockSharesOutstanding, divPayout)
+        debtToAsset, debtToEquity, financialLeverage, debtToCapital, currentRatio, quickRatio, cashRatio = calBsRatios(totalAssets, totalLiabilities, totalDebt, totalShareholderEquity, inventory, currentAssets, currentLiabilities, cash)
+        deffensiveInterval = calDefInt(currentAssets, operatingExp, operatingExpm1, operatingExpm2, operatingExpm3, noncashcharges, noncashchargesm1, noncashchargesm2, noncashchargesm3)
+        ###!!!!COMPLETECASHCONVCYCLE
+        #interestCoverageRatio, fixedChargeCoverageRatio, retentionRateB = calculateInterestCoverageRatio(ebit, intAndDebtExp)
+        inventoryTurnoverRatio, daysOfInvOnHand = invRatios(inventory, inventorym1, costOfRev)
 
         metricsDf.loc['trailingPE'][int(i)] = currentTrailingPE
+        metricsDf.loc['priceToCashFlow'][int(i)] = currentPcF
+        metricsDf.loc['priceToSales'][int(i)] = currentpS
+        metricsDf.loc['priceToBook'][int(i)] = currentpB
+        metricsDf.loc['bookValue'][int(i)] = currentBV
+        metricsDf.loc['earningsYield'][int(i)] = earnignsYield
+        metricsDf.loc['grossProfitMargin'][int(i)] = gpM
+        metricsDf.loc['operatingProfitMargin'][int(i)] = opM
+        metricsDf.loc['netProfitMargin'][int(i)] = npM
+        metricsDf.loc['ttmgrossProfitMargin'][int(i)] = ttmGPM
+        metricsDf.loc['ttmoperatingProfitMargin'][int(i)] = ttmOPM
+        metricsDf.loc['ttmnetProfitMargin'][int(i)] = ttmNPM
+
+        metricsDf.loc['currentBasicEPS'][int(i)] = basicEPS
+        metricsDf.loc['ttmEPS'][int(i)] = ttmEPS
+
+        metricsDf.loc['cashFlowPerShare'][int(i)] = cFpS
+        metricsDf.loc['tTMeBITDAperShare'][int(i)] = ttmEbitdaPs
+        metricsDf.loc['divPerShare'][int(i)] = divPerShare
+
+        metricsDf.loc['rOA'][int(i)] = roa
+        metricsDf.loc['rOE'][int(i)] = roe
+        metricsDf.loc['operatingROA'][int(i)] = opRoa
+
+        metricsDf.loc['debtRatio'][int(i)] = debtToAsset
+        metricsDf.loc['debtToEquity'][int(i)] = debtToEquity
+        metricsDf.loc['financialLeverage'][int(i)] = financialLeverage
+        metricsDf.loc['debtToCapital'][int(i)] = debtToCapital
+        metricsDf.loc['currentRatio'][int(i)] = currentRatio
+        metricsDf.loc['quickRatio'][int(i)] = quickRatio
+        metricsDf.loc['cashRatio'][int(i)] = cashRatio
+
+        metricsDf.loc['deffensiveInterval'][int(i)] = deffensiveInterval
+        metricsDf.loc['interestCoverage'][int(i)] = interestCoverageRatio
+        metricsDf.loc['fixedChargeCoverage'][int(i)] = fixedChargeCoverageRatio
+        metricsDf.loc['divPayoutRatio'][int(i)] = divPayoutRatio
+        metricsDf.loc['retentionRateB'][int(i)] = retentionRateB
+        metricsDf.loc['sustainableGrowthRate'][int(i)] = sustainableGrowthRate
+
+        metricsDf.loc['inventoryTurnoverRatio'][int(i)] = inventoryTurnoverRatio
+        metricsDf.loc['daysOfInvOnHand'][int(i)] = daysOfInvOnHand
+
+
+
+        continue
 
 
 
@@ -281,4 +509,4 @@ def automatefundamentalanalysis(ticker):
 
 
 
-automatefundamentalanalysis('AAPL')
+automatefundamentalanalysis('HD')

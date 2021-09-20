@@ -9,9 +9,9 @@ from pypfopt import plotting
 from pypfopt import expected_returns
 from pypfopt import EfficientFrontier
 
-# tickers = ["MSFT", "AMZN", "KO", "MA", "COST",
-#            "LUV", "XOM", "PFE", "JPM", "UNH",
-#            "ACN", "DIS", "GILD", "F", "TSLA", "AAP", "MARA", "ETH-USD"]
+tickers = ["MSFT", "AMZN", "KO", "MA", "COST",
+           "LUV", "XOM", "PFE", "JPM", "UNH",
+           "ACN", "DIS", "GILD", "F", "TSLA", "AAP", "MARA", "ETH-USD"]
 
 
 def calculateCovMatrix(tickers):
@@ -209,7 +209,8 @@ def optimize(tickers):
     ohlc = yf.download(tickers, period="max")
     prices = ohlc["Adj Close"].dropna(how="all")
     btc = pd.read_csv('btcPriceHistoryCopy.csv')
-    prices['btc'] = btc.loc['Value']
+    prices['btc'] = btc.iloc[1]
+
     print(prices.tail())
 
 
@@ -341,4 +342,4 @@ def optimize(tickers):
     plt.show(block=False)
 
 
-#optimize(tickers)
+optimize(tickers)
