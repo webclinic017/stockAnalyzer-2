@@ -1,6 +1,29 @@
 import pandas as pd
 import numpy as np
 
+def calTtmeps(nI, nIm1, nIm2, nIm3, comShrsOutstnd, comShrsOutstndm1, comShrsOutstndm2, comShrsOutstndm3):
+    curm3EPS = (float(nIm3) / float(comShrsOutstndm3))
+    curm2EPS = (float(nIm2) / float(comShrsOutstndm2))
+    curm1EPS = (float(nIm1) / float(comShrsOutstndm1))
+    curmEPS = (float(nI) / float(comShrsOutstnd))
+    ttmEps = (curmEPS + curm1EPS + curm2EPS + curm3EPS)
+    return ttmEps
+
+def calTrailingPE(sharePrice, nI, nIm1, nIm2, nIm3, comShrsOutstnd, comShrsOutstndm1, comShrsOutstndm2, comShrsOutstndm3):
+    ttmweightedAvgShrs = ((float(comShrsOutstnd) + float(comShrsOutstndm1) + float(comShrsOutstndm2) + float(comShrsOutstndm3))/4)
+    print('WeightedAvgShrs = ' + str(ttmweightedAvgShrs))
+    ttmNetIncome = ((float(nI) + float(nIm1) + float(nIm2) + float(nIm3)))
+    print( 'ttmNetIncome=' + str(ttmNetIncome))
+    ttmEps = (float(ttmNetIncome)/float(ttmweightedAvgShrs))
+    print( 'ttmEPS' + str(ttmEps))
+    trailingPE = (float(sharePrice) / float(ttmEps))
+    return trailingPE
+
+
+
+
+
+
 
 def ttmTotalRevenue(currentRevenue, curRevM1, curRevm2, curRevm3 ):
     ttmTotalRevenue = sum(currentRevenue, curRevM1, curRevm2, curRevm3)
@@ -41,8 +64,8 @@ def calculatedWeightedAverageSharesOutstanding(curComStockSharesOutstanding,curC
     return weightedAvgShares
 
 # Valuation metrics
-def calculatePE(quoteUnformatted, basicEPS):
-    peRatio = (quoteUnformatted / basicEPS)
+def calculateTrailingPE(quoteUnformatted, ttmbasicEPS):
+    peRatio = (quoteUnformatted / ttmbasicEPS)
     return peRatio
 
 def calculatePriceToCashFlow(quoteUnformatted, operatingCashFlowPerShare):

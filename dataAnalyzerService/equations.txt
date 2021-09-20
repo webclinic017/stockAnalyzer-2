@@ -1,0 +1,9 @@
+trailingPE = (current PE) = current price / (last 4 quarters of eps)
+forward PE = current price / expected earnings for next 4 quarters
+pCF = (Market Cap / Operating Cash Flow) or (sharePrice / Operative CF per share)
+pS = (currentPrice / ttmSalesPerShare)
+JustifiedPS = (!!!)
+bookValue = (commonShareholdersEquity / number of shares outstanding)
+pB = (currentPrice / bookValue)
+pEG = (forwardPE/ expectedEPSGrowth)
+earnings yield = (ttmEarnings / currentPrice)

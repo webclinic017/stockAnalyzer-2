@@ -207,7 +207,7 @@ def automatefundamentalanalysis(ticker):
 
     statsColumns = ['tm19', 'tm18', 'tm17', 'tm16', 'tm15', 'tm14', 'tm13', 'tm12', 'tm11', 'tm10', 'tm9', 'tm8', 'tm7',
                     'tm6', 'tm5', 'tm4', 'tm3', 'tm2', 'tm1', 't']
-    statsRows = ['priceToEarnings', 'priceToCashFlow', 'priceToSales', 'priceToBook', 'pEG', 'earningsYield',
+    statsRows = ['priceAtTime','trailingPE', 'forwardPE','priceToCashFlow', 'priceToSales', 'priceToBook', 'pEG', 'earningsYield',
                  'grossProfitMargin', 'operatingProfitMargin', 'netProfitMargin', 'ttmgrossProfitMargin',
                  'ttmoperatingProfitMargin', 'ttmnetProfitMargin', 'basicEPS', 'dilutedEPS', 'cashFlowPerShare',
                  'eBITDAperShare', 'divPerShare', 'operatinROA', 'rOA', 'returnOnTotalCapital', 'rOE',
@@ -221,16 +221,59 @@ def automatefundamentalanalysis(ticker):
     metricsDf = pd.DataFrame(data=np.nan, columns=statsColumns, index=statsRows)
     print(metricsDf)
 
-    for i in range(len(metricsDf.loc['priceToEarnings'])):
-        print(metricsDf.loc['priceToEarnings'][int(i)])
+    for i in range(len(metricsDf.loc['trailingPE'])):
+        currentprice = aggregateStatement.loc['statementDatePrices'][i]
 
 
-        current1= calculatePE(quoteUnformatted, calculateBasicEPS(ttmNetIncome(aggregateStatement.loc['netIncome'][int(i)], aggregateStatement.loc['netIncome'][int(int(i)-1)], aggregateStatement.loc['netIncome'][int(int(i)-2)], aggregateStatement.loc['netIncome'][int(int(i)-3)]), calculatedWeightedAverageSharesOutstanding(aggregateStatement.loc['commonStockSharesOutstanding'][int(i)], aggregateStatement.loc['commonStockSharesOutstanding'][int(i-1)], aggregateStatement.loc['commonStockSharesOutstanding'][int(i-2)], aggregateStatement.loc['commonStockSharesOutstanding'][int(i-3)])))
-        ni = aggregateStatement.loc['netIncome'][int(i)]
+        netIncome = aggregateStatement.loc['netIncome'][int(i)]
+        netIncomem1 = aggregateStatement.loc['netIncome'][int(i)]
+        netIncomem2 = aggregateStatement.loc['netIncome'][int(i)]
+        netIncomem3 = aggregateStatement.loc['netIncome'][int(i)]
+
+        commonStockSharesOutstanding = aggregateStatement.loc['commonStockSharesOutstanding'][int(i)]
+        commonStockSharesOutstandingm1 = aggregateStatement.loc['commonStockSharesOutstanding'][int(i)]
+        commonStockSharesOutstandingm2 = aggregateStatement.loc['commonStockSharesOutstanding'][int(i)]
+        commonStockSharesOutstandingm3 = aggregateStatement.loc['commonStockSharesOutstanding'][int(i)]
+
+        # elif i >= 3:
+        #     netIncome = aggregateStatement.loc['netIncome'][int(i)]
+        #     netIncomem1 = aggregateStatement.loc['netIncome'][int(i-1)]
+        #     netIncomem2 = aggregateStatement.loc['netIncome'][int(i-2)]
+        #     netIncomem3 = aggregateStatement.loc['netIncome'][int(i-3)]
+        #
+        #     commonStockSharesOutstanding = aggregateStatement.loc['commonStockSharesOutstanding'][int(i)]
+        #     commonStockSharesOutstandingm1 = aggregateStatement.loc['commonStockSharesOutstanding'][int(i - 1)]
+        #     commonStockSharesOutstandingm2 = aggregateStatement.loc['commonStockSharesOutstanding'][int(i - 2)]
+        #     commonStockSharesOutstandingm3 = aggregateStatement.loc['commonStockSharesOutstanding'][int(i - 3)]
+        print('NI =' + str(netIncome))
+        print('NIm3 =' + str(netIncomem3))
+
+
+
+        metricsDf.loc['priceAtTime'][int(i)] = currentprice
+        print('Current Price =' + str(currentprice))
+
+        currentTrailingPE = calTrailingPE(currentprice, netIncome,  netIncomem1, netIncomem2, netIncomem3, commonStockSharesOutstanding, commonStockSharesOutstandingm1, commonStockSharesOutstandingm2, commonStockSharesOutstandingm3)
+
+        metricsDf.loc['trailingPE'][int(i)] = currentTrailingPE
+
+
+
+
+        print(metricsDf.loc['trailingPE'][int(i)])
+
+        print(i)
+
+
+    print(metricsDf)
+
+
+        #current1= calculatePE(quoteUnformatted, calculateBasicEPS(ttmNetIncome(aggregateStatement.loc['netIncome'][int(i)], aggregateStatement.loc['netIncome'][int(int(i)-1)], aggregateStatement.loc['netIncome'][int(int(i)-2)], aggregateStatement.loc['netIncome'][int(int(i)-3)]), calculatedWeightedAverageSharesOutstanding(aggregateStatement.loc['commonStockSharesOutstanding'][int(i)], aggregateStatement.loc['commonStockSharesOutstanding'][int(i-1)], aggregateStatement.loc['commonStockSharesOutstanding'][int(i-2)], aggregateStatement.loc['commonStockSharesOutstanding'][int(i-3)])))
+        #ni = aggregateStatement.loc['netIncome'][int(i)]
         #prefd = ttmPreferedDivs(aggregateStatement.loc['dividendPayoutPreferredStock'][int(i)],aggregateStatement.loc['dividendPayoutPreferredStock'][int(i-1)], aggregateStatement.loc['dividendPayoutPreferredStock'][int(i-2)],aggregateStatement.loc['dividendPayoutPreferredStock'][int(i-3)])
         #print(prefd)
-        print(ni)
-        metricsDf.loc['priceToEarnings'][int(i)] = current1
+        #print(ni)
+        #metricsDf.loc['priceToEarnings'][int(i)] = current1
         #print('current1! = ' + str(current1))
 
 
