@@ -488,12 +488,19 @@ def automatefundamentalanalysis(ticker):
 
 
 
-        print(metricsDf.loc['trailingPE'][int(i)])
+
 
         print(i)
 
-
+    # for i in range(len(metricsDf.loc['trailingPE'])):
+    #     metricsDf.loc['priceAtTime'][(len(metricsDf.loc['priceAtTime']) - 1)] = "{:,.2f}".format(metricsDf.loc['priceAtTime'][(len(metricsDf.loc['priceAtTime'])-1)])
     print(metricsDf)
+    curPE = metricsDf.loc['trailingPE']['t']
+    print(curPE)
+
+
+    trailingPElist = metricsDf.loc['trailingPE'].values.tolist()
+    print(trailingPElist)
 
 
         #current1= calculatePE(quoteUnformatted, calculateBasicEPS(ttmNetIncome(aggregateStatement.loc['netIncome'][int(i)], aggregateStatement.loc['netIncome'][int(int(i)-1)], aggregateStatement.loc['netIncome'][int(int(i)-2)], aggregateStatement.loc['netIncome'][int(int(i)-3)]), calculatedWeightedAverageSharesOutstanding(aggregateStatement.loc['commonStockSharesOutstanding'][int(i)], aggregateStatement.loc['commonStockSharesOutstanding'][int(i-1)], aggregateStatement.loc['commonStockSharesOutstanding'][int(i-2)], aggregateStatement.loc['commonStockSharesOutstanding'][int(i-3)])))
